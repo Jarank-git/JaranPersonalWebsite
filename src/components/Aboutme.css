@@ -1,0 +1,49 @@
+.aboutMe-intro {
+  font-size: 1.7rem;
+}
+
+@media (max-width: 768px) {
+  .aboutMe-intro {
+    font-size: 1.4rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .aboutMe-intro {
+    font-size: 1.2rem;
+    line-height: 1.6;
+  }
+}
+
+.university-link {
+  color: #00d4ff;
+  text-decoration: none;
+  display: inline-block;
+  transition: all 0.3s ease;
+  position: relative;
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+}
+
+.university-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: linear-gradient(90deg, #00d4ff, #00ff88);
+  transition: width 0.3s ease;
+}
+
+.university-link:hover::after {
+  width: 100%;
+}
+
+.university-link:hover {
+  color: #ffffff;
+  background: rgba(0, 212, 255, 0.1);
+  transform: translateY(-1px);
+  text-shadow: 0 0 8px rgba(0, 212, 255, 0.3);
+  transition: all 0.3s ease;
+}

@@ -1,0 +1,115 @@
+.Projects {
+  display: flex;
+  flex-direction: column;  
+  align-items: flex-start; 
+  justify-content: flex-start;
+  margin: 0;
+  overflow: visible;
+  width: 100%;
+}
+
+.Projects h2 {
+  font-family: 'mainFont';
+  font-size: 3.5rem;
+  background: linear-gradient(
+    120deg,
+    #8a2be2 0%,
+    #ffffff 50%,
+    #8a2be2 100%
+  );
+  background-size: 200% 100%;
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: shimmer 8s infinite;
+  text-align: left;
+  margin: 0 0 2rem 0;
+  font-weight: 300;
+}
+
+@media (max-width: 768px) {
+  .Projects h2 {
+    font-size: 2.5rem;
+    margin: 0 0 1.5rem 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .Projects h2 {
+    font-size: 2rem;
+    margin: 0 0 1rem 0;
+  }
+}
+
+.collapsible-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: 'mainFont', system-ui, sans-serif;
+  font-size: 1.1rem;
+  padding: 1.5rem;
+  color: #e0e0e0;
+}
+
+.project-linkp {
+  color: #8a2be2;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  transition: all 0.3s ease;
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+  position: relative;
+  vertical-align: -0.3rem;
+  font-size: 1.5rem;
+}
+
+.project-linkp::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: linear-gradient(90deg, #8a2be2, #00d4ff);
+  transition: width 0.3s ease;
+}
+
+.project-linkp:hover::after {
+  width: 100%;
+}
+
+.project-linkp:hover {
+  color: #ffffff;
+  background: rgba(138, 43, 226, 0.1);
+  transform: translateY(-1px);
+  text-shadow: 0 0 8px rgba(138, 43, 226, 0.3);
+  transition: all 0.3s ease;
+}
+
+
+.Projects .collapsible {
+  width: 100%;
+  margin-bottom: 1.5rem;
+  border-radius: 12px;
+  background: rgba(20, 20, 30, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.Projects .collapsible:hover {
+  border-color: rgba(138, 43, 226, 0.3);
+  box-shadow: 0 4px 20px rgba(138, 43, 226, 0.1);
+  transform: translateY(-2px);
+}
+
+.Projects .toggle-button {
+  background: rgba(138, 43, 226, 0.1);
+  color: #8a2be2;
+}
+
+.Projects .toggle-button:hover {
+  background: rgba(138, 43, 226, 0.2);
+  box-shadow: 0 0 15px rgba(138, 43, 226, 0.3);
+}

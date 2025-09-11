@@ -1,0 +1,101 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  font-family: 'mainFont', system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.6;
+  font-weight: 300;
+  color-scheme: dark;
+  color: rgba(255, 255, 255, 0.9);
+  background-color: #0a0a0f;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  display: flex;
+  flex-direction: column;
+}
+
+a {
+  font-weight: 400;
+  color: #00d4ff;
+  text-decoration: inherit;
+}
+
+a:hover {
+  color: #ffffff;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+@font-face {
+  font-family: 'mainFont'; 
+  src: url('./assets/Jersey10-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.Typewriter {
+  font-family: 'mainFont';
+  font-size: 5.1rem;
+  background: linear-gradient(
+    120deg,
+    #00d4ff 0%,
+    #ffffff 50%,
+    #00d4ff 100%
+  );
+  background-size: 200% 100%;
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: shimmer 8s infinite;
+  text-align: left;
+  font-weight: 300;
+  line-height: 1.2;
+}
+
+@media (max-width: 768px) {
+  .Typewriter {
+    font-size: 3rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .Typewriter {
+    font-size: 2.2rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .Typewriter {
+    font-size: 1.8rem;
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.Projects, .experience, .footer {
+  gap: 0;               
+  margin: 0;
+  width: 100%;
+}
+
+.Projects, .experience {
+  margin-bottom: 4rem;
+}
