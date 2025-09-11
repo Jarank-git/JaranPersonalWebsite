@@ -1,6 +1,6 @@
 import "./Contact.css"
 import gmail from "../assets/gmail.png"
-import linkedin from "../assets/linkedin.png"
+import linkedin from "../assets/Linkedin.png"
 import github from "../assets/github.png"
 
 function Contact({ contactRef }) {
