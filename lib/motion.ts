@@ -20,3 +20,12 @@ export const brushItem: Variants = {
   initial: { opacity: 0, x: -16, skewX: -2 },
   animate: { opacity: 1, x: 0, skewX: 0, transition: { duration: 0.28, ease } },
 }
+
+export const routeEnterMobile: Variants = {
+  initial: { opacity: 0 },
+  animate: { opacity: 1, scale: 1, transition: { duration: 0.32, delay: 0.06, ease } },
+}
+
+export const routeExitMobile: Variants = {
+  exit: { opacity: 0, transition: { duration: 0.24, ease } },
+}
