@@ -1,66 +1,67 @@
 'use client'
 
+import { useEffect, useRef } from 'react'
 import Link from 'next/link'
-import type { MenuItem } from '@/types/content'
-import { cn } from '@/lib/utils'
+import type { MenuSection } from '@/types/content'
 
-export interface BrushItemProps {
-  item: MenuItem
+interface BrushItemProps {
+  section: MenuSection
+  label: string
+  num: string
+  href: string
+  outline?: boolean
+  selected: boolean
+  onSelect: () => void
 }
 
-const itemClass = cn(
-  'group relative flex min-h-14 w-full max-w-xl items-center pl-10 pr-8 py-4',
-  'text-lg md:text-xl',
-  'transition-all duration-300 ease-[var(--ease-ink)]',
-  'border-l-2 border-l-[var(--color-gold)]/15',
-  'bg-gradient-to-r from-[var(--color-obsidian-2)]/60 to-transparent',
-  'menu-label text-[var(--color-cream)]',
-  'hover:border-l-[var(--color-gold-bright)] hover:bg-gradient-to-r hover:from-[var(--color-obsidian-3)]/90 hover:to-[var(--color-obsidian-2)]/20',
-  'hover:translate-x-3 hover:text-[var(--color-gold-bright)]',
-  'hover:shadow-[inset_0_0_30px_oklch(66%_0.095_75_/_0.06)]',
-  'focus-visible:outline-none',
-  'focus-visible:border-l-[var(--color-gold-bright)] focus-visible:bg-gradient-to-r focus-visible:from-[var(--color-obsidian-3)]/90 focus-visible:to-[var(--color-obsidian-2)]/20',
-  'focus-visible:translate-x-3 focus-visible:text-[var(--color-gold-bright)]',
-  'focus-visible:shadow-[inset_0_0_30px_oklch(66%_0.095_75_/_0.06)]',
-  'after:content-[""] after:absolute after:left-10 after:right-8 after:bottom-2',
-  'after:h-px after:origin-left after:scale-x-0 after:transition-transform after:duration-300',
-  'after:bg-gradient-to-r after:from-[var(--color-gold-bright)] after:via-[var(--color-gold)]/40 after:to-transparent',
-  'hover:after:scale-x-100 focus-visible:after:scale-x-100',
-)
+const SPARKLE_COUNT = 10
 
-export function BrushItem({ item }: BrushItemProps) {
-  const inner = (
-    <>
-      <span>{item.label}</span>
-      {item.description && (
-        <span className="ml-3 text-xs text-[var(--color-cream-dim)] tracking-wide">
-          {item.description}
-        </span>
-      )}
-    </>
-  )
+export function BrushItem({
+  label,
+  num,
+  href,
+  outline = false,
+  selected,
+  onSelect,
+}: BrushItemProps) {
+  const sparklesRef = useRef<HTMLSpanElement>(null)
+  const didPopulate = useRef(false)
 
-  const commonProps = {
-    'data-menu-item': '',
-    tabIndex: 0,
-    className: cn(
-      itemClass,
-      item.disabled && 'pointer-events-none text-[var(--color-cream-faint)] opacity-50',
-    ),
-    ...(item.disabled ? { 'aria-disabled': true } : {}),
-  }
-
-  if (item.external) {
-    return (
-      <a href={item.href} target="_blank" rel="noreferrer noopener" {...commonProps}>
-        {inner}
-      </a>
-    )
-  }
+  useEffect(() => {
+    const host = sparklesRef.current
+    if (!host || didPopulate.current) return
+    didPopulate.current = true
+    for (let i = 0; i < SPARKLE_COUNT; i++) {
+      const s = document.createElement('span')
+      s.className = 'spk'
+      s.style.left = `${8 + Math.random() * 84}%`
+      s.style.top = `${12 + Math.random() * 76}%`
+      const size = 2 + Math.random() * 5
+      s.style.width = s.style.height = `${size}px`
+      s.style.animationDelay = `${Math.random() * 2.4}s`
+      s.style.animationDuration = `${1.6 + Math.random() * 1.6}s`
+      host.appendChild(s)
+    }
+  }, [])
 
   return (
-    <Link href={item.href} {...commonProps}>
-      {inner}
-    </Link>
+    <li
+      role="option"
+      className={outline ? 'stroked' : undefined}
+      aria-selected={selected}
+      onMouseEnter={onSelect}
+      onFocus={onSelect}
+    >
+      <span className="stain" aria-hidden="true">
+        <svg preserveAspectRatio="none">
+          <use href="#inkStain" />
+        </svg>
+      </span>
+      <span className="sparkles" ref={sparklesRef} aria-hidden="true" />
+      <Link href={href} prefetch>
+        <span className="menu-num">{num}</span>
+        <span className="menu-word">{label}</span>
+      </Link>
+    </li>
   )
 }

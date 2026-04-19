@@ -1,30 +1,138 @@
+'use client'
+
+import { useEffect, useRef, useCallback, useState } from 'react'
+import { GoldenFlakes } from '@/components/layout/GoldenFlakes'
+import { HudCard } from '@/components/menu/HudCard'
+import { PartyChips } from '@/components/menu/PartyChips'
 import { MenuStack } from '@/components/menu/MenuStack'
-import { Ornament } from '@/components/layout/Ornament'
-import { MAIN_ITEMS } from '@/lib/content'
+import { Stamp } from '@/components/menu/Stamp'
+import { useLayoutMode } from '@/hooks/use-layout-mode'
+
+const STAGE_W = 1600
+const STAGE_H = 1000
+
+function useStageScale(stageRef: React.RefObject<HTMLDivElement | null>, active: boolean) {
+  const fit = useCallback(() => {
+    const stage = stageRef.current
+    if (!stage) return
+    const wrap = stage.parentElement
+    if (!wrap) return
+    const s = Math.min(wrap.clientWidth / STAGE_W, wrap.clientHeight / STAGE_H)
+    stage.style.transform = `scale(${s})`
+  }, [stageRef])
+
+  useEffect(() => {
+    if (!active) return
+    fit()
+    window.addEventListener('resize', fit)
+    return () => window.removeEventListener('resize', fit)
+  }, [fit, active])
+}
+
+function Splatters() {
+  return (
+    <>
+      <div
+        className="splat"
+        style={{ left: 40, top: 40, width: 140, height: 90, transform: 'rotate(-12deg)', opacity: 0.55 }}
+      >
+        <svg><use href="#splat1" /></svg>
+      </div>
+      <div
+        className="splat"
+        style={{ right: 280, top: 170, width: 110, height: 80, transform: 'rotate(28deg)', opacity: 0.45 }}
+      >
+        <svg><use href="#splat2" /></svg>
+      </div>
+      <div
+        className="splat"
+        style={{ left: 660, bottom: 160, width: 160, height: 100, transform: 'rotate(-20deg)', opacity: 0.3 }}
+      >
+        <svg><use href="#splat1" /></svg>
+      </div>
+      <div
+        className="splat"
+        style={{ right: 40, bottom: 220, width: 100, height: 70, transform: 'rotate(14deg)', opacity: 0.5 }}
+      >
+        <svg><use href="#splat2" /></svg>
+      </div>
+      <div
+        className="splat"
+        style={{ left: 860, top: 80, width: 120, height: 80, transform: 'rotate(40deg)', opacity: 0.3 }}
+      >
+        <svg><use href="#splat1" /></svg>
+      </div>
+    </>
+  )
+}
+
+function CinematicHome() {
+  const stageRef = useRef<HTMLDivElement>(null)
+  useStageScale(stageRef, true)
+
+  return (
+    <div className="stage-wrap">
+      <div className="stage" ref={stageRef}>
+        <div className="bg-glyph">EXPEDITION</div>
+        <GoldenFlakes />
+        <Splatters />
+        <HudCard />
+        <PartyChips />
+        <MenuStack />
+        <Stamp />
+      </div>
+    </div>
+  )
+}
+
+function FluidHome() {
+  return (
+    <div className="home-fluid">
+      <div className="home-row-top">
+        <HudCard />
+        <PartyChips />
+      </div>
+      <div className="home-center">
+        <div className="bg-glyph" style={{ opacity: 0.06 }}>EXPEDITION</div>
+        <MenuStack />
+      </div>
+      <div className="home-row-bottom">
+        <Stamp />
+      </div>
+    </div>
+  )
+}
+
+function MobileHome() {
+  return (
+    <div className="home-mobile">
+      <div className="home-row-top">
+        <HudCard />
+      </div>
+      <div className="home-center">
+        <MenuStack showCommandHud={false} />
+      </div>
+      <div className="home-row-bottom">
+        <Stamp />
+      </div>
+    </div>
+  )
+}
 
 export default function HomePage() {
-  return (
-    <main className="relative flex min-h-screen flex-col items-center justify-center px-6">
-      <Ornament variant="corner-tl" className="fixed left-6 top-6 !h-20 !w-20 opacity-70" />
-      <Ornament variant="corner-tr" className="fixed right-6 top-6 !h-20 !w-20 opacity-70" />
-      <Ornament variant="corner-bl" className="fixed bottom-6 left-6 !h-20 !w-20 opacity-70" />
-      <Ornament variant="corner-br" className="fixed right-6 bottom-6 !h-20 !w-20 opacity-70" />
+  const mode = useLayoutMode()
+  const [mounted, setMounted] = useState(false)
+  useEffect(() => setMounted(true), [])
 
-      <div className="mb-12 text-center">
-        <h1 className="menu-label gold-text text-5xl md:text-7xl tracking-[0.25em] leading-tight">
-          Jaran Khalid
-        </h1>
-        <div className="mx-auto mt-4 max-w-xs">
-          <Ornament variant="flourish" className="mx-auto" />
-        </div>
-        <p className="mt-3 font-body text-sm tracking-[0.3em] text-[var(--color-cream-faint)] uppercase">
-          Electrical Engineering &middot; University of Waterloo
-        </p>
+  if (!mounted) {
+    return (
+      <div className="stage-wrap" aria-hidden>
+        <div className="stage" />
       </div>
+    )
+  }
 
-      <div className="w-full max-w-xl">
-        <MenuStack items={MAIN_ITEMS} ariaLabel="Main menu" />
-      </div>
-    </main>
-  )
+  if (mode === 'cinematic') return <CinematicHome />
+  if (mode === 'fluid') return <FluidHome />
+  return <MobileHome />
 }

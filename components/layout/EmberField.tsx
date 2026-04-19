@@ -65,11 +65,11 @@ export function EmberField() {
     const spawn = (): Ember => ({
       x: Math.random() * window.innerWidth,
       y: window.innerHeight + Math.random() * 40,
-      r: 0.6 + Math.random() * 1.2,
-      vx: (Math.random() - 0.5) * 0.2,
-      vy: -(0.3 + Math.random() * 0.5),
-      alpha: 0.3 + Math.random() * 0.5,
-      kind: Math.random() < 0.05 ? 'gold' : 'ember',
+      r: 0.8 + Math.random() * 1.8,
+      vx: (Math.random() - 0.5) * 0.3,
+      vy: -(0.25 + Math.random() * 0.55),
+      alpha: 0.25 + Math.random() * 0.55,
+      kind: Math.random() < 0.18 ? 'gold' : 'ember',
     })
 
     const embers: Ember[] = Array.from({ length: count }, spawn)

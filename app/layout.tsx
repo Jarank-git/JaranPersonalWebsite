@@ -1,24 +1,40 @@
 import type { Metadata } from 'next'
-import { Cinzel, EB_Garamond } from 'next/font/google'
+import {
+  Cinzel_Decorative,
+  Cormorant_Garamond,
+  IBM_Plex_Mono,
+  Italianno,
+} from 'next/font/google'
 import './globals.css'
-import { EmberField } from '@/components/layout/EmberField'
-import { RouteTransition } from '@/components/layout/RouteTransition'
-import { GlobalKeyboard } from '@/components/layout/GlobalKeyboard'
-import { Breadcrumb } from '@/components/menu/Breadcrumb'
-import { KeyHud } from '@/components/menu/KeyHud'
+import { GlobalAtmosphere } from '@/components/layout/GlobalAtmosphere'
+import { PageTransition } from '@/components/layout/PageTransition'
 
-const cinzel = Cinzel({
+const cinzelDecorative = Cinzel_Decorative({
   subsets: ['latin'],
-  weight: ['400', '500', '700'],
-  variable: '--font-cinzel',
+  weight: ['400', '700', '900'],
+  variable: '--font-cinzel-decorative',
   display: 'swap',
 })
 
-const ebGaramond = EB_Garamond({
+const cormorantGaramond = Cormorant_Garamond({
   subsets: ['latin'],
-  weight: ['400', '500'],
+  weight: ['400', '500', '600', '700'],
   style: ['normal', 'italic'],
-  variable: '--font-eb-garamond',
+  variable: '--font-cormorant',
+  display: 'swap',
+})
+
+const ibmPlexMono = IBM_Plex_Mono({
+  subsets: ['latin'],
+  weight: ['300', '400'],
+  variable: '--font-ibm-mono',
+  display: 'swap',
+})
+
+const italianno = Italianno({
+  subsets: ['latin'],
+  weight: '400',
+  variable: '--font-italianno',
   display: 'swap',
 })
 
@@ -27,23 +43,24 @@ export const metadata: Metadata = {
   description: 'Portfolio — Electrical Engineering, University of Waterloo.',
 }
 
+const fontVars = [
+  cinzelDecorative.variable,
+  cormorantGaramond.variable,
+  ibmPlexMono.variable,
+  italianno.variable,
+].join(' ')
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${cinzel.variable} ${ebGaramond.variable}`}>
-      <body className="relative min-h-screen antialiased">
-        <EmberField />
-        <a
-          href="#content"
-          className="sr-only focus:not-sr-only focus:absolute focus:left-2 focus:top-2 focus:z-50 focus:bg-[var(--color-obsidian-2)] focus:px-3 focus:py-2 focus:text-[var(--color-cream)]"
-        >
+    <html lang="en" className={fontVars}>
+      <body className="antialiased">
+        <a href="#content" className="skip-link">
           Skip to navigation
         </a>
-        <Breadcrumb />
-        <div id="content">
-          <RouteTransition>{children}</RouteTransition>
+        <GlobalAtmosphere />
+        <div id="content" className="app-root">
+          <PageTransition>{children}</PageTransition>
         </div>
-        <KeyHud />
-        <GlobalKeyboard />
       </body>
     </html>
   )

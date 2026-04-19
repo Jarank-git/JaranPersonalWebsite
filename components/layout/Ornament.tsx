@@ -37,30 +37,36 @@ export function Ornament({ variant = 'divider', className }: OrnamentProps) {
     return (
       <svg
         aria-hidden="true"
-        viewBox="0 0 200 40"
-        className={cn('h-10 w-50 text-[var(--color-gold)]/40', className)}
+        viewBox="0 0 300 50"
+        className={cn('h-12 w-72 text-[var(--color-gold)]', className)}
         preserveAspectRatio="xMidYMid meet"
       >
         <path
-          d="M 20 20 Q 40 5 60 15 Q 80 25 100 10 Q 120 -5 140 15 Q 160 25 180 20"
+          d="M 30 25 Q 60 8 90 20 Q 120 32 150 15 Q 180 -2 210 20 Q 240 32 270 25"
+          stroke="currentColor"
+          strokeWidth="1"
+          fill="none"
+          opacity="0.6"
+        />
+        <path
+          d="M 90 20 Q 110 10 130 18 Q 150 26 170 18 Q 190 10 210 20"
           stroke="currentColor"
           strokeWidth="0.6"
           fill="none"
+          opacity="0.35"
         />
         <path
-          d="M 60 15 Q 70 8 80 15 Q 90 22 100 15"
+          d="M 120 18 Q 135 8 150 14 Q 165 8 180 18"
           stroke="currentColor"
-          strokeWidth="0.4"
+          strokeWidth="0.5"
           fill="none"
-          opacity="0.5"
+          opacity="0.25"
         />
-        <path
-          d="M 100 10 Q 110 3 120 10 Q 130 17 140 10"
-          stroke="currentColor"
-          strokeWidth="0.4"
-          fill="none"
-          opacity="0.5"
-        />
+        <circle cx="150" cy="14" r="2.5" fill="currentColor" opacity="0.5" />
+        <circle cx="90" cy="20" r="1.5" fill="currentColor" opacity="0.3" />
+        <circle cx="210" cy="20" r="1.5" fill="currentColor" opacity="0.3" />
+        <line x1="60" y1="25" x2="30" y2="25" stroke="currentColor" strokeWidth="0.3" opacity="0.2" />
+        <line x1="240" y1="25" x2="270" y2="25" stroke="currentColor" strokeWidth="0.3" opacity="0.2" />
       </svg>
     )
   }

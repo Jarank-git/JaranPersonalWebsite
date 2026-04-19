@@ -51,3 +51,5 @@ export type ContactLink = {
   href: string
   external: boolean
 }
+
+export type MenuSection = 'about' | 'projects' | 'experience' | 'contact'

@@ -34,3 +34,9 @@ docs/
 .next/
 next-env.d.ts
 *.tsbuildinfo
+
+# Playwright MCP local logs
+.playwright-mcp/
+
+# Loose screenshot iterations at repo root (design scratch)
+/*.png

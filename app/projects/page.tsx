@@ -1,17 +1,23 @@
-import { MenuStack } from '@/components/menu/MenuStack'
-import { Ornament } from '@/components/layout/Ornament'
-import { projects, toProjectMenuItem } from '@/lib/content'
+import { ChronicleLayout } from '@/components/layout/ChronicleLayout'
+import { projects } from '@/lib/content'
 
 export default function ProjectsPage() {
   return (
-    <main className="flex min-h-screen items-center justify-center px-6">
-      <div className="w-full max-w-xl">
-        <div className="mb-10 text-center">
-          <h1 className="menu-label gold-text text-4xl md:text-5xl tracking-[0.2em]">Projects</h1>
-          <Ornament variant="divider" className="mt-4" />
+    <ChronicleLayout
+      eyebrow={'Chapter II \u00B7 The Archive'}
+      title="Projects"
+      titleSub="SELECTED WORK"
+      lead={'A handful of works from recent expeditions \u2014 each one shaped by the problem, the team, and what the project demanded.'}
+    >
+      {projects.map((p) => (
+        <div key={p.slug} className="project-card">
+          <div className="project-card-tag">
+            {p.year} {'\u00B7'} {p.stack.join(' \u00B7 ') || 'Project'}
+          </div>
+          <div className="project-card-title">{p.title}</div>
+          <div className="project-card-desc">{p.summary || p.tagline}</div>
         </div>
-        <MenuStack items={projects.map(toProjectMenuItem)} ariaLabel="Projects" />
-      </div>
-    </main>
+      ))}
+    </ChronicleLayout>
   )
 }

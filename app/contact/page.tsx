@@ -1,17 +1,28 @@
-import { MenuStack } from '@/components/menu/MenuStack'
-import { Ornament } from '@/components/layout/Ornament'
-import { contactLinks, toContactMenuItem } from '@/lib/content'
+import { ChronicleLayout } from '@/components/layout/ChronicleLayout'
+import { contactLinks } from '@/lib/content'
 
 export default function ContactPage() {
   return (
-    <main className="flex min-h-screen items-center justify-center px-6">
-      <div className="w-full max-w-xl">
-        <div className="mb-10 text-center">
-          <h1 className="menu-label gold-text text-4xl md:text-5xl tracking-[0.2em]">Contact</h1>
-          <Ornament variant="divider" className="mt-4" />
-        </div>
-        <MenuStack items={contactLinks.map(toContactMenuItem)} ariaLabel="Contact" />
+    <ChronicleLayout
+      eyebrow={'Chapter IV \u00B7 Send Word'}
+      title="Contact"
+      titleSub="CORRESPONDENCE"
+      lead="The best way to reach me is by email. I read everything and try to answer within a day or two."
+    >
+      <div className="contact-grid">
+        {contactLinks.map((c) => (
+          <a
+            key={c.slug}
+            href={c.href}
+            className="contact-tile"
+            target={c.external ? '_blank' : undefined}
+            rel={c.external ? 'noreferrer noopener' : undefined}
+          >
+            <div className="k">{c.label}</div>
+            <div className="v">{c.handle}</div>
+          </a>
+        ))}
       </div>
-    </main>
+    </ChronicleLayout>
   )
 }

@@ -1,23 +1,25 @@
-import { MenuStack } from '@/components/menu/MenuStack'
-import { Ornament } from '@/components/layout/Ornament'
-import type { MenuItem } from '@/types/content'
-
-const NOT_FOUND_ITEMS: MenuItem[] = [
-  { label: 'Return to Main', href: '/' },
-]
+import Link from 'next/link'
 
 export default function NotFound() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center px-6">
-      <div className="mb-10 text-center">
-        <h1 className="menu-label gold-text text-5xl md:text-6xl">Quest Not Found</h1>
-        <Ornament variant="flourish" className="mx-auto mt-4" />
-        <p className="mt-4 text-lg italic text-[var(--color-cream-dim)]">
-          This path no longer leads anywhere.
+    <main className="chronicle" style={{ justifyContent: 'center', alignItems: 'center', textAlign: 'center' }}>
+      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 20 }}>
+        <div className="chronicle-eyebrow">Untranslated Fragment</div>
+        <h1
+          className="chronicle-title"
+          style={{ fontFamily: 'var(--font-script)', fontSize: 'clamp(72px, 10vw, 140px)' }}
+        >
+          Quest Not Found
+        </h1>
+        <p className="chronicle-lead" style={{ maxWidth: '42em' }}>
+          This page has drifted out of the expedition. No record of it remains.
         </p>
-      </div>
-      <div className="w-full max-w-xl">
-        <MenuStack items={NOT_FOUND_ITEMS} ariaLabel="Not-found actions" />
+        <Link href="/" className="chronicle-back" style={{ marginTop: 20 }}>
+          <span className="chronicle-back-glyph" aria-hidden>
+            {'\u2190'}
+          </span>
+          <span className="chronicle-back-text">Return to Main</span>
+        </Link>
       </div>
     </main>
   )
