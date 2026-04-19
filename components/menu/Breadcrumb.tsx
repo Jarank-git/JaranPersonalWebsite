@@ -26,11 +26,15 @@ function labelFor(segment: string, parentSegment: string | undefined): string {
   return segmentTitle(segment)
 }
 
+const KNOWN_ROOTS = new Set(['about', 'projects', 'experience', 'contact'])
+
 export function Breadcrumb() {
   const pathname = usePathname()
   if (pathname === '/') return null
 
   const segments = pathname.split('/').filter(Boolean)
+  if (segments.length === 0 || !KNOWN_ROOTS.has(segments[0])) return null
+
   const crumbs = [
     { href: '/', label: 'MAIN', isLast: false },
     ...segments.map((segment, i) => {
