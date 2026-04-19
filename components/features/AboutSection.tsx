@@ -1,5 +1,6 @@
 import type { AboutSlab } from '@/types/content'
 import { Ornament } from '@/components/layout/Ornament'
+import { Button } from '@/components/ui/button'
 
 export interface AboutSectionProps {
   data: AboutSlab
@@ -31,13 +32,11 @@ export function AboutSection({ data }: AboutSectionProps) {
 
       {data.download && (
         <div className="mt-8">
-          <a
-            href={data.download.href}
-            className="menu-label inline-block border border-[var(--color-gold)]/60 px-6 py-3 text-sm text-[var(--color-gold-bright)] transition-colors hover:border-[var(--color-gold-bright)] hover:text-[var(--color-cream)] focus-visible:outline-none focus-visible:border-[var(--color-gold-bright)] focus-visible:text-[var(--color-cream)]"
-            download
-          >
-            {data.download.label}
-          </a>
+          <Button asChild size="lg">
+            <a href={data.download.href} download>
+              {data.download.label}
+            </a>
+          </Button>
         </div>
       )}
     </section>
