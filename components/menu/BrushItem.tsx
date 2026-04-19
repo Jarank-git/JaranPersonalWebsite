@@ -9,7 +9,8 @@ export interface BrushItemProps {
 }
 
 const itemClass = cn(
-  'relative block w-full max-w-xl px-6 py-3',
+  'relative flex min-h-12 w-full max-w-xl items-center px-6 py-3',
+  'text-base md:text-lg',
   'transition-[color,background-color] duration-200 ease-[var(--ease-ink)]',
   'before:absolute before:inset-0 before:-z-10 before:swipe-clip',
   'before:bg-[var(--color-obsidian-2)] before:opacity-80',
