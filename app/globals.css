@@ -1,0 +1,64 @@
+@import "tailwindcss";
+
+@theme {
+  /* Palette (OKLCH — warm obsidian + antique gold + cream) */
+  --color-obsidian:    oklch(11% 0.008 40);
+  --color-obsidian-2:  oklch(15% 0.010 40);
+  --color-obsidian-3:  oklch(19% 0.012 40);
+  --color-gold:        oklch(66% 0.095 75);
+  --color-gold-bright: oklch(76% 0.120 78);
+  --color-cream:       oklch(93% 0.020 85);
+  --color-cream-dim:   oklch(93% 0.020 85 / 0.62);
+  --color-cream-faint: oklch(93% 0.020 85 / 0.38);
+  --color-ember:       oklch(52% 0.155 30);
+
+  /* Typography — via next/font CSS vars */
+  --font-display: var(--font-cinzel), 'Cinzel', serif;
+  --font-body:    var(--font-eb-garamond), 'EB Garamond', serif;
+
+  /* Motion */
+  --ease-ink:  cubic-bezier(0.22, 1, 0.36, 1);
+  --dur-fast:  180ms;
+  --dur-med:   320ms;
+  --dur-slow:  520ms;
+
+  /* Structure */
+  --radius-sharp: 0;
+  --radius-hair:  2px;
+}
+
+/* Base */
+html, body {
+  background: var(--color-obsidian);
+  color: var(--color-cream);
+  font-family: var(--font-body);
+}
+
+@layer utilities {
+  .menu-label {
+    font-family: var(--font-display);
+    font-weight: 400;
+    letter-spacing: 0.16em;
+  }
+  .swipe-clip {
+    clip-path: polygon(0 10%, 98% 0%, 100% 88%, 2% 100%);
+  }
+  .slash-under::after {
+    content: '';
+    position: absolute;
+    left: 0.75rem;
+    right: 2rem;
+    bottom: 0.2rem;
+    height: 1px;
+    background: linear-gradient(90deg, var(--color-gold-bright), transparent);
+  }
+}
+
+/* Reduced-motion kill switch */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

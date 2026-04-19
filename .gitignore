@@ -29,3 +29,8 @@ dist-ssr
 CLAUDE.md
 references.md
 docs/
+
+# Next.js
+.next/
+next-env.d.ts
+*.tsbuildinfo
