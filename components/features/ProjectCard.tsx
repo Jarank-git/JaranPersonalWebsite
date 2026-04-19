@@ -17,22 +17,22 @@ export function ProjectCard({ project }: ProjectCardProps) {
   const { title, tagline, year, stack, images, summary, bullets, links } = project
 
   return (
-    <article className="mx-auto w-full max-w-3xl px-6 py-12">
-      <header className="mb-6">
-        <h1 className="menu-label text-3xl text-[var(--color-cream)]">{title}</h1>
-        <p className="mt-2 text-[var(--color-cream-dim)]">{tagline}</p>
-        <Ornament variant="divider" className="mt-4" />
-        <div className="mt-4 flex flex-wrap items-center gap-x-6 gap-y-2 text-xs text-[var(--color-cream-faint)]">
+    <article className="relative mx-auto w-full max-w-3xl px-6 py-12">
+      <header className="mb-8">
+        <h1 className="menu-label gold-text text-4xl md:text-5xl leading-tight">{title}</h1>
+        <p className="mt-3 text-lg italic text-[var(--color-cream-dim)]">{tagline}</p>
+        <Ornament variant="divider" className="mt-5" />
+        <div className="mt-5 flex flex-wrap items-center gap-x-6 gap-y-2 text-xs text-[var(--color-cream-faint)]">
           <div className="flex items-center gap-2">
-            <span className="menu-label tracking-widest">Year</span>
+            <span className="menu-label tracking-widest text-[var(--color-gold)]/60">Year</span>
             <span className="text-[var(--color-gold-bright)]">{year}</span>
           </div>
           {stack.length > 0 && (
             <div className="flex items-center gap-2">
-              <span className="menu-label tracking-widest">Stack</span>
+              <span className="menu-label tracking-widest text-[var(--color-gold)]/60">Stack</span>
               <ul className="flex flex-wrap gap-2">
                 {stack.map((s) => (
-                  <li key={s} className="menu-label border border-[var(--color-gold)]/40 px-2 py-0.5 text-[10px] text-[var(--color-cream)]">
+                  <li key={s} className="menu-label border border-[var(--color-gold)]/30 bg-[var(--color-obsidian-2)]/60 px-3 py-1 text-[10px] text-[var(--color-cream)]">
                     {s}
                   </li>
                 ))}
@@ -43,12 +43,12 @@ export function ProjectCard({ project }: ProjectCardProps) {
       </header>
 
       {images.length > 0 && (
-        <section aria-label="Gallery" className="mb-8 space-y-4">
+        <section aria-label="Gallery" className="mb-10 space-y-6">
           {images.map((img) => (
-            <figure key={img.src} className="relative aspect-[4/3] w-full overflow-hidden border border-[var(--color-gold)]/20 bg-[var(--color-obsidian-2)]">
+            <figure key={img.src} className="relative aspect-[4/3] w-full overflow-hidden art-nouveau-border bg-[var(--color-obsidian-2)]">
               <Image src={img.src} alt={img.alt} fill sizes="(max-width: 768px) 100vw, 768px" className="object-cover" />
               {img.caption && (
-                <figcaption className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-[var(--color-obsidian)]/90 to-transparent px-4 py-2 text-xs text-[var(--color-cream-dim)]">
+                <figcaption className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-[var(--color-obsidian)]/95 to-transparent px-5 py-3 text-xs text-[var(--color-cream-dim)]">
                   {img.caption}
                 </figcaption>
               )}
@@ -57,23 +57,31 @@ export function ProjectCard({ project }: ProjectCardProps) {
         </section>
       )}
 
-      <div className="space-y-4 text-[var(--color-cream-dim)] leading-relaxed">
-        <p>{summary}</p>
+      <div className="relative art-nouveau-border p-6">
+        <div className="space-y-4 text-[var(--color-cream-dim)] leading-relaxed">
+          <p>{summary}</p>
+        </div>
+
+        {bullets.length > 0 && (
+          <ul className="mt-6 space-y-3 pl-4 text-[var(--color-cream-dim)]">
+            {bullets.map((b, i) => (
+              <li key={i} className="flex gap-3">
+                <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rotate-45 bg-[var(--color-gold)]/60" />
+                <span>{b}</span>
+              </li>
+            ))}
+          </ul>
+        )}
       </div>
 
-      {bullets.length > 0 && (
-        <ul className="mt-6 list-disc space-y-2 pl-6 text-[var(--color-cream-dim)] marker:text-[var(--color-gold)]/60">
-          {bullets.map((b, i) => <li key={i}>{b}</li>)}
-        </ul>
-      )}
-
       {links.length > 0 && (
-        <footer className="mt-8 border-t border-[var(--color-gold)]/20 pt-6">
+        <footer className="mt-8">
+          <p className="menu-label mb-3 text-[10px] tracking-[0.3em] text-[var(--color-gold)]/50">Links</p>
           <ul className="flex flex-wrap gap-x-6 gap-y-3">
             {links.map((l) => (
               <li key={l.href}>
                 <a href={l.href} target="_blank" rel="noreferrer noopener"
-                  className="menu-label text-sm text-[var(--color-gold-bright)] hover:text-[var(--color-cream)] focus-visible:outline-none focus-visible:text-[var(--color-cream)]">
+                  className="menu-label border-b border-b-[var(--color-gold)]/30 pb-1 text-sm text-[var(--color-gold-bright)] transition-colors hover:border-b-[var(--color-gold-bright)] hover:text-[var(--color-cream)] focus-visible:outline-none focus-visible:text-[var(--color-cream)]">
                   {KIND_LABEL[l.kind]} · {l.label}
                 </a>
               </li>

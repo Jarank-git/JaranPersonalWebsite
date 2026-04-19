@@ -1,16 +1,19 @@
 @import "tailwindcss";
 
 @theme {
-  /* Palette (OKLCH — warm obsidian + antique gold + cream) */
-  --color-obsidian:    oklch(11% 0.008 40);
-  --color-obsidian-2:  oklch(15% 0.010 40);
-  --color-obsidian-3:  oklch(19% 0.012 40);
+  /* Palette — Expedition 33 corrupted elegance */
+  --color-obsidian:    oklch(8% 0.008 40);
+  --color-obsidian-2:  oklch(12% 0.012 40);
+  --color-obsidian-3:  oklch(16% 0.014 40);
+  --color-obsidian-warm: oklch(10% 0.015 50);
   --color-gold:        oklch(66% 0.095 75);
   --color-gold-bright: oklch(76% 0.120 78);
+  --color-gold-dim:    oklch(50% 0.070 70);
   --color-cream:       oklch(93% 0.020 85);
   --color-cream-dim:   oklch(93% 0.020 85 / 0.62);
   --color-cream-faint: oklch(93% 0.020 85 / 0.38);
   --color-ember:       oklch(52% 0.155 30);
+  --color-blood:       oklch(35% 0.12 25);
 
   /* Typography — via next/font CSS vars */
   --font-display: var(--font-cinzel), 'Cinzel', serif;
@@ -27,11 +30,31 @@
   --radius-hair:  2px;
 }
 
-/* Base */
+/* Base — deep vignette atmosphere like Exp33's obsidian world */
 html, body {
   background: var(--color-obsidian);
   color: var(--color-cream);
   font-family: var(--font-body);
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 50% 40%, transparent 20%, oklch(8% 0.008 40 / 0.4) 60%, oklch(5% 0.006 30 / 0.85) 100%);
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    linear-gradient(180deg, oklch(5% 0.006 30 / 0.3) 0%, transparent 12%, transparent 88%, oklch(5% 0.006 30 / 0.5) 100%);
 }
 
 @layer utilities {
@@ -41,7 +64,7 @@ html, body {
     letter-spacing: 0.16em;
   }
   .swipe-clip {
-    clip-path: polygon(0 10%, 98% 0%, 100% 88%, 2% 100%);
+    clip-path: polygon(0 6%, 97% 0%, 100% 93%, 3% 100%);
   }
   .slash-under::after {
     content: '';
@@ -51,6 +74,30 @@ html, body {
     bottom: 0.2rem;
     height: 1px;
     background: linear-gradient(90deg, var(--color-gold-bright), transparent);
+  }
+  .gold-text {
+    background: linear-gradient(135deg, var(--color-gold) 0%, var(--color-gold-bright) 45%, var(--color-cream) 50%, var(--color-gold-bright) 55%, var(--color-gold) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .art-nouveau-border {
+    border: 1px solid oklch(66% 0.095 75 / 0.3);
+    box-shadow:
+      inset 0 0 30px oklch(8% 0.008 40 / 0.5),
+      0 0 15px oklch(66% 0.095 75 / 0.05);
+  }
+  .art-nouveau-border::before {
+    content: '';
+    position: absolute;
+    inset: 3px;
+    border: 1px solid oklch(66% 0.095 75 / 0.12);
+    pointer-events: none;
+  }
+  .panel-glow {
+    background:
+      radial-gradient(ellipse at 50% 0%, oklch(66% 0.095 75 / 0.04) 0%, transparent 70%),
+      linear-gradient(180deg, oklch(12% 0.012 40) 0%, oklch(8% 0.008 40) 100%);
   }
   @media (forced-colors: active) {
     a:focus-visible,

@@ -1,4 +1,5 @@
 import { MenuStack } from '@/components/menu/MenuStack'
+import { Ornament } from '@/components/layout/Ornament'
 import type { MenuItem } from '@/types/content'
 
 const NOT_FOUND_ITEMS: MenuItem[] = [
@@ -9,8 +10,9 @@ export default function NotFound() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-center px-6">
       <div className="mb-10 text-center">
-        <h1 className="menu-label text-4xl text-[var(--color-cream)]">Quest Not Found</h1>
-        <p className="mt-3 text-[var(--color-cream-dim)]">
+        <h1 className="menu-label gold-text text-5xl md:text-6xl">Quest Not Found</h1>
+        <Ornament variant="flourish" className="mx-auto mt-4" />
+        <p className="mt-4 text-lg italic text-[var(--color-cream-dim)]">
           This path no longer leads anywhere.
         </p>
       </div>

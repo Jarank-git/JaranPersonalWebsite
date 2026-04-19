@@ -1,7 +1,7 @@
 import { cn } from '@/lib/utils'
 
 export interface OrnamentProps {
-  variant?: 'corner-tl' | 'corner-tr' | 'corner-bl' | 'corner-br' | 'divider'
+  variant?: 'corner-tl' | 'corner-tr' | 'corner-bl' | 'corner-br' | 'divider' | 'flourish'
   className?: string
 }
 
@@ -10,17 +10,57 @@ export function Ornament({ variant = 'divider', className }: OrnamentProps) {
     return (
       <svg
         aria-hidden="true"
-        viewBox="0 0 240 8"
-        className={cn('h-2 w-full text-[var(--color-gold)]/60', className)}
-        preserveAspectRatio="none"
+        viewBox="0 0 400 24"
+        className={cn('h-6 w-full text-[var(--color-gold)]/60', className)}
+        preserveAspectRatio="xMidYMid meet"
       >
         <path
-          d="M 0 4 L 105 4 M 115 4 L 125 4 M 135 4 L 240 4"
+          d="M 0 12 Q 60 12 90 8 Q 110 5 130 8 Q 150 12 170 10 Q 185 8 195 12 Q 200 14 205 12 Q 215 8 230 10 Q 250 12 270 8 Q 290 5 310 8 Q 340 12 400 12"
           stroke="currentColor"
           strokeWidth="0.5"
           fill="none"
         />
-        <circle cx="120" cy="4" r="1.5" fill="currentColor" />
+        <path
+          d="M 170 10 Q 185 2 200 6 Q 215 2 230 10"
+          stroke="currentColor"
+          strokeWidth="0.5"
+          fill="none"
+        />
+        <circle cx="200" cy="6" r="2" fill="currentColor" opacity="0.8" />
+        <circle cx="185" cy="8" r="1" fill="currentColor" opacity="0.4" />
+        <circle cx="215" cy="8" r="1" fill="currentColor" opacity="0.4" />
+      </svg>
+    )
+  }
+
+  if (variant === 'flourish') {
+    return (
+      <svg
+        aria-hidden="true"
+        viewBox="0 0 200 40"
+        className={cn('h-10 w-50 text-[var(--color-gold)]/40', className)}
+        preserveAspectRatio="xMidYMid meet"
+      >
+        <path
+          d="M 20 20 Q 40 5 60 15 Q 80 25 100 10 Q 120 -5 140 15 Q 160 25 180 20"
+          stroke="currentColor"
+          strokeWidth="0.6"
+          fill="none"
+        />
+        <path
+          d="M 60 15 Q 70 8 80 15 Q 90 22 100 15"
+          stroke="currentColor"
+          strokeWidth="0.4"
+          fill="none"
+          opacity="0.5"
+        />
+        <path
+          d="M 100 10 Q 110 3 120 10 Q 130 17 140 10"
+          stroke="currentColor"
+          strokeWidth="0.4"
+          fill="none"
+          opacity="0.5"
+        />
       </svg>
     )
   }
@@ -28,9 +68,9 @@ export function Ornament({ variant = 'divider', className }: OrnamentProps) {
   return (
     <svg
       aria-hidden="true"
-      viewBox="0 0 40 40"
+      viewBox="0 0 60 60"
       className={cn(
-        'h-10 w-10 text-[var(--color-gold)]/50',
+        'h-15 w-15 text-[var(--color-gold)]/40',
         variant === 'corner-tr' && 'rotate-90',
         variant === 'corner-br' && 'rotate-180',
         variant === 'corner-bl' && '-rotate-90',
@@ -38,11 +78,33 @@ export function Ornament({ variant = 'divider', className }: OrnamentProps) {
       )}
     >
       <path
-        d="M 2 2 L 2 22 M 2 2 L 22 2 M 8 2 L 8 8 L 2 8"
+        d="M 4 4 L 4 30 M 4 4 L 30 4"
+        stroke="currentColor"
+        strokeWidth="0.6"
+        fill="none"
+      />
+      <path
+        d="M 4 4 Q 4 15 10 20 Q 16 25 16 35"
         stroke="currentColor"
         strokeWidth="0.5"
         fill="none"
+        opacity="0.6"
       />
+      <path
+        d="M 4 4 Q 15 4 20 10 Q 25 16 35 16"
+        stroke="currentColor"
+        strokeWidth="0.5"
+        fill="none"
+        opacity="0.6"
+      />
+      <path
+        d="M 10 4 Q 10 10 4 10"
+        stroke="currentColor"
+        strokeWidth="0.4"
+        fill="none"
+        opacity="0.4"
+      />
+      <circle cx="4" cy="4" r="1.5" fill="currentColor" opacity="0.6" />
     </svg>
   )
 }

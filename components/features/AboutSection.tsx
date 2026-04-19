@@ -10,10 +10,10 @@ export function AboutSection({ data }: AboutSectionProps) {
   const paragraphs = data.body.split(/\n\n+/).filter((p) => p.trim().length > 0)
 
   return (
-    <section className="mx-auto w-full max-w-2xl px-6 py-12">
-      <header className="mb-6">
-        <h1 className="menu-label text-3xl text-[var(--color-cream)]">{data.title}</h1>
-        <Ornament variant="divider" className="mt-3" />
+    <section className="relative mx-auto w-full max-w-2xl px-6 py-12">
+      <header className="mb-8">
+        <h1 className="menu-label gold-text text-3xl md:text-4xl">{data.title}</h1>
+        <Ornament variant="divider" className="mt-4" />
       </header>
 
       <div className="space-y-4 text-[var(--color-cream-dim)] leading-relaxed">
