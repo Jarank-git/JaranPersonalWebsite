@@ -52,6 +52,14 @@ html, body {
     height: 1px;
     background: linear-gradient(90deg, var(--color-gold-bright), transparent);
   }
+  @media (forced-colors: active) {
+    a:focus-visible,
+    button:focus-visible,
+    [data-menu-item]:focus-visible {
+      outline: 2px solid CanvasText;
+      outline-offset: 2px;
+    }
+  }
 }
 
 /* Reduced-motion kill switch */
