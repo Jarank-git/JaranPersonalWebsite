@@ -22,3 +22,10 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+.superpowers/
+
+# Claude Code — local-only context, not pushed
+.claude/
+CLAUDE.md
+references.md
+docs/
