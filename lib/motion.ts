@@ -12,6 +12,7 @@ export const routeExit: Variants = {
 }
 
 export const stackChildren: Variants = {
+  initial: {},
   animate: { transition: { staggerChildren: 0.05, delayChildren: 0.08 } },
 }
 
