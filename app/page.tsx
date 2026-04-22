@@ -1,12 +1,15 @@
 'use client'
 
 import { useEffect, useRef, useCallback, useState } from 'react'
+import { AnimatePresence, motion } from 'framer-motion'
 import { GoldenFlakes } from '@/components/layout/GoldenFlakes'
-import { HudCard } from '@/components/menu/HudCard'
-import { PartyChips } from '@/components/menu/PartyChips'
 import { MenuStack } from '@/components/menu/MenuStack'
-import { Stamp } from '@/components/menu/Stamp'
+import { ToneWash } from '@/components/menu/ToneWash'
+import { SummaryPanel } from '@/components/menu/SummaryPanel'
+import { GhostWatermark } from '@/components/menu/GhostWatermark'
+import { MENU_ITEMS } from '@/components/menu/sections'
 import { useLayoutMode } from '@/hooks/use-layout-mode'
+import { useSwipe } from '@/hooks/use-swipe'
 
 const STAGE_W = 1600
 const STAGE_H = 1000
@@ -29,92 +32,189 @@ function useStageScale(stageRef: React.RefObject<HTMLDivElement | null>, active:
   }, [fit, active])
 }
 
-function Splatters() {
-  return (
-    <>
-      <div
-        className="splat"
-        style={{ left: 40, top: 40, width: 140, height: 90, transform: 'rotate(-12deg)', opacity: 0.55 }}
-      >
-        <svg><use href="#splat1" /></svg>
-      </div>
-      <div
-        className="splat"
-        style={{ right: 280, top: 170, width: 110, height: 80, transform: 'rotate(28deg)', opacity: 0.45 }}
-      >
-        <svg><use href="#splat2" /></svg>
-      </div>
-      <div
-        className="splat"
-        style={{ left: 660, bottom: 160, width: 160, height: 100, transform: 'rotate(-20deg)', opacity: 0.3 }}
-      >
-        <svg><use href="#splat1" /></svg>
-      </div>
-      <div
-        className="splat"
-        style={{ right: 40, bottom: 220, width: 100, height: 70, transform: 'rotate(14deg)', opacity: 0.5 }}
-      >
-        <svg><use href="#splat2" /></svg>
-      </div>
-      <div
-        className="splat"
-        style={{ left: 860, top: 80, width: 120, height: 80, transform: 'rotate(40deg)', opacity: 0.3 }}
-      >
-        <svg><use href="#splat1" /></svg>
-      </div>
-    </>
-  )
+interface HomeProps {
+  selectedIdx: number
+  setSelectedIdx: (idx: number) => void
 }
 
-function CinematicHome() {
+function CinematicHome({ selectedIdx, setSelectedIdx }: HomeProps) {
   const stageRef = useRef<HTMLDivElement>(null)
   useStageScale(stageRef, true)
 
   return (
     <div className="stage-wrap">
       <div className="stage" ref={stageRef}>
-        <div className="bg-glyph">EXPEDITION</div>
         <GoldenFlakes />
-        <Splatters />
-        <HudCard />
-        <PartyChips />
-        <MenuStack />
-        <Stamp />
+        <ToneWash selectedIdx={selectedIdx} />
+        <div className="stage-left-zone" aria-hidden="true">
+          <AnimatePresence mode="wait">
+            {selectedIdx === 0 ? (
+              <SummaryPanel key="summary" />
+            ) : (
+              <GhostWatermark
+                key={selectedIdx}
+                label={MENU_ITEMS[selectedIdx]?.label ?? ''}
+                num={MENU_ITEMS[selectedIdx]?.num ?? ''}
+              />
+            )}
+          </AnimatePresence>
+        </div>
+        <MenuStack selectedIdx={selectedIdx} setSelectedIdx={setSelectedIdx} />
       </div>
     </div>
   )
 }
 
-function FluidHome() {
+function FluidHome({ selectedIdx, setSelectedIdx }: HomeProps) {
   return (
     <div className="home-fluid">
-      <div className="home-row-top">
-        <HudCard />
-        <PartyChips />
-      </div>
       <div className="home-center">
-        <div className="bg-glyph" style={{ opacity: 0.06 }}>EXPEDITION</div>
-        <MenuStack />
-      </div>
-      <div className="home-row-bottom">
-        <Stamp />
+        <ToneWash selectedIdx={selectedIdx} />
+        <div className="fluid-left-zone" aria-hidden="true">
+          <AnimatePresence mode="wait">
+            {selectedIdx === 0 ? (
+              <SummaryPanel key="summary" />
+            ) : (
+              <GhostWatermark
+                key={selectedIdx}
+                label={MENU_ITEMS[selectedIdx]?.label ?? ''}
+                num={MENU_ITEMS[selectedIdx]?.num ?? ''}
+              />
+            )}
+          </AnimatePresence>
+        </div>
+        <MenuStack selectedIdx={selectedIdx} setSelectedIdx={setSelectedIdx} />
       </div>
     </div>
+  )
+}
+
+function MobileSummaryCard({ onNavigate }: { onNavigate: () => void }) {
+  return (
+    <motion.div
+      className="mobile-summary-card"
+      key="card"
+      initial={{ y: 0, opacity: 1 }}
+      animate={{ y: 0, opacity: 1 }}
+      exit={{ y: '-100vh', opacity: 0 }}
+      transition={{ duration: 0.38, ease: [0.7, 0, 0.3, 1] }}
+    >
+      <div className="mobile-summary-card-top-band" aria-hidden="true">
+        <span className="mobile-summary-card-id">00 · SUMMARY</span>
+      </div>
+      <div className="mobile-summary-card-accent" aria-hidden="true" />
+
+      <div className="mobile-summary-card-body">
+        <div aria-label="Jaran Khalid">
+          <span className="mobile-summary-name">JARAN</span>
+          <span className="mobile-summary-name"> KHALID</span>
+        </div>
+
+        <div className="mobile-summary-rule" aria-hidden="true" />
+
+        <p className="mobile-summary-degree">
+          BASc Electrical Engineering · Waterloo
+        </p>
+
+        <p className="mobile-summary-bio">
+          Building at the intersection of hardware and software.
+        </p>
+
+        <div className="mobile-summary-info-card mobile-summary-info-card--red">
+          <span className="mobile-summary-info-label">▸ Experience</span>
+          <span className="mobile-summary-info-title">Internship · Company</span>
+          <span className="mobile-summary-info-sub">Role · 2024</span>
+        </div>
+
+        <div className="mobile-summary-info-card mobile-summary-info-card--gold">
+          <span className="mobile-summary-info-label">▸ Top Project</span>
+          <span className="mobile-summary-info-title">Project Name</span>
+          <span className="mobile-summary-info-sub">React · TypeScript</span>
+        </div>
+
+        <div className="mobile-summary-info-card mobile-summary-info-card--purple">
+          <span className="mobile-summary-info-label">▸ Degree</span>
+          <span className="mobile-summary-info-title">BASc Electrical Engineering</span>
+          <span className="mobile-summary-info-sub">University of Waterloo · 202X</span>
+        </div>
+      </div>
+
+      <button
+        className="mobile-summary-swipe-btn"
+        onClick={onNavigate}
+        aria-label="Open navigation menu"
+        type="button"
+      >
+        <span className="mobile-summary-swipe-hint">Swipe to navigate</span>
+        <span className="mobile-summary-swipe-chevron" aria-hidden="true" />
+      </button>
+    </motion.div>
+  )
+}
+
+function MobileMenuState({ onBack }: { onBack: () => void }) {
+  const [selectedIdx, setSelectedIdx] = useState(1)
+
+  return (
+    <motion.div
+      className="mobile-menu-state home-mobile"
+      key="menu"
+      initial={{ y: '100vh', opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      exit={{ y: '100vh', opacity: 0 }}
+      transition={{ duration: 0.38, ease: [0.7, 0, 0.3, 1] }}
+    >
+      <ToneWash selectedIdx={selectedIdx} />
+
+      <button
+        className="mobile-back-btn"
+        onClick={onBack}
+        aria-label="Back to summary"
+        type="button"
+      >
+        <span className="mobile-back-chevron" aria-hidden="true" />
+        <span className="mobile-back-name">JARAN KHALID</span>
+      </button>
+
+      <div className="home-center" style={{ flex: 1 }}>
+        <MenuStack selectedIdx={selectedIdx} setSelectedIdx={setSelectedIdx} />
+      </div>
+
+      <div className="mobile-menu-hud" aria-live="polite">
+        TAP to select · SWIPE UP for summary
+      </div>
+    </motion.div>
   )
 }
 
 function MobileHome() {
+  const [cardVisible, setCardVisible] = useState(true)
+
+  useEffect(() => {
+    if (cardVisible) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = ''
+    }
+    return () => {
+      document.body.style.overflow = ''
+    }
+  }, [cardVisible])
+
+  const swipeHandlers = useSwipe((direction) => {
+    if (direction === 'down' && cardVisible) setCardVisible(false)
+    if (direction === 'up' && !cardVisible) setCardVisible(true)
+  })
+
   return (
-    <div className="home-mobile">
-      <div className="home-row-top">
-        <HudCard />
-      </div>
-      <div className="home-center">
-        <MenuStack showCommandHud={false} />
-      </div>
-      <div className="home-row-bottom">
-        <Stamp />
-      </div>
+    <div className="mobile-home-wrap" {...swipeHandlers}>
+      <AnimatePresence mode="wait">
+        {cardVisible ? (
+          <MobileSummaryCard key="card" onNavigate={() => setCardVisible(false)} />
+        ) : (
+          <MobileMenuState key="menu" onBack={() => setCardVisible(true)} />
+        )}
+      </AnimatePresence>
     </div>
   )
 }
@@ -122,6 +222,7 @@ function MobileHome() {
 export default function HomePage() {
   const mode = useLayoutMode()
   const [mounted, setMounted] = useState(false)
+  const [selectedIdx, setSelectedIdx] = useState(0)
   useEffect(() => setMounted(true), [])
 
   if (!mounted) {
@@ -132,7 +233,7 @@ export default function HomePage() {
     )
   }
 
-  if (mode === 'cinematic') return <CinematicHome />
-  if (mode === 'fluid') return <FluidHome />
+  if (mode === 'cinematic') return <CinematicHome selectedIdx={selectedIdx} setSelectedIdx={setSelectedIdx} />
+  if (mode === 'fluid') return <FluidHome selectedIdx={selectedIdx} setSelectedIdx={setSelectedIdx} />
   return <MobileHome />
 }
