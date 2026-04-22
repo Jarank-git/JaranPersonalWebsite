@@ -52,4 +52,4 @@ export type ContactLink = {
   external: boolean
 }
 
-export type MenuSection = 'about' | 'projects' | 'experience' | 'contact'
+export type MenuSection = 'about' | 'projects' | 'experience' | 'contact' | 'summary'
