@@ -80,10 +80,6 @@ body {
   z-index: -10;
   pointer-events: none;
   background: #030304;
-  background-image:
-    radial-gradient(ellipse 90% 70% at 50% 45%, oklch(0.16 0.028 265) 0%, oklch(0.05 0.012 265) 85%),
-    radial-gradient(ellipse 40% 32% at 72% 12%, oklch(0.58 0.14 65 / 0.14), transparent 70%),
-    radial-gradient(ellipse 32% 26% at 18% 88%, oklch(0.55 0.14 60 / 0.10), transparent 70%);
 }
 
 .atmos-grain {
@@ -105,41 +101,6 @@ body {
   mix-blend-mode: multiply;
 }
 
-/* ------------------------------------------------------------------ */
-/*  Ink-wipe page transition curtain                                   */
-/* ------------------------------------------------------------------ */
-
-.ink-curtain {
-  position: fixed;
-  inset: 0;
-  z-index: 900;
-  pointer-events: none;
-  background:
-    linear-gradient(92deg, oklch(0.05 0.01 265) 0%, oklch(0.08 0.015 265) 75%, oklch(0.10 0.02 265) 100%);
-  clip-path: polygon(
-    0 0,
-    92% 0,      96% 3%,     91% 7%,     95% 11%,
-    89% 15%,    96% 19%,    90% 23%,    95% 27%,
-    88% 31%,    96% 35%,    91% 39%,    94% 43%,
-    89% 47%,    96% 51%,    90% 55%,    95% 59%,
-    88% 63%,    96% 67%,    91% 71%,    94% 75%,
-    89% 79%,    96% 83%,    90% 87%,    95% 91%,
-    89% 95%,    94% 100%,
-    0 100%
-  );
-  box-shadow: 40px 0 120px oklch(0 0 0 / 0.55);
-  will-change: transform;
-}
-.ink-curtain-edge-glow {
-  position: absolute;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  width: 22%;
-  pointer-events: none;
-  background: linear-gradient(90deg, transparent 0%, oklch(0.58 0.14 65 / 0.18) 70%, oklch(0.78 0.16 82 / 0.28) 100%);
-  mix-blend-mode: screen;
-}
 
 /* ------------------------------------------------------------------ */
 /*  Home stage — letterboxed 1600x1000 canvas at cinematic sizes      */
@@ -1171,12 +1132,7 @@ body {
   top: 0;
   bottom: 0;
   width: 3px;
-  background: linear-gradient(
-    180deg,
-    var(--color-gold) 0%,
-    var(--color-accent-red) 50%,
-    transparent 100%
-  );
+  background: var(--color-gold);
 }
 
 .summary-panel-corner-cut {
@@ -1278,7 +1234,7 @@ body {
 }
 
 .summary-panel-card--red::before {
-  background: linear-gradient(90deg, var(--color-accent-red), transparent);
+  background: var(--color-accent-red);
 }
 
 .summary-panel-card--gold {
@@ -1286,7 +1242,7 @@ body {
 }
 
 .summary-panel-card--gold::before {
-  background: linear-gradient(90deg, var(--color-gold), transparent);
+  background: var(--color-gold);
 }
 
 .summary-panel-card-label {
@@ -1378,7 +1334,7 @@ body {
 .mobile-summary-card-top-band {
   height: 36px;
   flex-shrink: 0;
-  background: linear-gradient(135deg, var(--color-accent-red) 0%, transparent 60%);
+  background: var(--color-accent-red);
   clip-path: polygon(0 0, 100% 0, 100% 40%, 60% 100%, 0 100%);
   position: relative;
 }
@@ -1400,11 +1356,7 @@ body {
   top: 0;
   bottom: 0;
   width: 3px;
-  background: linear-gradient(
-    180deg,
-    var(--color-accent-red) 40%,
-    transparent 100%
-  );
+  background: var(--color-accent-red);
 }
 
 .mobile-summary-card-body {
@@ -1481,7 +1433,7 @@ body {
 }
 
 .mobile-summary-info-card--red::before {
-  background: linear-gradient(90deg, var(--color-accent-red), transparent);
+  background: var(--color-accent-red);
 }
 
 .mobile-summary-info-card--gold {
@@ -1490,7 +1442,7 @@ body {
 }
 
 .mobile-summary-info-card--gold::before {
-  background: linear-gradient(90deg, var(--color-gold), transparent);
+  background: var(--color-gold);
 }
 
 .mobile-summary-info-card--purple {
@@ -1500,7 +1452,7 @@ body {
 }
 
 .mobile-summary-info-card--purple::before {
-  background: linear-gradient(90deg, oklch(0.64 0.10 305), transparent);
+  background: oklch(0.64 0.10 305);
 }
 
 .mobile-summary-info-label {
@@ -1551,7 +1503,7 @@ body {
 .mobile-summary-swipe-chevron {
   width: 1px;
   height: 10px;
-  background: linear-gradient(180deg, transparent, var(--color-ink-dim));
+  background: var(--color-ink-dim);
   opacity: 0.3;
 }
 

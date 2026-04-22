@@ -48,7 +48,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
             <figure key={img.src} className="relative aspect-[4/3] w-full overflow-hidden art-nouveau-border bg-[var(--color-obsidian-2)]">
               <Image src={img.src} alt={img.alt} fill sizes="(max-width: 768px) 100vw, 768px" className="object-cover" />
               {img.caption && (
-                <figcaption className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-[var(--color-obsidian)]/95 to-transparent px-5 py-3 text-xs text-[var(--color-cream-dim)]">
+                <figcaption className="absolute bottom-0 left-0 right-0 bg-[var(--color-obsidian)]/90 px-5 py-3 text-xs text-[var(--color-cream-dim)]">
                   {img.caption}
                 </figcaption>
               )}
