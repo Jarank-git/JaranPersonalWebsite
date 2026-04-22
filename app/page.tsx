@@ -4,7 +4,6 @@ import { useEffect, useRef, useCallback, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { GoldenFlakes } from '@/components/layout/GoldenFlakes'
 import { MenuStack } from '@/components/menu/MenuStack'
-import { ToneWash } from '@/components/menu/ToneWash'
 import { SummaryPanel } from '@/components/menu/SummaryPanel'
 import { GhostWatermark } from '@/components/menu/GhostWatermark'
 import { MENU_ITEMS } from '@/components/menu/sections'
@@ -45,7 +44,6 @@ function CinematicHome({ selectedIdx, setSelectedIdx }: HomeProps) {
     <div className="stage-wrap">
       <div className="stage" ref={stageRef}>
         <GoldenFlakes />
-        <ToneWash selectedIdx={selectedIdx} />
         <div className="stage-left-zone" aria-hidden="true">
           <AnimatePresence mode="wait">
             {selectedIdx === 0 ? (
@@ -69,7 +67,6 @@ function FluidHome({ selectedIdx, setSelectedIdx }: HomeProps) {
   return (
     <div className="home-fluid">
       <div className="home-center">
-        <ToneWash selectedIdx={selectedIdx} />
         <div className="fluid-left-zone" aria-hidden="true">
           <AnimatePresence mode="wait">
             {selectedIdx === 0 ? (
@@ -164,8 +161,6 @@ function MobileMenuState({ onBack }: { onBack: () => void }) {
       exit={{ y: '100vh', opacity: 0 }}
       transition={{ duration: 0.38, ease: [0.7, 0, 0.3, 1] }}
     >
-      <ToneWash selectedIdx={selectedIdx} />
-
       <button
         className="mobile-back-btn"
         onClick={onBack}
