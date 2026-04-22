@@ -1,58 +1,54 @@
 'use client'
 
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useRef } from 'react'
 import { useRouter } from 'next/navigation'
-import type { MenuSection } from '@/types/content'
 import { BrushItem } from './BrushItem'
-import { CommandHud } from './CommandHud'
+import { MENU_ITEMS } from './sections'
 
-const ITEMS: {
-  section: MenuSection
-  label: string
-  num: string
-  href: string
-  outline: boolean
-  command: string
-}[] = [
-  { section: 'about',      label: 'ABOUT',      num: '01', href: '/about',      outline: false, command: 'Read the dossier' },
-  { section: 'projects',   label: 'PROJECTS',   num: '02', href: '/projects',   outline: true,  command: 'Review the archive' },
-  { section: 'experience', label: 'EXPERIENCE', num: '03', href: '/experience', outline: false, command: 'Unfold the timeline' },
-  { section: 'contact',    label: 'CONTACT',    num: '04', href: '/contact',    outline: true,  command: 'Send word' },
-]
+const KEY_THROTTLE_MS = 280
 
 interface MenuStackProps {
-  showCommandHud?: boolean
+  selectedIdx: number
+  setSelectedIdx: (idx: number) => void
 }
 
-export function MenuStack({ showCommandHud = true }: MenuStackProps) {
+export function MenuStack({ selectedIdx, setSelectedIdx }: MenuStackProps) {
   const router = useRouter()
-  const [selectedIdx, setSelectedIdx] = useState(0)
+  const lastKeyAt = useRef(0)
 
-  const select = useCallback((idx: number) => {
-    setSelectedIdx(((idx % ITEMS.length) + ITEMS.length) % ITEMS.length)
-  }, [])
+  const select = useCallback(
+    (idx: number) => {
+      setSelectedIdx(((idx % MENU_ITEMS.length) + MENU_ITEMS.length) % MENU_ITEMS.length)
+    },
+    [setSelectedIdx],
+  )
 
   useEffect(() => {
-    for (const item of ITEMS) router.prefetch(item.href)
+    for (const item of MENU_ITEMS) router.prefetch(item.href)
   }, [router])
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement) return
+      const now = Date.now()
       switch (e.key) {
         case 'ArrowDown':
         case 'j':
           e.preventDefault()
+          if (now - lastKeyAt.current < KEY_THROTTLE_MS) return
+          lastKeyAt.current = now
           select(selectedIdx + 1)
           break
         case 'ArrowUp':
         case 'k':
           e.preventDefault()
+          if (now - lastKeyAt.current < KEY_THROTTLE_MS) return
+          lastKeyAt.current = now
           select(selectedIdx - 1)
           break
         case 'Enter':
           e.preventDefault()
-          router.push(ITEMS[selectedIdx].href)
+          router.push(MENU_ITEMS[selectedIdx].href)
           break
       }
     }
@@ -61,25 +57,21 @@ export function MenuStack({ showCommandHud = true }: MenuStackProps) {
   }, [selectedIdx, select, router])
 
   return (
-    <>
-      <nav className="menu" aria-label="main menu">
-        <ul role="listbox">
-          {ITEMS.map((item, i) => (
-            <BrushItem
-              key={item.section}
-              section={item.section}
-              label={item.label}
-              num={item.num}
-              href={item.href}
-              outline={item.outline}
-              selected={selectedIdx === i}
-              onSelect={() => select(i)}
-            />
-          ))}
-        </ul>
-      </nav>
-
-      {showCommandHud && <CommandHud currentCommand={ITEMS[selectedIdx].command} />}
-    </>
+    <nav className="menu" aria-label="main menu">
+      <ul role="listbox">
+        {MENU_ITEMS.map((item, i) => (
+          <BrushItem
+            key={item.section}
+            section={item.section}
+            label={item.label}
+            num={item.num}
+            href={item.href}
+            outline={item.outline}
+            selected={selectedIdx === i}
+            onSelect={() => select(i)}
+          />
+        ))}
+      </ul>
+    </nav>
   )
 }

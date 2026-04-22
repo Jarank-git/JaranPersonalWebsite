@@ -36,7 +36,7 @@ export function BrushItem({
       s.className = 'spk'
       s.style.left = `${8 + Math.random() * 84}%`
       s.style.top = `${12 + Math.random() * 76}%`
-      const size = 2 + Math.random() * 5
+      const size = 2 + Math.random() * 4
       s.style.width = s.style.height = `${size}px`
       s.style.animationDelay = `${Math.random() * 2.4}s`
       s.style.animationDuration = `${1.6 + Math.random() * 1.6}s`
@@ -59,7 +59,6 @@ export function BrushItem({
       </span>
       <span className="sparkles" ref={sparklesRef} aria-hidden="true" />
       <Link href={href} prefetch>
-        <span className="menu-num">{num}</span>
         <span className="menu-word">{label}</span>
       </Link>
     </li>
