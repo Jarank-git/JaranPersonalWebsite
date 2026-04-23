@@ -1,6 +1,6 @@
 # context.md — System Architecture
 
-> **Status (2026-04-20):** Navigation architecture is pivoting to **Persona 3 Reload–style** — vertical menu, per-section tonal wash (Framer Motion, shipped), angular stencil commit-wipe on navigation (pending), section watermarks (pending). The **Elden Ring / Expedition 33 color palette and font stack stay locked** (`@theme` tokens + `next/font` loaders are untouched). All four destination routes (`/about`, `/projects`, `/experience`, `/contact`) are being blanked to empty placeholders — their existing content and chrome are considered inaccurate to the new direction and will be torn out. The `[slug]` detail routes are slated for removal. Atmosphere chrome on the home stage (Splatters, GoldenFlakes, EmberField, bg-glyph "EXPEDITION", Ornament, InkDefs) and the ink-curtain page transition are under demolition review. The only parts of the current build treated as load-bearing going forward are: the color tokens, the font stack, the three responsive modes, `MenuStack`, and `ToneWash`.
+> **Status (updated 2026-04-22):** Navigation architecture is pivoting to **Persona 3 Reload–style** — vertical menu, per-section tonal wash (Framer Motion, shipped), angular stencil commit-wipe on navigation (pending), section watermarks (pending). The home stage now sits over a **looping video background** (`public/wallpaper/shaman-village.mp4`, ~75 MB local; optimization deferred) wrapped in the **"restrained atmospheric" treatment**: menu words dimmed to 0.82 opacity with a metallic-gold gradient strikethrough on the active item, info cards reduced to hairline gold-gradient rules over a near-transparent paper wash, mobile summary card translucent + backdrop-blurred, body/html background made transparent so the video is visible. **Color usage shifted:** `--color-accent-red` is now reserved for dormant chronicle/destination chrome — every active home-page accent uses `--color-gold`/`--color-gold-bright`. **Display font swapped:** `Cinzel Decorative` → **Optimus Princeps** (Manfred Klein, free for commercial use, local via `next/font/local`, files in `public/fonts/`). The other three font roles (body Cormorant, mono Plex, script Italianno) and the `@theme` palette tokens are still locked. All four destination routes (`/about`, `/projects`, `/experience`, `/contact`) remain blank pending redesign. `[slug]` detail routes still slated for removal. Load-bearing post-pivot: video bg + softened atmosphere stack, color tokens (with the new usage rules), Optimus Princeps + Cormorant + Plex Mono, three responsive modes, `MenuStack`, `ToneWash`.
 
 ## Tech stack
 
@@ -11,7 +11,7 @@
 | Styling     | Tailwind CSS v4 (`@import "tailwindcss"` + `@theme` tokens)                                 |
 | UI kit      | shadcn/ui primitives (only `button` installed so far)                                       |
 | Animation   | Framer Motion 11                                                                            |
-| Fonts       | Cinzel Decorative (display) + Cormorant Garamond (body) + Italianno (script) + IBM Plex Mono (mono) — via `next/font` |
+| Fonts       | Optimus Princeps (display, local in `public/fonts/`) + Cormorant Garamond (body) + Italianno (script, dormant) + IBM Plex Mono (mono) — via `next/font/local` + `next/font/google` |
 | Build/dev   | Next.js with Turbopack (`next dev --turbopack`)                                             |
 | Routing     | File-based App Router                                                                       |
 | Testing     | Vitest + React Testing Library + jsdom                                                      |
@@ -24,7 +24,7 @@ No database, no auth, no backend. Static portfolio — server-rendered at build,
 
 **Nav + motion architecture: Persona 3 Reload.** Vertical menu of four sections driven by keyboard (↑↓ / j / k / Enter) and click. Hover/selection triggers a per-section tonal wash that slides in from a corner unique to that section (shipped via `ToneWash.tsx` + Framer Motion `AnimatePresence`). Commit (Enter / click) fires an angular stencil wipe — a hard-edged polygon sweep carrying the destination's color + a section watermark — before `router.push()` (pending). Each destination is treated as a themed "floor" with its own watermark banner rather than a journaled chapter.
 
-**Palette + type: Elden Ring / Expedition 33.** Dark earth/midnight paper, warm cream ink, antique gold, ember-red accent. Display serif (Cinzel Decorative) paired with body serif (Cormorant Garamond), script accent (Italianno), mono for labels (IBM Plex Mono). These tokens are *frozen* — `@theme` in `app/globals.css` and the `next/font` setup in `app/layout.tsx` are not to be modified without explicit approval.
+**Palette + type: Elden Ring / Expedition 33 — restrained atmospheric pass.** Dark earth/midnight paper (now transparent on `html/body` so the video shows through), warm cream ink, antique gold dominating every active accent (metallic `gold-deep → gold-bright → gold` gradient on strikes/rules), ember-red still defined but dormant (only chronicle/destination chrome). Display Roman titling caps (**Optimus Princeps**, local) paired with body serif (**Cormorant Garamond**), script accent (**Italianno**, dormant), mono for labels (**IBM Plex Mono**). The `@theme` color tokens are frozen; `accent-red` usage is locked out of the home stage. The display font was swapped from Cinzel Decorative to Optimus Princeps on 2026-04-22 — any further font changes require explicit approval.
 
 **What is being torn out:** the chronicle/journal sub-route chrome, feature components that render project/role/about detail, ink-brush atmosphere (splatters, flakes, embers, bg-glyph), ink-curtain page transition, and all `[slug]` detail routes.
 
@@ -36,7 +36,7 @@ Legend: **[KEEP]** load-bearing post-pivot · **[DEMO]** slated for removal/rewr
 
 ```
 app/
-  layout.tsx                         [KEEP]  Root: fonts, PageTransition (DEMO), skip link, GlobalAtmosphere (DEMO)
+  layout.tsx                         [KEEP]  Root: fonts (Optimus Princeps via next/font/local + 3 Google fonts), PageTransition (DEMO), skip link, GlobalAtmosphere (KEEP — now hosts video bg)
   page.tsx                           [KEEP]  Home — 3 layout modes via useLayoutMode; stage content being pruned
   globals.css                        [KEEP]  Tailwind import + @theme tokens (FROZEN) + styles (pruning in progress)
   not-found.tsx                      [DEMO]  Chronicle-styled fragment — rewrite for new aesthetic
@@ -49,11 +49,11 @@ app/
   contact/page.tsx                   [BLANK] Destination kept, content wiped pending redesign
 components/
   layout/
-    GlobalAtmosphere.tsx             [DEMO]  Grain/vignette/midnight-gradient layers — reviewing which survive
+    GlobalAtmosphere.tsx             [KEEP]  Hosts looping video bg + bottom/left atmos-fade + softened atmos-vignette; grain layer removed 2026-04-22
     PageTransition.tsx               [DEMO]  Ink-curtain wipe — replace with P3R angular stencil wipe
     ChronicleLayout.tsx              [DEMO]  Journal chrome for sub-routes — deleted with chronicle aesthetic
     EmberField.tsx                   [DEMO]  Canvas ember drift
-    GoldenFlakes.tsx                 [DEMO]  Canvas golden flakes
+    GoldenFlakes.tsx                 [DEMO]  Canvas golden flakes — removed from cinematic stage 2026-04-22, file remains
     InkDefs.tsx                      [DEMO]  Inline SVG defs for ink splats
     Ornament.tsx                     [DEMO]  Decorative flourishes
   menu/
@@ -81,6 +81,8 @@ types/
   content.ts                         [TBD]   Content type shapes — will follow content.ts rewrite
 test/                                [KEEP]  Vitest setup
 public/images/projects/              [TBD]   Asset folder may be restructured with destinations
+public/fonts/                        [KEEP]  OptimusPrinceps.ttf + OptimusPrincepsSemiBold.ttf — local display font (Manfred Klein, free for commercial use)
+public/wallpaper/                    [KEEP]  shaman-village.mp4 (75 MB) — looping background video; size optimization deferred
 ```
 
 ## Routing

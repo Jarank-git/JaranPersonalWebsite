@@ -14,7 +14,7 @@
   --color-accent-red:  oklch(0.70 0.17 35);
 
   /* Typography — via next/font CSS vars */
-  --font-display:  var(--font-cinzel-decorative), 'Cinzel Decorative', serif;
+  --font-display:  var(--font-optimus-princeps), 'Optimus Princeps', 'Trajan Pro', serif;
   --font-body:     var(--font-cormorant), 'Cormorant Garamond', serif;
   --font-script:   var(--font-italianno), 'Italianno', cursive;
   --font-mono:     var(--font-ibm-mono), 'IBM Plex Mono', monospace;
@@ -36,7 +36,7 @@ html, body {
   margin: 0;
   padding: 0;
   min-height: 100%;
-  background: #030304;
+  background: transparent;
   color: var(--color-ink);
   font-family: var(--font-body);
 }
@@ -82,14 +82,34 @@ body {
   background: #030304;
 }
 
-.atmos-grain {
+.atmos-video {
+  position: fixed;
+  inset: 0;
+  z-index: -8;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+  opacity: 1;
+}
+
+.atmos-fade {
   position: fixed;
   inset: 0;
   z-index: -6;
   pointer-events: none;
-  opacity: 0.25;
-  mix-blend-mode: overlay;
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='320' height='320'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.9  0 0 0 0 0.8  0 0 0 0 0.6  0 0 0 0.22 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  background:
+    linear-gradient(
+      to top,
+      oklch(0.06 0.01 265 / 0.55) 0%,
+      oklch(0.06 0.01 265 / 0.18) 22%,
+      transparent 42%
+    ),
+    linear-gradient(
+      to right,
+      oklch(0.06 0.01 265 / 0.30) 0%,
+      transparent 32%
+    );
 }
 
 .atmos-vignette {
@@ -97,8 +117,7 @@ body {
   inset: 0;
   z-index: -5;
   pointer-events: none;
-  background: radial-gradient(ellipse 78% 68% at 50% 50%, transparent 42%, oklch(0.04 0.01 265 / 0.72) 100%);
-  mix-blend-mode: multiply;
+  background: radial-gradient(ellipse 90% 80% at 50% 50%, transparent 55%, oklch(0.04 0.01 265 / 0.4) 100%);
 }
 
 
@@ -435,28 +454,37 @@ body {
 .menu-word {
   font-family: var(--font-display);
   font-weight: 900;
-  letter-spacing: 0.005em;
+  letter-spacing: 0.025em;
   line-height: 0.95;
   display: inline-block;
+  opacity: 0.82;
   transform: skewX(-7deg);
-  transition: transform 200ms cubic-bezier(0.22, 1, 0.36, 1);
+  transition:
+    transform 200ms cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 380ms cubic-bezier(0.7, 0, 0.3, 1),
+    text-shadow 380ms cubic-bezier(0.7, 0, 0.3, 1);
   text-shadow: 0 2px 14px oklch(0.06 0.02 265 / 0.8);
-  will-change: transform;
+  will-change: transform, opacity;
 }
 
-/* Mixed-size rhythm — cinematic */
-.stage .menu li:nth-child(1) .menu-word { font-size: 78px; }   /* SUMMARY */
-.stage .menu li:nth-child(2) .menu-word { font-size: 92px; }   /* ABOUT */
-.stage .menu li:nth-child(3) .menu-word { font-size: 120px; }  /* PROJECTS */
-.stage .menu li:nth-child(4) .menu-word { font-size: 82px; }   /* EXPERIENCE */
-.stage .menu li:nth-child(5) .menu-word { font-size: 108px; }  /* CONTACT */
+/* Mouse hover does NOT style on its own — onMouseEnter triggers selection,
+   so the [aria-selected="true"] rules below drive the highlight for both
+   mouse and keyboard. This prevents two items from glowing simultaneously
+   when the keyboard moves selection while the cursor is still parked. */
+
+/* Mixed-size rhythm — cinematic (~28% smaller) */
+.stage .menu li:nth-child(1) .menu-word { font-size: 56px; }   /* SUMMARY */
+.stage .menu li:nth-child(2) .menu-word { font-size: 66px; }   /* ABOUT */
+.stage .menu li:nth-child(3) .menu-word { font-size: 86px; }   /* PROJECTS */
+.stage .menu li:nth-child(4) .menu-word { font-size: 60px; }   /* EXPERIENCE */
+.stage .menu li:nth-child(5) .menu-word { font-size: 78px; }   /* CONTACT */
 
 /* Fluid — clamp with mixed rhythm preserved proportionally */
-.home-fluid .menu li:nth-child(1) .menu-word { font-size: clamp(48px, 6.8vw, 76px); }
-.home-fluid .menu li:nth-child(2) .menu-word { font-size: clamp(56px, 8vw, 88px); }
-.home-fluid .menu li:nth-child(3) .menu-word { font-size: clamp(72px, 10.5vw, 116px); }
-.home-fluid .menu li:nth-child(4) .menu-word { font-size: clamp(52px, 7.2vw, 80px); }
-.home-fluid .menu li:nth-child(5) .menu-word { font-size: clamp(64px, 9.4vw, 104px); }
+.home-fluid .menu li:nth-child(1) .menu-word { font-size: clamp(36px, 4.9vw, 56px); }
+.home-fluid .menu li:nth-child(2) .menu-word { font-size: clamp(42px, 5.8vw, 66px); }
+.home-fluid .menu li:nth-child(3) .menu-word { font-size: clamp(54px, 7.6vw, 86px); }
+.home-fluid .menu li:nth-child(4) .menu-word { font-size: clamp(38px, 5.2vw, 60px); }
+.home-fluid .menu li:nth-child(5) .menu-word { font-size: clamp(48px, 6.8vw, 78px); }
 
 /* Cap ::before right extension in fluid to stay within viewport */
 .home-fluid .menu li::before {
@@ -504,7 +532,12 @@ body {
   height: 42%;
   left: -28px;
   right: -46px;
-  background: var(--color-accent-red);
+  background: linear-gradient(
+    90deg,
+    var(--color-gold-deep) 0%,
+    var(--color-gold-bright) 48%,
+    var(--color-gold) 100%
+  );
   transform: skewX(-22deg) translateX(-36px) scaleX(0.55);
   clip-path: polygon(0 0, 100% 0, calc(100% - 28px) 100%, 0 100%);
 }
@@ -518,58 +551,114 @@ body {
   clip-path: polygon(0 0, 100% 0, calc(100% - 14px) 100%, 0 100%);
 }
 
-/* Selected — word pops off the column, slash sweeps in */
+/* Selected — Elden Ring style: text stays in column, glow band (.stain) is the highlight */
 .menu li[aria-selected="true"] {
   z-index: 4;
   isolation: isolate;
-  transform: translate(38px, -8px) rotate(-5.5deg);
-}
-.menu li[aria-selected="true"]:hover {
-  transform: translate(44px, -10px) rotate(-5.5deg);
 }
 .menu li[aria-selected="true"] .menu-word {
-  transform: skewX(-12deg);
-}
-.menu li[aria-selected="true"].stroked .menu-word,
-.menu li[aria-selected="true"] .menu-word {
-  color: oklch(0.72 0.09 80) !important;
-  -webkit-text-stroke: 0 !important;
-  -webkit-text-fill-color: oklch(0.72 0.09 80) !important;
-  text-shadow: 0 3px 0 var(--color-paper);
+  opacity: 1;
   position: relative;
   z-index: 2;
+  color: oklch(0.88 0.11 82);
+  transform: skewX(-7deg) scale(1.06);
+  animation: text-shimmer 2.4s ease-in-out infinite;
+}
+
+@keyframes text-shimmer {
+  0%, 100% {
+    text-shadow:
+      0 2px 14px oklch(0.06 0.02 265 / 0.8),
+      0 0 18px color-mix(in oklab, var(--color-gold-bright) 28%, transparent);
+  }
+  50% {
+    text-shadow:
+      0 2px 14px oklch(0.06 0.02 265 / 0.8),
+      0 0 34px color-mix(in oklab, var(--color-gold-bright) 55%, transparent),
+      0 0 78px color-mix(in oklab, var(--color-gold)        32%, transparent);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .menu li[aria-selected="true"] .menu-word {
+    animation: none;
+  }
 }
 .menu li[aria-selected="true"] .menu-num {
-  color: var(--color-accent-red);
+  color: var(--color-gold-bright);
   z-index: 3;
   position: relative;
-  text-shadow: 0 0 12px oklch(0.70 0.17 35 / 0.6);
+  text-shadow: 0 0 14px color-mix(in oklab, var(--color-gold-bright) 60%, transparent);
 }
 
-.menu li[aria-selected="true"]::before {
-  opacity: 1;
-  transform: skewX(-22deg) translateX(0) scaleX(1);
-}
+/* Strikethrough bars retired — Elden Ring vocabulary is the glow band only */
+.menu li[aria-selected="true"]::before,
 .menu li[aria-selected="true"]::after {
-  opacity: 0.9;
-  transform: skewX(-22deg) translateX(0) scaleX(1);
+  opacity: 0;
 }
 
-/* Ink stain brush stroke */
+/* Elden Ring hover glow — wide tattered horizontal gold band */
 .stain {
   position: absolute;
-  left: -30px;
-  right: -30px;
-  top: 8%;
-  bottom: 8%;
+  left: -180px;
+  right: -180px;
+  top: 50%;
+  height: 200%;
   z-index: -1;
   opacity: 0;
-  transform: scale(0.85);
-  transition: opacity 160ms ease-out, transform 220ms cubic-bezier(0.22, 1, 0.36, 1);
+  transform: translateY(-50%) scaleX(0.72);
+  transform-origin: center;
+  background: radial-gradient(
+    ellipse 48% 22% at 50% 50%,
+    color-mix(in oklab, var(--color-gold-bright) 100%, transparent) 0%,
+    color-mix(in oklab, var(--color-gold-bright)  82%, transparent) 8%,
+    color-mix(in oklab, var(--color-gold)         55%, transparent) 22%,
+    color-mix(in oklab, var(--color-gold-deep)    26%, transparent) 46%,
+    color-mix(in oklab, var(--color-gold-deep)     6%, transparent) 70%,
+    transparent 90%
+  );
+  filter: url(#tatterEdge) blur(0.6px);
+  -webkit-filter: url(#tatterEdge) blur(0.6px);
+  transition:
+    opacity   420ms cubic-bezier(0.7, 0, 0.3, 1),
+    transform 560ms cubic-bezier(0.22, 1, 0.36, 1);
   pointer-events: none;
-  color: oklch(0.62 0.08 78);
 }
-.stain svg { width: 100%; height: 100%; display: block; }
+.stain svg { display: none; }
+
+/* Selected — single unified state for both mouse and keyboard.
+   Honey/deep gold band (was the :hover variant) + breathing pulse. */
+.menu li[aria-selected="true"] .stain {
+  opacity: 1;
+  transform: translateY(-50%) scaleX(1);
+  background: radial-gradient(
+    ellipse 52% 24% at 50% 50%,
+    color-mix(in oklab, var(--color-gold)         98%, transparent) 0%,
+    color-mix(in oklab, var(--color-gold)         80%, transparent) 8%,
+    color-mix(in oklab, var(--color-gold-deep)    72%, transparent) 22%,
+    color-mix(in oklab, var(--color-gold-deep)    36%, transparent) 46%,
+    color-mix(in oklab, var(--color-gold-deep)     8%, transparent) 70%,
+    transparent 92%
+  );
+  animation: stain-pulse 2.8s ease-in-out infinite;
+}
+
+@keyframes stain-pulse {
+  0%, 100% {
+    opacity: 1;
+    transform: translateY(-50%) scaleX(1);
+  }
+  50% {
+    opacity: 0.78;
+    transform: translateY(-50%) scaleX(1.06);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .menu li[aria-selected="true"] .stain {
+    animation: none;
+  }
+}
 
 /* Sparkle overlay */
 .sparkles {
@@ -1150,7 +1239,7 @@ body {
 .summary-panel-eyebrow {
   font-family: var(--font-mono);
   font-size: 11px;
-  color: var(--color-accent-red);
+  color: var(--color-gold);
   letter-spacing: 0.24em;
   text-transform: uppercase;
   margin: 0;
@@ -1203,12 +1292,12 @@ body {
   line-height: 1.45;
   margin: 0;
   padding-left: 12px;
-  border-left: 2px solid var(--color-accent-red);
+  border-left: 1.5px solid var(--color-gold);
   max-width: 36em;
 }
 
 .summary-panel-card {
-  border: 1px solid oklch(0.28 0.04 265);
+  border: 1px solid color-mix(in oklab, var(--color-gold) 18%, transparent);
   padding: 10px 14px;
   clip-path: polygon(
     0 0, calc(100% - 10px) 0, 100% 10px,
@@ -1229,26 +1318,25 @@ body {
   height: 1px;
 }
 
-.summary-panel-card--red {
-  background: oklch(0.48 0.15 25 / 0.07);
-}
-
-.summary-panel-card--red::before {
-  background: var(--color-accent-red);
-}
-
+.summary-panel-card--red,
 .summary-panel-card--gold {
-  background: oklch(0.78 0.16 82 / 0.05);
+  background: color-mix(in oklab, var(--color-paper) 8%, transparent);
 }
 
+.summary-panel-card--red::before,
 .summary-panel-card--gold::before {
-  background: var(--color-gold);
+  background: linear-gradient(
+    90deg,
+    var(--color-gold-deep) 0%,
+    var(--color-gold-bright) 50%,
+    var(--color-gold) 100%
+  );
 }
 
 .summary-panel-card-label {
   font-family: var(--font-mono);
   font-size: 10px;
-  color: var(--color-accent-red);
+  color: var(--color-gold);
   letter-spacing: 0.2em;
   text-transform: uppercase;
 }
@@ -1327,27 +1415,28 @@ body {
   display: flex;
   flex-direction: column;
   height: 100vh;
-  background: var(--color-paper);
+  background: color-mix(in oklab, var(--color-paper) 65%, transparent);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
   z-index: 2;
 }
 
 .mobile-summary-card-top-band {
   height: 36px;
   flex-shrink: 0;
-  background: var(--color-accent-red);
-  clip-path: polygon(0 0, 100% 0, 100% 40%, 60% 100%, 0 100%);
   position: relative;
+  border-bottom: 1px solid color-mix(in oklab, var(--color-gold) 55%, transparent);
 }
 
 .mobile-summary-card-id {
   position: absolute;
-  top: 7px;
+  top: 12px;
   left: 14px;
   font-family: var(--font-mono);
-  font-size: 7px;
-  color: var(--color-ink);
-  letter-spacing: 0.24em;
-  opacity: 0.8;
+  font-size: 8px;
+  color: var(--color-gold);
+  letter-spacing: 0.28em;
+  opacity: 0.85;
 }
 
 .mobile-summary-card-accent {
@@ -1355,8 +1444,13 @@ body {
   left: 0;
   top: 0;
   bottom: 0;
-  width: 3px;
-  background: var(--color-accent-red);
+  width: 1.5px;
+  background: linear-gradient(
+    180deg,
+    var(--color-gold-deep) 0%,
+    var(--color-gold-bright) 50%,
+    var(--color-gold) 100%
+  );
 }
 
 .mobile-summary-card-body {
@@ -1405,11 +1499,11 @@ body {
   line-height: 1.45;
   margin: 0;
   padding-left: 10px;
-  border-left: 2px solid var(--color-accent-red);
+  border-left: 1.5px solid var(--color-gold);
 }
 
 .mobile-summary-info-card {
-  border: 1px solid oklch(0.28 0.04 265);
+  border: 1px solid color-mix(in oklab, var(--color-gold) 18%, transparent);
   padding: 8px 10px;
   display: flex;
   flex-direction: column;
@@ -1427,38 +1521,40 @@ body {
   height: 1px;
 }
 
+.mobile-summary-info-card--red,
+.mobile-summary-info-card--gold,
+.mobile-summary-info-card--purple {
+  background: color-mix(in oklab, var(--color-paper) 8%, transparent);
+}
+
 .mobile-summary-info-card--red {
-  background: oklch(0.48 0.15 25 / 0.07);
   clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px));
 }
 
-.mobile-summary-info-card--red::before {
-  background: var(--color-accent-red);
-}
-
-.mobile-summary-info-card--gold {
-  background: oklch(0.78 0.16 82 / 0.05);
+.mobile-summary-info-card--gold,
+.mobile-summary-info-card--purple {
   clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 0 100%);
-}
-
-.mobile-summary-info-card--gold::before {
-  background: var(--color-gold);
 }
 
 .mobile-summary-info-card--purple {
-  background: oklch(0.44 0.10 305 / 0.06);
-  clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 0 100%);
   flex-shrink: 2;
 }
 
+.mobile-summary-info-card--red::before,
+.mobile-summary-info-card--gold::before,
 .mobile-summary-info-card--purple::before {
-  background: oklch(0.64 0.10 305);
+  background: linear-gradient(
+    90deg,
+    var(--color-gold-deep) 0%,
+    var(--color-gold-bright) 50%,
+    var(--color-gold) 100%
+  );
 }
 
 .mobile-summary-info-label {
   font-family: var(--font-mono);
   font-size: 6.5px;
-  color: var(--color-accent-red);
+  color: var(--color-gold);
   letter-spacing: 0.2em;
   text-transform: uppercase;
 }

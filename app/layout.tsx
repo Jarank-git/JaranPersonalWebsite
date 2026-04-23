@@ -1,18 +1,20 @@
 import type { Metadata } from 'next'
 import {
-  Cinzel_Decorative,
   Cormorant_Garamond,
   IBM_Plex_Mono,
   Italianno,
 } from 'next/font/google'
+import localFont from 'next/font/local'
 import './globals.css'
 import { GlobalAtmosphere } from '@/components/layout/GlobalAtmosphere'
 import { PageTransition } from '@/components/layout/PageTransition'
 
-const cinzelDecorative = Cinzel_Decorative({
-  subsets: ['latin'],
-  weight: ['400', '700', '900'],
-  variable: '--font-cinzel-decorative',
+const optimusPrinceps = localFont({
+  src: [
+    { path: '../public/fonts/OptimusPrinceps.ttf', weight: '400', style: 'normal' },
+    { path: '../public/fonts/OptimusPrincepsSemiBold.ttf', weight: '700', style: 'normal' },
+  ],
+  variable: '--font-optimus-princeps',
   display: 'swap',
 })
 
@@ -44,7 +46,7 @@ export const metadata: Metadata = {
 }
 
 const fontVars = [
-  cinzelDecorative.variable,
+  optimusPrinceps.variable,
   cormorantGaramond.variable,
   ibmPlexMono.variable,
   italianno.variable,

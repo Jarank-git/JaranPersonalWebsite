@@ -2,6 +2,11 @@ export function InkDefs() {
   return (
     <svg width="0" height="0" className="absolute" aria-hidden="true">
       <defs>
+        <filter id="tatterEdge" x="-10%" y="-15%" width="120%" height="130%">
+          <feTurbulence type="fractalNoise" baseFrequency="0.018 0.55" numOctaves="2" seed="7" result="noise" />
+          <feDisplacementMap in="SourceGraphic" in2="noise" scale="34" xChannelSelector="R" yChannelSelector="G" />
+        </filter>
+
         <symbol id="inkStain" viewBox="0 0 800 220">
           <path
             d="M 40 120 C 20 70, 80 40, 130 50 C 180 20, 240 35, 280 60

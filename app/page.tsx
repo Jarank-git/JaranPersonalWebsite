@@ -2,7 +2,6 @@
 
 import { useEffect, useRef, useCallback, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
-import { GoldenFlakes } from '@/components/layout/GoldenFlakes'
 import { MenuStack } from '@/components/menu/MenuStack'
 import { SummaryPanel } from '@/components/menu/SummaryPanel'
 import { GhostWatermark } from '@/components/menu/GhostWatermark'
@@ -43,7 +42,6 @@ function CinematicHome({ selectedIdx, setSelectedIdx }: HomeProps) {
   return (
     <div className="stage-wrap">
       <div className="stage" ref={stageRef}>
-        <GoldenFlakes />
         <div className="stage-left-zone" aria-hidden="true">
           <AnimatePresence mode="wait">
             {selectedIdx === 0 ? (
