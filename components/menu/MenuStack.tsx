@@ -48,7 +48,9 @@ export function MenuStack({ selectedIdx, setSelectedIdx }: MenuStackProps) {
           break
         case 'Enter':
           e.preventDefault()
-          router.push(MENU_ITEMS[selectedIdx].href)
+          if (!MENU_ITEMS[selectedIdx].panel) {
+            router.push(MENU_ITEMS[selectedIdx].href)
+          }
           break
       }
     }
@@ -67,6 +69,7 @@ export function MenuStack({ selectedIdx, setSelectedIdx }: MenuStackProps) {
             num={item.num}
             href={item.href}
             outline={item.outline}
+            panel={item.panel}
             selected={selectedIdx === i}
             onSelect={() => select(i)}
           />

@@ -4,6 +4,7 @@ import { useEffect, useRef, useCallback, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { MenuStack } from '@/components/menu/MenuStack'
 import { SummaryPanel } from '@/components/menu/SummaryPanel'
+import { ContactPanel } from '@/components/menu/ContactPanel'
 import { GhostWatermark } from '@/components/menu/GhostWatermark'
 import { MENU_ITEMS } from '@/components/menu/sections'
 import { useLayoutMode } from '@/hooks/use-layout-mode'
@@ -46,6 +47,8 @@ function CinematicHome({ selectedIdx, setSelectedIdx }: HomeProps) {
           <AnimatePresence mode="wait">
             {selectedIdx === 0 ? (
               <SummaryPanel key="summary" />
+            ) : selectedIdx === 4 ? (
+              <ContactPanel key="contact" />
             ) : (
               <GhostWatermark
                 key={selectedIdx}
@@ -69,6 +72,8 @@ function FluidHome({ selectedIdx, setSelectedIdx }: HomeProps) {
           <AnimatePresence mode="wait">
             {selectedIdx === 0 ? (
               <SummaryPanel key="summary" />
+            ) : selectedIdx === 4 ? (
+              <ContactPanel key="contact" />
             ) : (
               <GhostWatermark
                 key={selectedIdx}
@@ -94,44 +99,92 @@ function MobileSummaryCard({ onNavigate }: { onNavigate: () => void }) {
       exit={{ y: '-100vh', opacity: 0 }}
       transition={{ duration: 0.38, ease: [0.7, 0, 0.3, 1] }}
     >
-      <div className="mobile-summary-card-top-band" aria-hidden="true">
-        <span className="mobile-summary-card-id">00 · SUMMARY</span>
-      </div>
-      <div className="mobile-summary-card-accent" aria-hidden="true" />
+      <hr className="mobile-summary-rule" aria-hidden="true" />
+      <h2 className="mobile-summary-title">Jaran Khalid</h2>
+      <hr className="mobile-summary-rule" aria-hidden="true" />
 
       <div className="mobile-summary-card-body">
-        <div aria-label="Jaran Khalid">
-          <span className="mobile-summary-name">JARAN</span>
-          <span className="mobile-summary-name"> KHALID</span>
-        </div>
+        <section className="mobile-summary-section" aria-labelledby="msp-experience">
+          <h3 id="msp-experience" className="mobile-summary-section-heading">Experience</h3>
 
-        <div className="mobile-summary-rule" aria-hidden="true" />
+          <div className="mobile-summary-entry">
+            <span className="mobile-summary-entry-title">Systems Eng. Intern · Civilcraft</span>
+            <span className="mobile-summary-entry-sub">Remote · Jun–Aug 2025</span>
+          </div>
+          <div className="mobile-summary-entry">
+            <span className="mobile-summary-entry-title">Electrical Subsystem · WARG</span>
+            <span className="mobile-summary-entry-sub">Waterloo · Sep 2025–Present</span>
+          </div>
+          <div className="mobile-summary-entry">
+            <span className="mobile-summary-entry-title">Coding Instructor · Code Ninjas</span>
+            <span className="mobile-summary-entry-sub">Milton · Jul–Aug 2025</span>
+          </div>
+        </section>
 
-        <p className="mobile-summary-degree">
-          BASc Electrical Engineering · Waterloo
-        </p>
+        <section className="mobile-summary-section" aria-labelledby="msp-projects">
+          <h3 id="msp-projects" className="mobile-summary-section-heading">Projects</h3>
 
-        <p className="mobile-summary-bio">
-          Building at the intersection of hardware and software.
-        </p>
+          <div className="mobile-summary-entry">
+            <span className="mobile-summary-entry-title">12-24V Buck Boost Converter</span>
+            <span className="mobile-summary-entry-sub">Altium Designer · WARG</span>
+          </div>
+          <div className="mobile-summary-entry">
+            <span className="mobile-summary-entry-title">Patient Env. Management System</span>
+            <span className="mobile-summary-entry-sub">Python · Flask · Raspberry Pi</span>
+          </div>
+        </section>
 
-        <div className="mobile-summary-info-card mobile-summary-info-card--red">
-          <span className="mobile-summary-info-label">▸ Experience</span>
-          <span className="mobile-summary-info-title">Internship · Company</span>
-          <span className="mobile-summary-info-sub">Role · 2024</span>
-        </div>
+        <section className="mobile-summary-section" aria-labelledby="msp-education">
+          <h3 id="msp-education" className="mobile-summary-section-heading">Education</h3>
 
-        <div className="mobile-summary-info-card mobile-summary-info-card--gold">
-          <span className="mobile-summary-info-label">▸ Top Project</span>
-          <span className="mobile-summary-info-title">Project Name</span>
-          <span className="mobile-summary-info-sub">React · TypeScript</span>
-        </div>
+          <div className="mobile-summary-entry">
+            <span className="mobile-summary-entry-title">BASc Electrical Engineering</span>
+            <span className="mobile-summary-entry-sub">
+              <a
+                href="https://uwaterloo.ca/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mobile-summary-entry-link"
+              >
+                <img
+                  src="/assets/uwaterloo-crest.png"
+                  alt=""
+                  aria-hidden="true"
+                  className="mobile-summary-entry-mark"
+                />
+                University of Waterloo · 2025–2030
+              </a>
+            </span>
+          </div>
+        </section>
+      </div>
 
-        <div className="mobile-summary-info-card mobile-summary-info-card--purple">
-          <span className="mobile-summary-info-label">▸ Degree</span>
-          <span className="mobile-summary-info-title">BASc Electrical Engineering</span>
-          <span className="mobile-summary-info-sub">University of Waterloo · 202X</span>
-        </div>
+      <hr className="mobile-summary-rule" aria-hidden="true" />
+      <div className="mobile-summary-footer">
+        <a href="/resume.pdf" className="mobile-summary-hint" download aria-label="Download resume">
+          <span className="mobile-summary-hint-glyph" aria-hidden="true" />
+          <span>:Resume</span>
+        </a>
+        <a
+          href="https://github.com/Jarank-git"
+          className="mobile-summary-hint"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="GitHub profile"
+        >
+          <span className="mobile-summary-hint-glyph" aria-hidden="true" />
+          <span>:GitHub</span>
+        </a>
+        <a
+          href="https://www.linkedin.com/in/jaran-khalid/"
+          className="mobile-summary-hint"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="LinkedIn profile"
+        >
+          <span className="mobile-summary-hint-glyph" aria-hidden="true" />
+          <span>:LinkedIn</span>
+        </a>
       </div>
 
       <button

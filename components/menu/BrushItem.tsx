@@ -10,6 +10,7 @@ interface BrushItemProps {
   num: string
   href: string
   outline?: boolean
+  panel?: boolean
   selected: boolean
   onSelect: () => void
 }
@@ -18,9 +19,10 @@ const SPARKLE_COUNT = 10
 
 export function BrushItem({
   label,
-  num,
+  num: _num,
   href,
   outline = false,
+  panel = false,
   selected,
   onSelect,
 }: BrushItemProps) {
@@ -58,9 +60,15 @@ export function BrushItem({
         </svg>
       </span>
       <span className="sparkles" ref={sparklesRef} aria-hidden="true" />
-      <Link href={href} prefetch>
-        <span className="menu-word">{label}</span>
-      </Link>
+      {panel ? (
+        <button className="menu-word-btn" onClick={onSelect} type="button">
+          <span className="menu-word">{label}</span>
+        </button>
+      ) : (
+        <Link href={href} prefetch>
+          <span className="menu-word">{label}</span>
+        </Link>
+      )}
     </li>
   )
 }

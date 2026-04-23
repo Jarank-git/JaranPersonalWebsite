@@ -4,6 +4,7 @@ import { motion, useAnimationControls, useReducedMotion } from 'framer-motion'
 import { usePathname } from 'next/navigation'
 import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { MENU_ITEMS } from '@/components/menu/sections'
+import { consumeNavDirection } from '@/lib/nav-direction'
 
 const TOTAL_S       = 0.5
 const COVER_POINT   = 0.38                                          // 190ms in, 310ms out
@@ -51,8 +52,12 @@ export function PageTransition({ children }: { children: React.ReactNode }) {
 
     const t = setTimeout(() => setContentVisible(true), COVER_AT_MS)
 
+    const dir = consumeNavDirection()
+    const clipStart = dir === 'back' ? CLIP_LEFT  : CLIP_RIGHT
+    const clipEnd   = dir === 'back' ? CLIP_RIGHT : CLIP_LEFT
+
     controls.start({
-      clipPath: [CLIP_RIGHT, CLIP_COVER, CLIP_LEFT],
+      clipPath: [clipStart, CLIP_COVER, clipEnd],
       transition: {
         duration: TOTAL_S,
         times: [0, COVER_POINT, 1],

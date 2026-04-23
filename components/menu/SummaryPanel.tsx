@@ -13,55 +13,98 @@ export function SummaryPanel() {
       exit={{ x: reduced ? 0 : -40, opacity: 0 }}
       transition={{ duration: 0.32, ease: [0.2, 0.7, 0.2, 1] }}
     >
-      <div className="summary-panel-accent" aria-hidden="true" />
-      <div className="summary-panel-corner-cut" aria-hidden="true" />
+      <hr className="summary-panel-rule" aria-hidden="true" />
+      <h2 className="summary-panel-title">Jaran Khalid</h2>
+      <hr className="summary-panel-rule" aria-hidden="true" />
 
-      <p className="summary-panel-eyebrow">00 · SUMMARY</p>
+      <div className="summary-panel-body">
+        <section className="summary-panel-section" aria-labelledby="sp-experience">
+          <h3 id="sp-experience" className="summary-panel-section-heading">Experience</h3>
 
-      <div className="summary-panel-name" aria-label="Jaran Khalid">
-        <span>JARAN</span>
-        <span>KHALID</span>
+          <div className="summary-panel-entry">
+            <span className="summary-panel-entry-title">Systems Eng. Intern · Civilcraft</span>
+            <span className="summary-panel-entry-sub">Remote · Jun–Aug 2025</span>
+          </div>
+          <div className="summary-panel-entry">
+            <span className="summary-panel-entry-title">Electrical Subsystem · WARG</span>
+            <span className="summary-panel-entry-sub">Waterloo · Sep 2025–Present</span>
+          </div>
+          <div className="summary-panel-entry">
+            <span className="summary-panel-entry-title">Coding Instructor · Code Ninjas</span>
+            <span className="summary-panel-entry-sub">Milton · Jul–Aug 2025</span>
+          </div>
+        </section>
+
+        <div>
+          <section className="summary-panel-section" aria-labelledby="sp-projects">
+            <h3 id="sp-projects" className="summary-panel-section-heading">Projects</h3>
+
+            <div className="summary-panel-entry">
+              <span className="summary-panel-entry-title">12-24V Buck Boost Converter</span>
+              <span className="summary-panel-entry-sub">Altium Designer · WARG</span>
+            </div>
+            <div className="summary-panel-entry">
+              <span className="summary-panel-entry-title">Patient Env. Management System</span>
+              <span className="summary-panel-entry-sub">Python · Flask · Raspberry Pi</span>
+            </div>
+          </section>
+
+          <section className="summary-panel-section" aria-labelledby="sp-education">
+            <h3 id="sp-education" className="summary-panel-section-heading">Education</h3>
+
+            <div className="summary-panel-entry">
+              <span className="summary-panel-entry-title">BASc Electrical Engineering</span>
+              <span className="summary-panel-entry-sub">
+                <a
+                  href="https://uwaterloo.ca/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="summary-panel-entry-link"
+                >
+                  <img
+                    src="/assets/uwaterloo-crest.png"
+                    alt=""
+                    aria-hidden="true"
+                    className="summary-panel-entry-mark"
+                  />
+                  University of Waterloo · 2025–2030
+                </a>
+              </span>
+            </div>
+          </section>
+        </div>
       </div>
 
-      <div className="summary-panel-rule" aria-hidden="true" />
-
-      <p className="summary-panel-degree">
-        BASc Electrical Engineering · University of Waterloo
-      </p>
-
-      <p className="summary-panel-bio">
-        Building at the intersection of hardware and software.
-      </p>
-
-      <div className="summary-panel-card summary-panel-card--red">
-        <span className="summary-panel-card-label">▸ Experience</span>
-        <span className="summary-panel-card-title">Internship · Company</span>
-        <span className="summary-panel-card-sub">Role · 2024</span>
-      </div>
-
-      <div className="summary-panel-card summary-panel-card--gold">
-        <span className="summary-panel-card-label">▸ Top Project</span>
-        <span className="summary-panel-card-title">Project Name</span>
-        <span className="summary-panel-card-sub">React · TypeScript</span>
-      </div>
-
-      <div className="summary-panel-ctas">
+      <hr className="summary-panel-rule" aria-hidden="true" />
+      <div className="summary-panel-footer">
         <a
           href="/resume.pdf"
-          className="summary-panel-btn-primary"
+          className="summary-panel-hint"
           download
           aria-label="Download resume"
         >
-          ↓ Resume
+          <span className="summary-panel-hint-glyph" aria-hidden="true" />
+          <span>:Resume</span>
         </a>
         <a
-          href="https://linkedin.com/in/jarankhalid"
-          className="summary-panel-btn-secondary"
+          href="https://github.com/Jarank-git"
+          className="summary-panel-hint"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="GitHub profile"
+        >
+          <span className="summary-panel-hint-glyph" aria-hidden="true" />
+          <span>:GitHub</span>
+        </a>
+        <a
+          href="https://www.linkedin.com/in/jaran-khalid/"
+          className="summary-panel-hint"
           target="_blank"
           rel="noopener noreferrer"
           aria-label="LinkedIn profile"
         >
-          ↗ LinkedIn
+          <span className="summary-panel-hint-glyph" aria-hidden="true" />
+          <span>:LinkedIn</span>
         </a>
       </div>
     </motion.div>
