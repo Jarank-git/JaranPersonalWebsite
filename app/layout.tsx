@@ -55,6 +55,14 @@ const fontVars = [
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={fontVars}>
+      <head>
+        <link
+          rel="preload"
+          as="image"
+          href="/wallpaper/shaman-village-poster.jpg"
+          fetchPriority="high"
+        />
+      </head>
       <body className="antialiased">
         <a href="#content" className="skip-link">
           Skip to navigation
