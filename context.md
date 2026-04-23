@@ -1,6 +1,6 @@
 # context.md — System Architecture
 
-> **Status (updated 2026-04-22):** Navigation architecture is pivoting to **Persona 3 Reload–style** — vertical menu, per-section tonal wash (Framer Motion, shipped), angular stencil commit-wipe on navigation (pending), section watermarks (pending). The home stage now sits over a **looping video background** (`public/wallpaper/shaman-village.mp4`, ~75 MB local; optimization deferred) wrapped in the **"restrained atmospheric" treatment**: menu words dimmed to 0.82 opacity with a metallic-gold gradient strikethrough on the active item, info cards reduced to hairline gold-gradient rules over a near-transparent paper wash, mobile summary card translucent + backdrop-blurred, body/html background made transparent so the video is visible. **Color usage shifted:** `--color-accent-red` is now reserved for dormant chronicle/destination chrome — every active home-page accent uses `--color-gold`/`--color-gold-bright`. **Display font swapped:** `Cinzel Decorative` → **Optimus Princeps** (Manfred Klein, free for commercial use, local via `next/font/local`, files in `public/fonts/`). The other three font roles (body Cormorant, mono Plex, script Italianno) and the `@theme` palette tokens are still locked. All four destination routes (`/about`, `/projects`, `/experience`, `/contact`) remain blank pending redesign. `[slug]` detail routes still slated for removal. Load-bearing post-pivot: video bg + softened atmosphere stack, color tokens (with the new usage rules), Optimus Princeps + Cormorant + Plex Mono, three responsive modes, `MenuStack`, `ToneWash`.
+> **Status (updated 2026-04-23):** Navigation architecture is pivoting to **Persona 3 Reload–style** — vertical menu, per-section tonal wash (Framer Motion, shipped), angular stencil commit-wipe on navigation (pending), section watermarks (pending). The home stage sits over a **looping video background** from a 20 s crossfaded loop (`public/wallpaper/shaman-village.*`, now five optimized assets totalling ~8.4 MB desktop / ~2.2 MB mobile — down from a single 77 MB mp4). Delivery uses device-aware `<source>` ladders (WebM primary, MP4 Safari fallback, 1080p desktop / 720p mobile), a poster JPEG painted first for instant first frame, `preload="metadata"` + `requestIdleCallback`-gated mount, and a `prefers-reduced-motion` escape that skips the `<video>` entirely. The home stage continues the **"restrained atmospheric" treatment**: menu words dimmed to 0.82 opacity with a metallic-gold gradient strikethrough on the active item, info cards reduced to hairline gold-gradient rules over a near-transparent paper wash, mobile summary card translucent + backdrop-blurred, body/html background made transparent so the video is visible. **Color usage shifted:** `--color-accent-red` is now reserved for dormant chronicle/destination chrome — every active home-page accent uses `--color-gold`/`--color-gold-bright`. **Display font swapped:** `Cinzel Decorative` → **Optimus Princeps** (Manfred Klein, free for commercial use, local via `next/font/local`, files in `public/fonts/`). The other three font roles (body Cormorant, mono Plex, script Italianno) and the `@theme` palette tokens are still locked. All four destination routes (`/about`, `/projects`, `/experience`, `/contact`) remain blank pending redesign. `[slug]` detail routes still slated for removal. Load-bearing post-pivot: video pipeline (5 files + poster + deferred mount) + softened atmosphere stack, color tokens (with the new usage rules), Optimus Princeps + Cormorant + Plex Mono, three responsive modes, `MenuStack`, `ToneWash`.
 
 ## Tech stack
 
@@ -49,7 +49,7 @@ app/
   contact/page.tsx                   [BLANK] Destination kept, content wiped pending redesign
 components/
   layout/
-    GlobalAtmosphere.tsx             [KEEP]  Hosts looping video bg + bottom/left atmos-fade + softened atmos-vignette; grain layer removed 2026-04-22
+    GlobalAtmosphere.tsx             [KEEP]  Hosts looping video bg with device-aware <source> ladder, poster first-paint, idle-callback deferred mount, prefers-reduced-motion escape; bottom/left atmos-fade + softened atmos-vignette; grain layer removed 2026-04-22; video pipeline rewritten 2026-04-23
     PageTransition.tsx               [DEMO]  Ink-curtain wipe — replace with P3R angular stencil wipe
     ChronicleLayout.tsx              [DEMO]  Journal chrome for sub-routes — deleted with chronicle aesthetic
     EmberField.tsx                   [DEMO]  Canvas ember drift
@@ -82,7 +82,13 @@ types/
 test/                                [KEEP]  Vitest setup
 public/images/projects/              [TBD]   Asset folder may be restructured with destinations
 public/fonts/                        [KEEP]  OptimusPrinceps.ttf + OptimusPrincepsSemiBold.ttf — local display font (Manfred Klein, free for commercial use)
-public/wallpaper/                    [KEEP]  shaman-village.mp4 (75 MB) — looping background video; size optimization deferred
+public/wallpaper/                    [KEEP]  Optimized background pipeline:
+                                           shaman-village.webm        (1920×1080 VP9 CRF 37, 8.2 MB)
+                                           shaman-village.mp4         (1920×1080 H.264 CRF 26, 8.1 MB — Safari fallback)
+                                           shaman-village-mobile.webm (1280×720  VP9 CRF 41, 2.0 MB)
+                                           shaman-village-mobile.mp4  (1280×720  H.264 CRF 28, 2.1 MB — iOS Safari fallback)
+                                           shaman-village-poster.jpg  (1920×1080 MJPEG q8, 152 KB — first-paint poster)
+                                           All loop seamlessly over a 20 s crossfade; audio stripped
 ```
 
 ## Routing
