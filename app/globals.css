@@ -79,7 +79,11 @@ body {
   inset: 0;
   z-index: -10;
   pointer-events: none;
-  background: #030304;
+  background-color: #030304;
+  background-image: url('/wallpaper/shaman-village-poster.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .atmos-video {
@@ -90,6 +94,11 @@ body {
   height: 100%;
   object-fit: cover;
   pointer-events: none;
+  opacity: 0;
+  transition: opacity 400ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.atmos-video.loaded {
   opacity: 1;
 }
 
