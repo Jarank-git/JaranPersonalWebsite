@@ -1,18 +1,8 @@
 'use client'
 
-import { motion, useReducedMotion } from 'framer-motion'
-
 export function ContactPanel() {
-  const reduced = useReducedMotion()
-
   return (
-    <motion.div
-      className="summary-panel"
-      initial={{ x: reduced ? 0 : -40, opacity: 0 }}
-      animate={{ x: 0, opacity: 1 }}
-      exit={{ x: reduced ? 0 : -40, opacity: 0 }}
-      transition={{ duration: 0.32, ease: [0.2, 0.7, 0.2, 1] }}
-    >
+    <div className="summary-panel">
       <hr className="summary-panel-rule" aria-hidden="true" />
       <h2 className="summary-panel-title">Contact</h2>
       <hr className="summary-panel-rule" aria-hidden="true" />
@@ -55,6 +45,6 @@ export function ContactPanel() {
       </div>
 
       <hr className="summary-panel-rule" aria-hidden="true" />
-    </motion.div>
+    </div>
   )
 }

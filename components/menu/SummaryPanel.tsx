@@ -1,18 +1,8 @@
 'use client'
 
-import { motion, useReducedMotion } from 'framer-motion'
-
 export function SummaryPanel() {
-  const reduced = useReducedMotion()
-
   return (
-    <motion.div
-      className="summary-panel"
-      initial={{ x: reduced ? 0 : -40, opacity: 0 }}
-      animate={{ x: 0, opacity: 1 }}
-      exit={{ x: reduced ? 0 : -40, opacity: 0 }}
-      transition={{ duration: 0.32, ease: [0.2, 0.7, 0.2, 1] }}
-    >
+    <div className="summary-panel">
       <hr className="summary-panel-rule" aria-hidden="true" />
       <h2 className="summary-panel-title">Jaran Khalid</h2>
       <hr className="summary-panel-rule" aria-hidden="true" />
@@ -22,16 +12,43 @@ export function SummaryPanel() {
           <h3 id="sp-experience" className="summary-panel-section-heading">Experience</h3>
 
           <div className="summary-panel-entry">
-            <span className="summary-panel-entry-title">Systems Eng. Intern · Civilcraft</span>
-            <span className="summary-panel-entry-sub">Remote · Jun–Aug 2025</span>
+            <span className="summary-panel-entry-title">Business Automation &amp; Systems Developer (Co-op)</span>
+            <span className="summary-panel-entry-sub">
+              <a href="https://renellence.com/" target="_blank" rel="noopener noreferrer" className="summary-panel-entry-company">
+                <img src="/assets/Renellence%20Logo.png" alt="" aria-hidden="true" className="summary-panel-entry-co-mark" />
+                Renellence · Jan 2026–Present
+              </a>
+            </span>
           </div>
+
           <div className="summary-panel-entry">
-            <span className="summary-panel-entry-title">Electrical Subsystem · WARG</span>
-            <span className="summary-panel-entry-sub">Waterloo · Sep 2025–Present</span>
+            <span className="summary-panel-entry-title">Systems Engineering Intern</span>
+            <span className="summary-panel-entry-sub">
+              <a href="https://civilcraft.com/" target="_blank" rel="noopener noreferrer" className="summary-panel-entry-company">
+                <img src="/assets/Civilcraft.png" alt="" aria-hidden="true" className="summary-panel-entry-co-mark" />
+                Civilcraft · Jun–Aug 2025
+              </a>
+            </span>
           </div>
+
           <div className="summary-panel-entry">
-            <span className="summary-panel-entry-title">Coding Instructor · Code Ninjas</span>
-            <span className="summary-panel-entry-sub">Milton · Jul–Aug 2025</span>
+            <span className="summary-panel-entry-title">Electrical Subsystem Member</span>
+            <span className="summary-panel-entry-sub">
+              <a href="https://www.uwarg.com/" target="_blank" rel="noopener noreferrer" className="summary-panel-entry-company">
+                <img src="/assets/WARG.png" alt="" aria-hidden="true" className="summary-panel-entry-co-mark" />
+                WARG · Sep 2025–Present
+              </a>
+            </span>
+          </div>
+
+          <div className="summary-panel-entry">
+            <span className="summary-panel-entry-title">Coding Instructor</span>
+            <span className="summary-panel-entry-sub">
+              <a href="https://www.codeninjas.com/milton-on-ca" target="_blank" rel="noopener noreferrer" className="summary-panel-entry-company">
+                <img src="/assets/Code%20Ninjas%20Logo.png" alt="" aria-hidden="true" className="summary-panel-entry-co-mark" />
+                Code Ninjas · Jul–Aug 2025
+              </a>
+            </span>
           </div>
         </section>
 
@@ -62,7 +79,7 @@ export function SummaryPanel() {
                   className="summary-panel-entry-link"
                 >
                   <img
-                    src="/assets/uwaterloo-crest.png"
+                    src="/assets/Uwaterloo_crest.png"
                     alt=""
                     aria-hidden="true"
                     className="summary-panel-entry-mark"
@@ -78,22 +95,13 @@ export function SummaryPanel() {
       <hr className="summary-panel-rule" aria-hidden="true" />
       <div className="summary-panel-footer">
         <a
-          href="/resume.pdf"
-          className="summary-panel-hint"
-          download
-          aria-label="Download resume"
-        >
-          <span className="summary-panel-hint-glyph" aria-hidden="true" />
-          <span>:Resume</span>
-        </a>
-        <a
           href="https://github.com/Jarank-git"
           className="summary-panel-hint"
           target="_blank"
           rel="noopener noreferrer"
           aria-label="GitHub profile"
         >
-          <span className="summary-panel-hint-glyph" aria-hidden="true" />
+          <img src="/assets/Github%20Logo.png" alt="" aria-hidden="true" className="summary-panel-hint-logo" />
           <span>:GitHub</span>
         </a>
         <a
@@ -103,10 +111,10 @@ export function SummaryPanel() {
           rel="noopener noreferrer"
           aria-label="LinkedIn profile"
         >
-          <span className="summary-panel-hint-glyph" aria-hidden="true" />
+          <img src="/assets/Linkedin%20Logo.png" alt="" aria-hidden="true" className="summary-panel-hint-logo" />
           <span>:LinkedIn</span>
         </a>
       </div>
-    </motion.div>
+    </div>
   )
 }
