@@ -1,6 +1,3 @@
-'use client'
-
-import { motion, useReducedMotion } from 'framer-motion'
 import { BackButton } from '@/components/layout/BackButton'
 
 const PROJECTS = [
@@ -24,11 +21,7 @@ const PROJECTS = [
   },
 ]
 
-const ease: [number, number, number, number] = [0.22, 1, 0.36, 1]
-
 export default function ProjectsPage() {
-  const reduced = useReducedMotion()
-
   return (
     <main className="dest-page">
       <header className="dest-header">
@@ -43,21 +36,15 @@ export default function ProjectsPage() {
       <p className="dest-wip-note">Case studies in progress.</p>
 
       <div className="proj-grid">
-        {PROJECTS.map((p, i) => (
-          <motion.article
-            key={p.title}
-            className="proj-card"
-            initial={reduced ? undefined : { opacity: 0, y: 18 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.38, delay: i * 0.1, ease }}
-          >
+        {PROJECTS.map((p) => (
+          <article key={p.title} className="proj-card">
             <div className="proj-card-top">
               <span className="proj-card-year">{p.year}</span>
               <span className="proj-card-sub">{p.sub}</span>
             </div>
             <h2 className="proj-card-title">{p.title}</h2>
             <p className="proj-card-tagline">{p.tagline}</p>
-          </motion.article>
+          </article>
         ))}
       </div>
     </main>
