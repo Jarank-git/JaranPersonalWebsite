@@ -1,7 +1,6 @@
 'use client'
 
 import { useEffect, useRef, useCallback, useState } from 'react'
-import { AnimatePresence, motion } from 'framer-motion'
 import { MenuStack } from '@/components/menu/MenuStack'
 import { SummaryPanel } from '@/components/menu/SummaryPanel'
 import { ContactPanel } from '@/components/menu/ContactPanel'
@@ -12,6 +11,8 @@ import { useSwipe } from '@/hooks/use-swipe'
 
 const STAGE_W = 1600
 const STAGE_H = 1000
+const PANEL_EXIT_MS = 200
+const MOBILE_TRANSITION_MS = 380
 
 function useStageScale(stageRef: React.RefObject<HTMLDivElement | null>, active: boolean) {
   const fit = useCallback(() => {
@@ -31,6 +32,68 @@ function useStageScale(stageRef: React.RefObject<HTMLDivElement | null>, active:
   }, [fit, active])
 }
 
+// ------------------------------------------------------------------ //
+//  Left-zone panel swap                                               //
+// ------------------------------------------------------------------ //
+
+type PanelKey = 'summary' | 'ghost' | 'contact'
+
+function panelKeyFromIdx(idx: number): PanelKey {
+  if (idx === 0) return 'summary'
+  if (idx === 4) return 'contact'
+  return 'ghost'
+}
+
+function LeftZonePanel({ selectedIdx }: { selectedIdx: number }) {
+  const [panelKey, setPanelKey] = useState<PanelKey>(() => panelKeyFromIdx(selectedIdx))
+  const [displayIdx, setDisplayIdx] = useState(selectedIdx)
+  const [state, setState] = useState<'visible' | 'exiting' | 'entering'>('visible')
+
+  useEffect(() => {
+    const nextKey = panelKeyFromIdx(selectedIdx)
+    if (nextKey === panelKey && selectedIdx === displayIdx) return
+
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    if (reduced) {
+      setPanelKey(nextKey)
+      setDisplayIdx(selectedIdx)
+      setState('visible')
+      return
+    }
+
+    setState('exiting')
+    const t = setTimeout(() => {
+      setPanelKey(nextKey)
+      setDisplayIdx(selectedIdx)
+      setState('entering')
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => setState('visible'))
+      })
+    }, PANEL_EXIT_MS)
+
+    return () => clearTimeout(t)
+  }, [selectedIdx, panelKey, displayIdx])
+
+  return (
+    <div className="left-panel-wrap" data-state={state} aria-hidden="true">
+      {panelKey === 'summary' ? (
+        <SummaryPanel />
+      ) : panelKey === 'contact' ? (
+        <ContactPanel />
+      ) : (
+        <GhostWatermark
+          label={MENU_ITEMS[displayIdx]?.label ?? ''}
+          num={MENU_ITEMS[displayIdx]?.num ?? ''}
+        />
+      )}
+    </div>
+  )
+}
+
+// ------------------------------------------------------------------ //
+//  Layout modes                                                        //
+// ------------------------------------------------------------------ //
+
 interface HomeProps {
   selectedIdx: number
   setSelectedIdx: (idx: number) => void
@@ -43,20 +106,8 @@ function CinematicHome({ selectedIdx, setSelectedIdx }: HomeProps) {
   return (
     <div className="stage-wrap">
       <div className="stage" ref={stageRef}>
-        <div className="stage-left-zone" aria-hidden="true">
-          <AnimatePresence mode="wait">
-            {selectedIdx === 0 ? (
-              <SummaryPanel key="summary" />
-            ) : selectedIdx === 4 ? (
-              <ContactPanel key="contact" />
-            ) : (
-              <GhostWatermark
-                key={selectedIdx}
-                label={MENU_ITEMS[selectedIdx]?.label ?? ''}
-                num={MENU_ITEMS[selectedIdx]?.num ?? ''}
-              />
-            )}
-          </AnimatePresence>
+        <div className="stage-left-zone">
+          <LeftZonePanel selectedIdx={selectedIdx} />
         </div>
         <MenuStack selectedIdx={selectedIdx} setSelectedIdx={setSelectedIdx} />
       </div>
@@ -68,20 +119,8 @@ function FluidHome({ selectedIdx, setSelectedIdx }: HomeProps) {
   return (
     <div className="home-fluid">
       <div className="home-center">
-        <div className="fluid-left-zone" aria-hidden="true">
-          <AnimatePresence mode="wait">
-            {selectedIdx === 0 ? (
-              <SummaryPanel key="summary" />
-            ) : selectedIdx === 4 ? (
-              <ContactPanel key="contact" />
-            ) : (
-              <GhostWatermark
-                key={selectedIdx}
-                label={MENU_ITEMS[selectedIdx]?.label ?? ''}
-                num={MENU_ITEMS[selectedIdx]?.num ?? ''}
-              />
-            )}
-          </AnimatePresence>
+        <div className="fluid-left-zone">
+          <LeftZonePanel selectedIdx={selectedIdx} />
         </div>
         <MenuStack selectedIdx={selectedIdx} setSelectedIdx={setSelectedIdx} />
       </div>
@@ -89,16 +128,19 @@ function FluidHome({ selectedIdx, setSelectedIdx }: HomeProps) {
   )
 }
 
-function MobileSummaryCard({ onNavigate }: { onNavigate: () => void }) {
+// ------------------------------------------------------------------ //
+//  Mobile two-state home                                              //
+// ------------------------------------------------------------------ //
+
+function MobileSummaryCard({
+  onNavigate,
+  dataExiting,
+}: {
+  onNavigate: () => void
+  dataExiting: boolean
+}) {
   return (
-    <motion.div
-      className="mobile-summary-card"
-      key="card"
-      initial={{ y: 0, opacity: 1 }}
-      animate={{ y: 0, opacity: 1 }}
-      exit={{ y: '-100vh', opacity: 0 }}
-      transition={{ duration: 0.38, ease: [0.7, 0, 0.3, 1] }}
-    >
+    <div className="mobile-summary-card" data-exiting={dataExiting || undefined}>
       <hr className="mobile-summary-rule" aria-hidden="true" />
       <h2 className="mobile-summary-title">Jaran Khalid</h2>
       <hr className="mobile-summary-rule" aria-hidden="true" />
@@ -107,6 +149,10 @@ function MobileSummaryCard({ onNavigate }: { onNavigate: () => void }) {
         <section className="mobile-summary-section" aria-labelledby="msp-experience">
           <h3 id="msp-experience" className="mobile-summary-section-heading">Experience</h3>
 
+          <div className="mobile-summary-entry">
+            <span className="mobile-summary-entry-title">Business Automation &amp; Systems Dev · Renellence</span>
+            <span className="mobile-summary-entry-sub">North York · Jan 2026–Present</span>
+          </div>
           <div className="mobile-summary-entry">
             <span className="mobile-summary-entry-title">Systems Eng. Intern · Civilcraft</span>
             <span className="mobile-summary-entry-sub">Remote · Jun–Aug 2025</span>
@@ -161,10 +207,6 @@ function MobileSummaryCard({ onNavigate }: { onNavigate: () => void }) {
 
       <hr className="mobile-summary-rule" aria-hidden="true" />
       <div className="mobile-summary-footer">
-        <a href="/resume.pdf" className="mobile-summary-hint" download aria-label="Download resume">
-          <span className="mobile-summary-hint-glyph" aria-hidden="true" />
-          <span>:Resume</span>
-        </a>
         <a
           href="https://github.com/Jarank-git"
           className="mobile-summary-hint"
@@ -196,22 +238,21 @@ function MobileSummaryCard({ onNavigate }: { onNavigate: () => void }) {
         <span className="mobile-summary-swipe-hint">Swipe to navigate</span>
         <span className="mobile-summary-swipe-chevron" aria-hidden="true" />
       </button>
-    </motion.div>
+    </div>
   )
 }
 
-function MobileMenuState({ onBack }: { onBack: () => void }) {
+function MobileMenuState({
+  onBack,
+  dataExiting,
+}: {
+  onBack: () => void
+  dataExiting: boolean
+}) {
   const [selectedIdx, setSelectedIdx] = useState(1)
 
   return (
-    <motion.div
-      className="mobile-menu-state home-mobile"
-      key="menu"
-      initial={{ y: '100vh', opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      exit={{ y: '100vh', opacity: 0 }}
-      transition={{ duration: 0.38, ease: [0.7, 0, 0.3, 1] }}
-    >
+    <div className="mobile-menu-state home-mobile" data-exiting={dataExiting || undefined}>
       <button
         className="mobile-back-btn"
         onClick={onBack}
@@ -229,12 +270,14 @@ function MobileMenuState({ onBack }: { onBack: () => void }) {
       <div className="mobile-menu-hud" aria-live="polite">
         TAP to select · SWIPE UP for summary
       </div>
-    </motion.div>
+    </div>
   )
 }
 
 function MobileHome() {
   const [cardVisible, setCardVisible] = useState(true)
+  const [cardExiting, setCardExiting] = useState(false)
+  const [menuExiting, setMenuExiting] = useState(false)
 
   useEffect(() => {
     if (cardVisible) {
@@ -247,23 +290,51 @@ function MobileHome() {
     }
   }, [cardVisible])
 
+  const showMenu = useCallback(() => {
+    if (cardExiting || menuExiting) return
+    setCardExiting(true)
+    setTimeout(() => {
+      setCardVisible(false)
+      setCardExiting(false)
+    }, MOBILE_TRANSITION_MS)
+  }, [cardExiting, menuExiting])
+
+  const showCard = useCallback(() => {
+    if (cardExiting || menuExiting) return
+    setMenuExiting(true)
+    setTimeout(() => {
+      setCardVisible(true)
+      setMenuExiting(false)
+    }, MOBILE_TRANSITION_MS)
+  }, [cardExiting, menuExiting])
+
   const swipeHandlers = useSwipe((direction) => {
-    if (direction === 'down' && cardVisible) setCardVisible(false)
-    if (direction === 'up' && !cardVisible) setCardVisible(true)
+    if (direction === 'down' && cardVisible) showMenu()
+    if (direction === 'up' && !cardVisible) showCard()
   })
 
   return (
     <div className="mobile-home-wrap" {...swipeHandlers}>
-      <AnimatePresence mode="wait">
-        {cardVisible ? (
-          <MobileSummaryCard key="card" onNavigate={() => setCardVisible(false)} />
-        ) : (
-          <MobileMenuState key="menu" onBack={() => setCardVisible(true)} />
-        )}
-      </AnimatePresence>
+      {cardVisible ? (
+        <MobileSummaryCard
+          key="card"
+          onNavigate={showMenu}
+          dataExiting={cardExiting}
+        />
+      ) : (
+        <MobileMenuState
+          key="menu"
+          onBack={showCard}
+          dataExiting={menuExiting}
+        />
+      )}
     </div>
   )
 }
+
+// ------------------------------------------------------------------ //
+//  Root page                                                           //
+// ------------------------------------------------------------------ //
 
 export default function HomePage() {
   const mode = useLayoutMode()
