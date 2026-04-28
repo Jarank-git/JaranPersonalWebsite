@@ -1,7 +1,6 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
-import { InkDefs } from './InkDefs'
 import { useLayoutMode } from '@/hooks/use-layout-mode'
 import { useMediaQuery } from '@/hooks/use-media-query'
 
@@ -33,7 +32,6 @@ export function GlobalAtmosphere() {
 
   return (
     <>
-      <InkDefs />
       <div className="atmos-bg" aria-hidden />
       {shouldRenderVideo && (
         <video
