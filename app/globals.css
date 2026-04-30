@@ -2147,7 +2147,7 @@ body {
 
 .contact-panel-value {
   font-family: var(--font-body);
-  font-size: clamp(13px, 1.05vw, 15px);
+  font-size: clamp(16px, 1.45vw, 21px);
   color: var(--color-parchment);
   text-decoration: none;
   transition: color 160ms ease;
