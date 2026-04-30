@@ -29,6 +29,7 @@ dist-ssr
 CLAUDE.md
 references.md
 docs/
+context.md
 
 # Next.js
 .next/
