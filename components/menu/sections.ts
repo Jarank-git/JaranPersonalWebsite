@@ -14,7 +14,7 @@ export interface MenuItem {
 }
 
 export const MENU_ITEMS: MenuItem[] = [
-  { section: 'summary',    label: 'SUMMARY',    num: '00', href: '/summary',    outline: false, tone: 'oklch(0.68 0.18 82)', corner: 'bl' },
+  { section: 'summary',    label: 'SUMMARY',    num: '00', href: '/summary',    outline: false, tone: 'oklch(0.68 0.18 82)', corner: 'bl', panel: true },
   { section: 'about',      label: 'ABOUT',      num: '01', href: '/about',      outline: false, tone: 'oklch(0.68 0.18 82)', corner: 'bl' },
   { section: 'projects',   label: 'PROJECTS',   num: '02', href: '/projects',   outline: false, tone: 'oklch(0.68 0.18 82)', corner: 'tr' },
   { section: 'experience', label: 'EXPERIENCE', num: '03', href: '/experience', outline: false, tone: 'oklch(0.68 0.18 82)', corner: 'tl' },
