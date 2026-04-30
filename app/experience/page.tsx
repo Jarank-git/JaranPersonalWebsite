@@ -9,6 +9,8 @@ const EXPERIENCES = [
   {
     role: 'Business Automation & Systems Developer',
     company: 'Renellence Inc',
+    companyHref: 'https://renellence.com/',
+    companyLogo: '/assets/Renellence%20Logo.png',
     location: 'North York, Ontario',
     start: 'Jan 2026',
     end: 'Present',
@@ -22,6 +24,8 @@ const EXPERIENCES = [
   {
     role: 'Systems Engineering Intern',
     company: 'Civilcraft Engineering LLC',
+    companyHref: 'https://civilcraft.com/',
+    companyLogo: '/assets/Civilcraft.png',
     location: 'New York City, NY (Remote)',
     start: 'Jun 2025',
     end: 'Aug 2025',
@@ -35,6 +39,8 @@ const EXPERIENCES = [
   {
     role: 'Electrical Subsystem Member',
     company: 'Waterloo Aerial Robotics Group',
+    companyHref: 'https://www.uwarg.com/',
+    companyLogo: '/assets/WARG.png',
     location: 'Waterloo, Ontario',
     start: 'Sep 2025',
     end: 'Present',
@@ -48,6 +54,8 @@ const EXPERIENCES = [
   {
     role: 'Coding Instructor',
     company: 'Code Ninjas',
+    companyHref: 'https://www.codeninjas.com/milton-on-ca',
+    companyLogo: '/assets/Code%20Ninjas%20Logo.png',
     location: 'Milton, Ontario',
     start: 'Jul 2025',
     end: 'Aug 2025',

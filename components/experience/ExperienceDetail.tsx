@@ -3,6 +3,8 @@
 interface Experience {
   role: string
   company: string
+  companyHref: string
+  companyLogo: string
   location: string
   start: string
   end: string
@@ -25,7 +27,15 @@ export function ExperienceDetail({ exp }: ExperienceDetailProps) {
         <div className="summary-panel-section">
           <h3 className="summary-panel-section-heading">Where</h3>
           <div className="summary-panel-entry">
-            <span className="summary-panel-entry-title">{exp.company}</span>
+            <a
+              href={exp.companyHref}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="summary-panel-entry-company"
+            >
+              <img src={exp.companyLogo} alt="" aria-hidden="true" className="summary-panel-entry-co-mark" />
+              {exp.company}
+            </a>
             <span className="summary-panel-entry-sub">{exp.location}</span>
           </div>
           <div className="summary-panel-entry">
