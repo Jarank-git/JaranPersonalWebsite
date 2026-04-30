@@ -1737,6 +1737,7 @@ body {
   z-index: 900;
   pointer-events: none;
   will-change: clip-path;
+  clip-path: polygon(110% 0%, 200% 0%, 200% 100%, 110% 100%);
 }
 
 .angular-wipe-label {
@@ -2248,6 +2249,8 @@ body {
   user-select: none;
   transform-origin: left center;
   will-change: transform;
+  transition: transform 0.42s cubic-bezier(0.22, 1, 0.36, 1),
+              opacity 0.42s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 /* No glow band in the experience carousel */
@@ -2353,6 +2356,19 @@ body {
 .exp-left-zone .summary-panel-section-heading { font-size: 13px; letter-spacing: 0.22em; }
 .exp-left-zone .summary-panel-entry-title    { font-size: clamp(16px, 1.45vw, 21px); }
 .exp-left-zone .summary-panel-entry-sub      { font-size: clamp(14px, 1.2vw, 17px); }
+
+@keyframes exp-detail-in {
+  from { opacity: 0; transform: translateX(-40px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+.exp-detail-anim {
+  animation: exp-detail-in 0.32s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .exp-detail-anim { animation: none; }
+}
 
 /* ------------------------------------------------------------------ */
 /*  Destination responsive                                             */
