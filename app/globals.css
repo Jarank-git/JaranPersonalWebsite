@@ -2274,22 +2274,6 @@ body {
   text-shadow: 0 2px 14px oklch(0.06 0.02 265 / 0.8);
 }
 
-.exp-carousel-item[aria-selected="true"] .menu-word::after {
-  content: "";
-  position: absolute;
-  inset: -4px -8px;
-  background: radial-gradient(ellipse, color-mix(in oklab, var(--color-gold-bright) 55%, transparent), transparent 70%);
-  animation: word-glow 2.4s ease-in-out infinite;
-  pointer-events: none;
-  z-index: -1;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .exp-carousel-item[aria-selected="true"] .menu-word::after {
-    animation: none;
-    opacity: 0.5;
-  }
-}
 .exp-carousel-item:hover .sparkles,
 .exp-carousel-item[aria-selected="true"] .sparkles { opacity: 1; }
 
