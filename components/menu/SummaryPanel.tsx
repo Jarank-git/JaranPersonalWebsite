@@ -111,7 +111,7 @@ export function SummaryPanel() {
           rel="noopener noreferrer"
           aria-label="LinkedIn profile"
         >
-          <img src="/assets/Linkedin%20Logo.png" alt="" aria-hidden="true" className="summary-panel-hint-logo" />
+          <img src="/assets/Linkedin%20Logo.png" alt="" aria-hidden="true" className="summary-panel-hint-logo" data-color />
           <span>:LinkedIn</span>
         </a>
       </div>

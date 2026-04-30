@@ -1423,6 +1423,11 @@ body {
   filter: brightness(0) invert(1) opacity(0.8);
 }
 
+.summary-panel-entry-co-mark[data-color] {
+  filter: none;
+  opacity: 0.9;
+}
+
 .summary-panel-entry-link {
   display: inline-flex;
   align-items: baseline;
@@ -1477,11 +1482,21 @@ body {
   flex-shrink: 0;
   object-fit: contain;
   filter: brightness(0) invert(1) opacity(0.75);
-  transition: filter 160ms ease;
+  transition: filter 160ms ease, opacity 160ms ease;
+}
+
+.summary-panel-hint-logo[data-color] {
+  filter: none;
+  opacity: 0.85;
 }
 
 .summary-panel-hint:hover .summary-panel-hint-logo {
   filter: brightness(0) invert(1) sepia(1) saturate(2) hue-rotate(10deg) opacity(1);
+}
+
+.summary-panel-hint:hover .summary-panel-hint-logo[data-color] {
+  filter: none;
+  opacity: 1;
 }
 
 /* ------------------------------------------------------------------ */

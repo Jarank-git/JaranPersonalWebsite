@@ -11,12 +11,14 @@ const LINK_ROWS = [
     href: 'https://www.linkedin.com/in/jaran-khalid/',
     display: 'jaran-khalid',
     logo: '/assets/Linkedin%20Logo.png',
+    colorLogo: true,
   },
   {
     label: 'GitHub',
     href: 'https://github.com/Jarank-git',
     display: 'Jarank-git',
     logo: '/assets/Github%20Logo.png',
+    colorLogo: false,
   },
 ]
 
@@ -34,7 +36,7 @@ export function ContactPanel() {
             <span className="contact-panel-value">{display}</span>
           </div>
         ))}
-        {LINK_ROWS.map(({ label, href, display, logo }) => (
+        {LINK_ROWS.map(({ label, href, display, logo, colorLogo }) => (
           <div key={label} className="contact-panel-row">
             <span className="contact-panel-label">{label}</span>
             <a
@@ -43,7 +45,13 @@ export function ContactPanel() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <img src={logo} alt="" aria-hidden="true" className="summary-panel-entry-co-mark" />
+              <img
+                src={logo}
+                alt=""
+                aria-hidden="true"
+                className="summary-panel-entry-co-mark"
+                {...(colorLogo ? { 'data-color': '' } : {})}
+              />
               {display}
             </a>
           </div>
