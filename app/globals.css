@@ -2520,6 +2520,71 @@ body {
 }
 
 /* ------------------------------------------------------------------ */
+/*  Narrow fluid (≤ 1099px) — compact panel, give menu breathing room */
+/* ------------------------------------------------------------------ */
+@media (max-width: 1099px) {
+  .home-fluid {
+    padding-left: clamp(16px, 2.5vw, 40px);
+    padding-right: clamp(16px, 2.5vw, 40px);
+  }
+
+  .home-fluid .home-center {
+    gap: clamp(12px, 1.8vw, 24px);
+  }
+
+  /* Shrink left zone so menu has ~60% of the content width */
+  .fluid-left-zone {
+    flex: 0 0 42%;
+  }
+
+  /* Compact the panel surface */
+  .summary-panel {
+    padding: 0 clamp(14px, 2vw, 28px) 14px;
+  }
+
+  .summary-panel-title {
+    font-size: clamp(18px, 2.1vw, 26px);
+    margin: 8px 0;
+  }
+
+  /* Single-column body so panel doesn't need to be as wide */
+  .summary-panel-body {
+    grid-template-columns: 1fr;
+    gap: 0;
+    padding: 10px 4px 8px;
+  }
+
+  .summary-panel-section-heading {
+    font-size: 11px;
+    margin-bottom: 4px;
+  }
+
+  .summary-panel-section + .summary-panel-section {
+    margin-top: 12px;
+  }
+
+  .summary-panel-entry {
+    margin-bottom: 6px;
+  }
+
+  .summary-panel-entry-title {
+    font-size: clamp(13px, 1.35vw, 16px);
+  }
+
+  .summary-panel-entry-sub {
+    font-size: clamp(11px, 1.1vw, 14px);
+  }
+
+  .summary-panel-footer {
+    padding-top: 8px;
+  }
+
+  .contact-panel-value {
+    font-size: clamp(13px, 1.35vw, 18px);
+  }
+}
+
+/* ------------------------------------------------------------------ */
 /*  Left-zone panel swap                                               */
 /* ------------------------------------------------------------------ */
 

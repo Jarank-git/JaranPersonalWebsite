@@ -49,6 +49,7 @@ export function MenuStack({ selectedIdx, setSelectedIdx }: MenuStackProps) {
         case 'Enter':
           e.preventDefault()
           if (!MENU_ITEMS[selectedIdx].panel) {
+            sessionStorage.setItem('home-selected-idx', String(selectedIdx))
             router.push(MENU_ITEMS[selectedIdx].href)
           }
           break
@@ -72,6 +73,7 @@ export function MenuStack({ selectedIdx, setSelectedIdx }: MenuStackProps) {
             panel={item.panel}
             selected={selectedIdx === i}
             onSelect={() => select(i)}
+            onNavigate={() => sessionStorage.setItem('home-selected-idx', String(i))}
           />
         ))}
       </ul>

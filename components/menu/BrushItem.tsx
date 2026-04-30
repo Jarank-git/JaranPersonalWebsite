@@ -13,6 +13,7 @@ interface BrushItemProps {
   panel?: boolean
   selected: boolean
   onSelect: () => void
+  onNavigate?: () => void
 }
 
 const SPARKLE_COUNT = 10
@@ -25,6 +26,7 @@ export function BrushItem({
   panel = false,
   selected,
   onSelect,
+  onNavigate,
 }: BrushItemProps) {
   const sparklesRef = useRef<HTMLSpanElement>(null)
   const didPopulate = useRef(false)
@@ -65,7 +67,7 @@ export function BrushItem({
           <span className="menu-word">{label}</span>
         </button>
       ) : (
-        <Link href={href} prefetch>
+        <Link href={href} prefetch onClick={onNavigate}>
           <span className="menu-word">{label}</span>
         </Link>
       )}

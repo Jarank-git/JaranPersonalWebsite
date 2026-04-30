@@ -340,7 +340,15 @@ export default function HomePage() {
   const mode = useLayoutMode()
   const [mounted, setMounted] = useState(false)
   const [selectedIdx, setSelectedIdx] = useState(0)
-  useEffect(() => setMounted(true), [])
+  useEffect(() => {
+    const saved = sessionStorage.getItem('home-selected-idx')
+    if (saved !== null) {
+      sessionStorage.removeItem('home-selected-idx')
+      const idx = parseInt(saved, 10)
+      if (!isNaN(idx) && idx >= 0 && idx < MENU_ITEMS.length) setSelectedIdx(idx)
+    }
+    setMounted(true)
+  }, [])
 
   if (!mounted) {
     return (
