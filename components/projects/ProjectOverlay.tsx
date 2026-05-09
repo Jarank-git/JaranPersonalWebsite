@@ -15,6 +15,7 @@ export interface ProjectEntry {
   stack: string[]
   links: { label: string; href: string }[]
   images: { src: string; alt: string }[]
+  icon: string | null
 }
 
 interface ProjectOverlayProps {

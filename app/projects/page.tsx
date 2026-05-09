@@ -13,7 +13,8 @@ const PROJECTS: ProjectEntry[] = [
     sub: 'Altium Designer · WARG',
     year: 'Oct–Nov 2025',
     category: 'Hardware',
-    tagline: '500W 2-Phase Interleaved design for competition drone rapid charging, achieving >90% efficiency.',
+    tagline:
+      '500W 2-Phase Interleaved design for competition drone rapid charging, achieving >90% efficiency across the full load range.',
     overview:
       'Designed a 500W 2-Phase Interleaved Buck-Boost converter in Altium Designer for the WARG competition drone power system. The converter steps between 12V and 24V rails, achieving greater than 90% conversion efficiency across the full load range.',
     bullets: [
@@ -25,6 +26,7 @@ const PROJECTS: ProjectEntry[] = [
     stack: ['Altium Designer', 'LTspice', 'Power Electronics', 'PCB Layout'],
     links: [],
     images: [],
+    icon: null,
   },
   {
     id: 'ldo',
@@ -33,7 +35,8 @@ const PROJECTS: ProjectEntry[] = [
     sub: 'Altium Designer · WARG',
     year: 'Sep–Oct 2025',
     category: 'Hardware',
-    tagline: 'Custom schematic + PCB layout achieving <9 mV voltage ripple from 5+ translated datasheets.',
+    tagline:
+      'Custom schematic + PCB layout achieving <9 mV voltage ripple from 5+ translated datasheets.',
     overview:
       'Custom 5V to 3.3V LDO voltage regulator designed in Altium Designer for WARG drone avionics power distribution. Achieved sub-9 mV output voltage ripple through careful layout, component selection, and decoupling strategy.',
     bullets: [
@@ -45,6 +48,7 @@ const PROJECTS: ProjectEntry[] = [
     stack: ['Altium Designer', 'Oscilloscope', 'Soldering', 'PCB Layout'],
     links: [],
     images: [],
+    icon: null,
   },
   {
     id: 'pems',
@@ -53,7 +57,8 @@ const PROJECTS: ProjectEntry[] = [
     sub: 'Python · Flask · Raspberry Pi',
     year: 'Oct–Nov 2025',
     category: 'Software · Embedded',
-    tagline: 'Real-time environment regulator reducing Hospital Induced Delirium risk, responding in <500 ms.',
+    tagline:
+      'Real-time environment regulator reducing Hospital Induced Delirium risk, responding in <500 ms.',
     overview:
       'A Raspberry Pi–based closed-loop system that monitors and regulates patient room conditions — temperature, lighting, and ambient sound — to reduce the risk of Hospital Induced Delirium. Built with a Python/Flask backend and real-time sensor polling over I²C.',
     bullets: [
@@ -65,6 +70,7 @@ const PROJECTS: ProjectEntry[] = [
     stack: ['Python', 'Flask', 'Raspberry Pi', 'I²C', 'Sensors'],
     links: [],
     images: [],
+    icon: null,
   },
 ]
 
@@ -73,7 +79,6 @@ export default function ProjectsPage() {
   const openProject = PROJECTS.find((p) => p.id === openId) ?? null
 
   const close = useCallback(() => setOpenId(null), [])
-
   const toggle = useCallback(
     (id: string) => setOpenId((prev) => (prev === id ? null : id)),
     [],
@@ -104,18 +109,55 @@ export default function ProjectsPage() {
             aria-expanded={openId === p.id}
             aria-label={`Open ${p.title}`}
           >
-            <div className="proj-entry-image">
-              {p.images[0] ? (
-                <img src={p.images[0].src} alt={p.images[0].alt} />
-              ) : (
-                <div className="proj-entry-image-placeholder" />
-              )}
+            {/* Header: icon + title/description */}
+            <div className="proj-entry-header">
+              <div className={`proj-entry-icon${!p.icon ? ' proj-entry-icon-empty' : ''}`}>
+                {p.icon && <img src={p.icon} alt="" />}
+              </div>
+              <div className="proj-entry-info">
+                <span className="proj-entry-title">{p.title}</span>
+                <span className="proj-entry-sub">{p.sub}</span>
+                <span className="proj-entry-tagline">{p.tagline}</span>
+              </div>
             </div>
-            <div className="proj-entry-body">
-              <span className="proj-entry-title">{p.title}</span>
-              <span className="proj-entry-sub">{p.sub}</span>
-              <span className="proj-entry-tagline">{p.tagline}</span>
-            </div>
+
+            {/* Preview images */}
+            {p.images.length > 0 && (
+              <div className="proj-entry-gallery">
+                {p.images.slice(0, 2).map((img) => (
+                  <div key={img.src} className="proj-entry-gallery-img">
+                    <img src={img.src} alt={img.alt} />
+                  </div>
+                ))}
+              </div>
+            )}
+
+            {/* Stack tags */}
+            {p.stack.length > 0 && (
+              <div className="proj-entry-tags">
+                {p.stack.map((s) => (
+                  <span key={s} className="proj-entry-tag">{s}</span>
+                ))}
+              </div>
+            )}
+
+            {/* Bottom links */}
+            {p.links.length > 0 && (
+              <div className="proj-entry-links">
+                {p.links.map((l) => (
+                  <a
+                    key={l.href}
+                    href={l.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="proj-entry-link"
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    {l.label}
+                  </a>
+                ))}
+              </div>
+            )}
           </button>
         ))}
       </div>
