@@ -2508,8 +2508,8 @@ body {
 
 /* Left zone — mirror of .stage-left-zone */
 .exp-left-zone {
-  flex: 0 0 66%;
-  max-width: 66%;
+  flex: 0 0 52%;
+  max-width: 52%;
   height: 100%;
   display: flex;
   align-items: center;
@@ -2524,8 +2524,8 @@ body {
 
 /* Right zone — carousel, items handle their own rotation via Framer Motion */
 .exp-menu-zone {
-  flex: 0 0 34%;
-  max-width: 34%;
+  flex: 0 0 48%;
+  max-width: 48%;
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -2595,13 +2595,13 @@ body {
   display: flex;
   flex-direction: column;
   gap: 0;
-  padding: 10px 8px 10px;
+  padding: 16px 8px 16px;
   flex: 1;
   overflow-y: auto;
 }
 
 .exp-detail-body .summary-panel-section + .summary-panel-section {
-  margin-top: 10px;
+  margin-top: 16px;
 }
 
 .exp-detail-stack {
@@ -2643,12 +2643,12 @@ body {
 }
 
 /* Experience detail — type scoped so home SummaryPanel is unaffected */
-.exp-left-zone .summary-panel               { padding: 0 32px 16px; }
-.exp-left-zone .summary-panel-title          { font-size: clamp(15px, 1.4vw, 20px); }
-.exp-left-zone .summary-panel-section-heading { font-size: 11px; letter-spacing: 0.22em; }
-.exp-left-zone .summary-panel-entry-title    { font-size: clamp(13px, 1.1vw, 16px); }
-.exp-left-zone .summary-panel-entry-sub      { font-size: clamp(11px, 0.95vw, 13px); }
-.exp-left-zone .summary-panel-rule           { margin: 8px 0; }
+.exp-left-zone .summary-panel               { padding: 0 36px 22px; }
+.exp-left-zone .summary-panel-title          { font-size: clamp(18px, 1.7vw, 24px); }
+.exp-left-zone .summary-panel-section-heading { font-size: 12px; letter-spacing: 0.22em; }
+.exp-left-zone .summary-panel-entry-title    { font-size: clamp(14px, 1.3vw, 18px); }
+.exp-left-zone .summary-panel-entry-sub      { font-size: clamp(13px, 1.1vw, 15px); }
+.exp-left-zone .summary-panel-rule           { margin: 10px 0; }
 
 @keyframes exp-detail-in {
   from { opacity: 0; transform: translateX(-40px); }
