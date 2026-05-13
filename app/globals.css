@@ -1114,35 +1114,6 @@ body {
 }
 
 /* ------------------------------------------------------------------ */
-/*  Fluid narrow — single-column summary panel for ≤1100px viewports  */
-/* ------------------------------------------------------------------ */
-
-@media (min-width: 768px) and (max-width: 1100px) {
-  .summary-panel-body {
-    grid-template-columns: 1fr;
-    gap: 24px;
-    padding: 20px 8px 20px;
-  }
-
-  .summary-panel-title {
-    font-size: clamp(20px, 3vw, 28px);
-    margin: 12px 0;
-  }
-
-  .summary-panel-entry-title {
-    font-size: clamp(14px, 1.8vw, 17px);
-  }
-
-  .summary-panel-entry-sub {
-    font-size: clamp(12px, 1.3vw, 14px);
-  }
-
-  .fluid-left-zone {
-    min-height: min(400px, 38vh);
-  }
-}
-
-/* ------------------------------------------------------------------ */
 /*  Chronicle responsive                                               */
 /* ------------------------------------------------------------------ */
 
@@ -2966,6 +2937,10 @@ body {
 
   .contact-panel-value {
     font-size: clamp(13px, 1.35vw, 18px);
+  }
+
+  .fluid-left-zone {
+    min-height: min(400px, 38vh);
   }
 }
 
