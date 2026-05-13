@@ -42,3 +42,7 @@ next-env.d.ts
 # Loose screenshot iterations at repo root (design scratch)
 /*.png
 tmp/
+
+# Unnamed scratch images anywhere in the tree
+public/assets/image (*).png
+public/assets/image (*).jpg
