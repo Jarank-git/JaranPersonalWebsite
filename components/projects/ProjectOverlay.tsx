@@ -31,6 +31,8 @@ export function ProjectOverlay({ project, onClose }: ProjectOverlayProps) {
 
   useEffect(() => {
     panelRef.current?.focus()
+    document.body.style.overflow = 'hidden'
+    return () => { document.body.style.overflow = '' }
   }, [])
 
   const close = () => {
