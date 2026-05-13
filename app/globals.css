@@ -1566,12 +1566,13 @@ body {
   padding: 18px 4px 16px;
   display: flex;
   flex-direction: column;
+  gap: clamp(22px, 7vh, 90px);
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
 }
 
 .mobile-summary-section + .mobile-summary-section {
-  margin-top: 22px;
+  margin-top: 0;
 }
 
 .mobile-summary-section-heading {
