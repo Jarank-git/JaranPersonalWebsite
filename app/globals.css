@@ -2968,3 +2968,67 @@ body {
     transition: none;
   }
 }
+
+/* ------------------------------------------------------------------ */
+/*  Large-screen (≥ 1800×900) cinematic overrides — 1920×1080 target  */
+/* ------------------------------------------------------------------ */
+
+@media (min-width: 1800px) and (min-height: 900px) {
+  /* Shift menu left and widen it to use the extra screen real estate */
+  .stage .menu {
+    right: 310px;
+    width: 820px;
+  }
+
+  /* Scale menu type up ~28% from base cinematic sizes */
+  .stage .menu li:nth-child(1) .menu-word { font-size: 72px; }
+  .stage .menu li:nth-child(2) .menu-word { font-size: 85px; }
+  .stage .menu li:nth-child(3) .menu-word { font-size: 110px; }
+  .stage .menu li:nth-child(4) .menu-word { font-size: 77px; }
+  .stage .menu li:nth-child(5) .menu-word { font-size: 100px; }
+
+  /* Panel title */
+  .summary-panel-title {
+    font-size: clamp(28px, 2.8vw, 42px);
+    margin: 22px 0;
+  }
+
+  /* Panel section headings and entry copy */
+  .summary-panel-section-heading {
+    font-size: 16px;
+    margin-bottom: 14px;
+  }
+  .summary-panel-entry-title {
+    font-size: clamp(18px, 1.6vw, 25px);
+  }
+  .summary-panel-entry-sub {
+    font-size: clamp(14px, 1.2vw, 18px);
+  }
+
+  /* More breathing room in the two-column body */
+  .summary-panel-body {
+    gap: 48px;
+    padding: 32px 12px 28px;
+  }
+
+  /* Footer CTA hints */
+  .summary-panel-hint {
+    font-size: 18px;
+  }
+  .summary-panel-hint-logo {
+    width: 26px;
+    height: 26px;
+  }
+
+  /* Contact panel */
+  .contact-panel-label {
+    font-size: 12px;
+    flex: 0 0 80px;
+  }
+  .contact-panel-value {
+    font-size: clamp(18px, 1.6vw, 25px);
+  }
+  .contact-panel-row {
+    padding: 16px 0;
+  }
+}
