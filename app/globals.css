@@ -2649,6 +2649,7 @@ body {
 .exp-left-zone .summary-panel-entry-title    { font-size: clamp(14px, 1.3vw, 18px); }
 .exp-left-zone .summary-panel-entry-sub      { font-size: clamp(13px, 1.1vw, 15px); }
 .exp-left-zone .summary-panel-rule           { margin: 10px 0; }
+.exp-left-zone .summary-panel-rule:first-child { margin-top: 0; }
 
 @keyframes exp-detail-in {
   from { opacity: 0; transform: translateX(-40px); }
