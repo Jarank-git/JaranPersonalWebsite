@@ -16,7 +16,7 @@ export function SummaryPanel() {
             <span className="summary-panel-entry-sub">
               <a href="https://renellence.com/" target="_blank" rel="noopener noreferrer" className="summary-panel-entry-company">
                 <img src="/assets/Renellence%20Logo.png" alt="" aria-hidden="true" className="summary-panel-entry-co-mark" />
-                Renellence · Jan 2026–Present
+                Renellence · Jan–Apr 2026
               </a>
             </span>
           </div>

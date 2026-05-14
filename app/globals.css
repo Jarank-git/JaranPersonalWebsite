@@ -2237,6 +2237,9 @@ body {
 }
 
 .proj-entry-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
   font-family: var(--font-body);
   font-size: 14px;
   color: var(--color-gold-bright);
@@ -2245,6 +2248,18 @@ body {
   padding-bottom: 2px;
   transition: border-color 160ms ease, color 160ms ease;
   pointer-events: auto;
+}
+
+.proj-entry-link-logo {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  filter: brightness(0) invert(1) opacity(0.75);
+  transition: opacity 160ms ease;
+}
+
+.proj-entry-link:hover .proj-entry-link-logo {
+  filter: brightness(0) invert(1) opacity(1);
 }
 
 .proj-entry-link:hover {

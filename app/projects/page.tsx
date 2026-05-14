@@ -166,15 +166,6 @@ export default function ProjectsPage() {
               </div>
             )}
 
-            {/* Stack tags */}
-            {p.stack.length > 0 && (
-              <div className="proj-entry-tags">
-                {p.stack.map((s) => (
-                  <span key={s} className="proj-entry-tag">{s}</span>
-                ))}
-              </div>
-            )}
-
             {/* Bottom links */}
             {p.links.length > 0 && (
               <div className="proj-entry-links">
@@ -187,7 +178,8 @@ export default function ProjectsPage() {
                     className="proj-entry-link"
                     onClick={(e) => e.stopPropagation()}
                   >
-                    {l.label}
+                    <img src="/assets/Github%20Logo.png" alt="" aria-hidden="true" className="proj-entry-link-logo" />
+                    {p.title}
                   </a>
                 ))}
               </div>
