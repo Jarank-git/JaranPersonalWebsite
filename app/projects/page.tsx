@@ -30,6 +30,8 @@ const PROJECTS: ProjectEntry[] = [
     ],
     images: [
       { src: '/images/projects/robotic-arm/final-product.jpg', alt: 'Completed robotic arm' },
+      { src: '/images/projects/robotic-arm/arm-3d.png', alt: '3D model of the robotic arm' },
+      { src: '/images/projects/robotic-arm/pcb-footprint.png', alt: 'PCB footprint layout' },
       { src: '/images/projects/robotic-arm/full-assembly.jpg', alt: 'First full assembly' },
       { src: '/images/projects/robotic-arm/wiring-clean.jpg', alt: 'Cleaned wiring harness' },
       { src: '/images/projects/robotic-arm/partial-assembly.jpg', alt: 'Partial assembly stage' },
