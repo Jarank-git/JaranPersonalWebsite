@@ -66,8 +66,7 @@ const PROJECTS: ProjectEntry[] = [
       { label: 'GitHub', href: 'https://github.com/Jarank-git/LDO-Voltage-Regulator' },
     ],
     images: [
-      { src: '/images/projects/ldo/schematic-1.png', alt: 'LDO schematic page 1' },
-      { src: '/images/projects/ldo/schematic-2.png', alt: 'LDO schematic page 2' },
+      { src: '/images/projects/ldo/schematic-2.png', alt: 'LDO schematic' },
       { src: '/images/projects/ldo/pcb-layout.png', alt: 'PCB layout in Altium Designer' },
     ],
     icon: null,
