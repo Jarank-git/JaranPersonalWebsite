@@ -35,6 +35,10 @@ const ibmPlexMono = IBM_Plex_Mono({
 export const metadata: Metadata = {
   title: 'Jaran Khalid',
   description: 'Portfolio — Electrical Engineering, University of Waterloo.',
+  icons: {
+    icon: '/assets/Favicon.png',
+    apple: '/assets/Favicon.png',
+  },
 }
 
 const fontVars = [
