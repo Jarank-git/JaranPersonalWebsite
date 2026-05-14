@@ -1169,10 +1169,10 @@ body {
   left: 0;
   top: 0;
   bottom: 0;
-  width: 50%;
+  width: 54%;
   display: flex;
   align-items: center;
-  padding: 0 40px 0 52px;
+  padding: 0 28px 0 36px;
   z-index: 5;
   pointer-events: none;
 }
@@ -1183,7 +1183,7 @@ body {
 
 /* Fluid left zone — sibling to the menu inside home-center */
 .fluid-left-zone {
-  flex: 0 0 50%;
+  flex: 0 0 54%;
   position: relative;
   min-height: 400px;
   display: flex;
@@ -1350,21 +1350,10 @@ body {
 
 .summary-panel-body {
   display: grid;
-  grid-template-columns: 1fr;
-  gap: 28px;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
   padding: 28px 12px 26px;
   flex: 1;
-}
-
-/* Projects + Education sit side-by-side below the full-width Experience section */
-.summary-panel-sub-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 24px;
-}
-
-.summary-panel-sub-grid .summary-panel-section + .summary-panel-section {
-  margin-top: 0;
 }
 
 .summary-panel-section + .summary-panel-section {
@@ -2999,9 +2988,9 @@ body {
     gap: clamp(12px, 1.8vw, 24px);
   }
 
-  /* Give panel half the content width for comfortable single-column layout */
+  /* Shrink left zone so menu has ~60% of the content width */
   .fluid-left-zone {
-    flex: 0 0 50%;
+    flex: 0 0 42%;
   }
 
   /* Compact the panel surface */
@@ -3014,8 +3003,10 @@ body {
     margin: 8px 0;
   }
 
+  /* Single-column body so panel doesn't need to be as wide */
   .summary-panel-body {
-    gap: 16px;
+    grid-template-columns: 1fr;
+    gap: 0;
     padding: 10px 4px 8px;
   }
 

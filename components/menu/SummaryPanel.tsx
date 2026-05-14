@@ -52,7 +52,7 @@ export function SummaryPanel() {
           </div>
         </section>
 
-        <div className="summary-panel-sub-grid">
+        <div>
           <section className="summary-panel-section" aria-labelledby="sp-projects">
             <h3 id="sp-projects" className="summary-panel-section-heading">Projects</h3>
 
