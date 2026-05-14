@@ -73,8 +73,34 @@ const PROJECTS: ProjectEntry[] = [
     icon: null,
   },
   {
-    id: 'arctic',
+    id: 'pawprint',
     num: '03',
+    title: 'PawPrint: AI-Powered Adoption Campaigns',
+    sub: 'React 19 · Google Gemini 2.0 · Cloudinary',
+    year: 'Mar 2026',
+    category: 'Full-Stack · AI · Hackathon',
+    tagline:
+      'Shelter volunteers upload pet photos and walk away with AI-generated captions and platform-optimized download packs — built in 36 hours at HackCanada 2026.',
+    overview:
+      'Built at HackCanada 2026, PawPrint is a full-stack web app that turns raw shelter photos into polished adoption campaigns in minutes. Volunteers run through a 3-step wizard: enter pet details, upload photos and video via a Cloudinary widget, then review AI-generated captions and select a hero image. The resulting profile page produces platform-sized image packs (Instagram, Twitter, Facebook, YouTube), a printable QR-code kennel card, and a sharable link — all without a traditional database. Every pet record lives as structured metadata on Cloudinary assets and is queried back through the Cloudinary Search API.',
+    bullets: [
+      'Cloudinary doubles as media host and database — pet data encoded as structured metadata on every asset, queried via the Search API; no separate DB needed',
+      'Google Gemini 2.0 Flash generates warm adoption captions plus five platform-tailored variants (tone, length, hashtag count) from pet details alone',
+      'Smart hero selection uses Cloudinary quality_analysis.focus scores to surface the best photo automatically; volunteers override via a tag-hero serverless endpoint',
+      'Client-side ZIP generation with JSZip builds platform-optimized packs (1080×1080 Instagram, 1200×675 Twitter, etc.) entirely in the browser — no server compute',
+      'Vercel serverless functions gate all secrets (Cloudinary admin SDK, Gemini API key) while the React + Vite frontend stays fully static and deployable to any CDN',
+    ],
+    stack: ['React 19', 'TypeScript', 'Vite', 'Google Gemini 2.0', 'Cloudinary', 'Vercel', 'JSZip'],
+    links: [
+      { label: 'GitHub', href: 'https://github.com/Jarank-git/HackCanada2026' },
+    ],
+    images: [],
+    videos: [],
+    icon: null,
+  },
+  {
+    id: 'arctic',
+    num: '04',
     title: 'Arctic Analytics: IoT Line-Follow Robot',
     sub: 'Arduino Uno R4 WiFi · React · Python · MongoDB',
     year: 'Oct–Nov 2025',
