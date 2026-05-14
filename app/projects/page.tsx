@@ -144,9 +144,11 @@ export default function ProjectsPage() {
           >
             {/* Header: icon + title/description */}
             <div className="proj-entry-header">
-              <div className={`proj-entry-icon${!p.icon ? ' proj-entry-icon-empty' : ''}`}>
-                {p.icon && <img src={p.icon} alt="" />}
-              </div>
+              {p.icon && (
+                <div className="proj-entry-icon">
+                  <img src={p.icon} alt="" />
+                </div>
+              )}
               <div className="proj-entry-info">
                 <span className="proj-entry-title">{p.title}</span>
                 <span className="proj-entry-sub">{p.sub}</span>
