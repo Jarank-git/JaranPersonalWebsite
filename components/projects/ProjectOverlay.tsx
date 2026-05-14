@@ -29,6 +29,11 @@ const EXIT_MS = 180
 export function ProjectOverlay({ project, onClose }: ProjectOverlayProps) {
   const panelRef = useRef<HTMLDivElement>(null)
   const [exiting, setExiting] = useState(false)
+  const [slideIdx, setSlideIdx] = useState(0)
+
+  const total = project.images.length
+  const prev = () => setSlideIdx((i) => (i - 1 + total) % total)
+  const next = () => setSlideIdx((i) => (i + 1) % total)
 
   useEffect(() => {
     panelRef.current?.focus()
@@ -40,6 +45,24 @@ export function ProjectOverlay({ project, onClose }: ProjectOverlayProps) {
     setExiting(true)
     setTimeout(onClose, EXIT_MS)
   }
+
+  useEffect(() => {
+    if (total <= 1) return
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'ArrowLeft') { e.preventDefault(); prev() }
+      if (e.key === 'ArrowRight') { e.preventDefault(); next() }
+    }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [total])
+
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') { e.preventDefault(); close() }
+    }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [])
 
   return (
     <div
@@ -78,13 +101,36 @@ export function ProjectOverlay({ project, onClose }: ProjectOverlayProps) {
         <hr className="summary-panel-rule" />
 
         <div className="proj-overlay-body">
-          {project.images.length > 0 && (
-            <div className="proj-overlay-gallery">
-              {project.images.map((img) => (
-                <div key={img.src} className="proj-overlay-img">
-                  <img src={img.src} alt={img.alt} />
+          {total > 0 && (
+            <div className="proj-overlay-slideshow" aria-label="Image gallery">
+              <div className="proj-overlay-slide">
+                <img
+                  key={project.images[slideIdx].src}
+                  src={project.images[slideIdx].src}
+                  alt={project.images[slideIdx].alt}
+                />
+              </div>
+              {total > 1 && (
+                <div className="proj-overlay-slide-nav">
+                  <button
+                    className="proj-overlay-slide-btn"
+                    onClick={prev}
+                    aria-label="Previous image"
+                  >
+                    ‹
+                  </button>
+                  <span className="proj-overlay-slide-counter">
+                    {String(slideIdx + 1).padStart(2, '0')} / {String(total).padStart(2, '0')}
+                  </span>
+                  <button
+                    className="proj-overlay-slide-btn"
+                    onClick={next}
+                    aria-label="Next image"
+                  >
+                    ›
+                  </button>
                 </div>
-              ))}
+              )}
             </div>
           )}
 
