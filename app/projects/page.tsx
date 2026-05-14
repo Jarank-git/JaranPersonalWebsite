@@ -35,7 +35,6 @@ const PROJECTS: ProjectEntry[] = [
       { src: '/images/projects/robotic-arm/full-assembly.jpg', alt: 'First full assembly' },
       { src: '/images/projects/robotic-arm/wiring-clean.jpg', alt: 'Cleaned wiring harness' },
       { src: '/images/projects/robotic-arm/partial-assembly.jpg', alt: 'Partial assembly stage' },
-      { src: '/images/projects/robotic-arm/pcb-3d.png', alt: '3D render of the custom PCB shield' },
       { src: '/images/projects/robotic-arm/schematic.png', alt: 'Power and servo schematic' },
     ],
     videos: [
