@@ -2420,6 +2420,43 @@ body {
   border-bottom-color: var(--color-gold);
 }
 
+.proj-overlay-videos {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.proj-overlay-video-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.proj-overlay-video-label {
+  font-family: var(--font-body);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: oklch(0.78 0.16 82 / 0.7);
+}
+
+.proj-overlay-video-frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16/9;
+  background: rgba(6, 6, 4, 0.9);
+  border: 1px solid oklch(0.78 0.16 82 / 0.2);
+}
+
+.proj-overlay-video-frame iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
 /* ------------------------------------------------------------------ */
 /*  Contact panel body                                                 */
 /* ------------------------------------------------------------------ */

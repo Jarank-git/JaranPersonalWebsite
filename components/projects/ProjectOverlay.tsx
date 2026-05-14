@@ -15,6 +15,7 @@ export interface ProjectEntry {
   stack: string[]
   links: { label: string; href: string }[]
   images: { src: string; alt: string }[]
+  videos?: { label: string; youtubeId: string }[]
   icon: string | null
 }
 
@@ -107,6 +108,28 @@ export function ProjectOverlay({ project, onClose }: ProjectOverlayProps) {
               <div className="proj-overlay-tags">
                 {project.stack.map((s) => (
                   <span key={s} className="proj-overlay-tag">{s}</span>
+                ))}
+              </div>
+            </>
+          )}
+
+          {project.videos && project.videos.length > 0 && (
+            <>
+              <div className="proj-overlay-section-label">Demo Videos</div>
+              <div className="proj-overlay-videos">
+                {project.videos.map((v) => (
+                  <div key={v.youtubeId} className="proj-overlay-video-wrap">
+                    <div className="proj-overlay-video-label">{v.label}</div>
+                    <div className="proj-overlay-video-frame">
+                      <iframe
+                        src={`https://www.youtube.com/embed/${v.youtubeId}`}
+                        title={v.label}
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                        loading="lazy"
+                      />
+                    </div>
+                  </div>
                 ))}
               </div>
             </>
