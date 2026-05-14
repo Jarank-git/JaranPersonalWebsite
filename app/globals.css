@@ -3064,9 +3064,9 @@ body {
 /* ------------------------------------------------------------------ */
 
 @media (min-width: 1800px) and (min-height: 900px) {
-  /* Shift menu left and widen it to use the extra screen real estate */
+  /* Keep menu left edge at same stage x=740 as base cinematic; widen rightward */
   .stage .menu {
-    right: 310px;
+    right: 40px;
     width: 820px;
   }
 
