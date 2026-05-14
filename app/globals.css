@@ -1356,6 +1356,17 @@ body {
   flex: 1;
 }
 
+/* Projects + Education sit side-by-side below the full-width Experience section */
+.summary-panel-sub-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.summary-panel-sub-grid .summary-panel-section + .summary-panel-section {
+  margin-top: 0;
+}
+
 .summary-panel-section + .summary-panel-section {
   margin-top: 22px;
 }
