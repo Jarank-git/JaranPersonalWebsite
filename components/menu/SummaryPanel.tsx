@@ -57,16 +57,16 @@ export function SummaryPanel() {
             <h3 id="sp-projects" className="summary-panel-section-heading">Projects</h3>
 
             <div className="summary-panel-entry">
-              <span className="summary-panel-entry-title">Robotic Arm: Record/Playback &amp; Hand Control</span>
-              <span className="summary-panel-entry-sub">Arduino Nano · OpenCV · Altium Designer</span>
+              <span className="summary-panel-entry-title">Robotic Arm</span>
+              <span className="summary-panel-entry-sub">Arduino Nano · OpenCV · Altium</span>
             </div>
             <div className="summary-panel-entry">
-              <span className="summary-panel-entry-title">5–3.3V LDO Voltage Regulator</span>
+              <span className="summary-panel-entry-title">LDO Voltage Regulator</span>
               <span className="summary-panel-entry-sub">Altium Designer · WARG</span>
             </div>
             <div className="summary-panel-entry">
-              <span className="summary-panel-entry-title">Arctic Analytics: IoT Line-Follow Robot</span>
-              <span className="summary-panel-entry-sub">Arduino · React · Python · MongoDB</span>
+              <span className="summary-panel-entry-title">Arctic Analytics</span>
+              <span className="summary-panel-entry-sub">Arduino · React · Python</span>
             </div>
           </section>
 
