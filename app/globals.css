@@ -1350,8 +1350,8 @@ body {
 
 .summary-panel-body {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 40px;
+  grid-template-columns: 1fr;
+  gap: 28px;
   padding: 28px 12px 26px;
   flex: 1;
 }
@@ -2973,9 +2973,9 @@ body {
     gap: clamp(12px, 1.8vw, 24px);
   }
 
-  /* Shrink left zone so menu has ~60% of the content width */
+  /* Give panel half the content width for comfortable single-column layout */
   .fluid-left-zone {
-    flex: 0 0 42%;
+    flex: 0 0 50%;
   }
 
   /* Compact the panel surface */
@@ -2988,10 +2988,8 @@ body {
     margin: 8px 0;
   }
 
-  /* Single-column body so panel doesn't need to be as wide */
   .summary-panel-body {
-    grid-template-columns: 1fr;
-    gap: 0;
+    gap: 16px;
     padding: 10px 4px 8px;
   }
 
