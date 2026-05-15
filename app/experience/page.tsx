@@ -26,7 +26,7 @@ const EXPERIENCES = [
     company: 'Civilcraft Engineering LLC',
     companyHref: 'https://civilcraft.com/',
     companyLogo: '/assets/Civilcraft.png',
-    location: 'New York City, NY (Remote)',
+    location: 'New York City, NY',
     start: 'Jun 2025',
     end: 'Aug 2025',
     stack: ['Python', 'pandas', 'NYC Open Data API'],

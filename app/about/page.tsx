@@ -25,9 +25,9 @@ export default function AboutPage() {
             <section className="summary-panel-section" aria-labelledby="about-who">
               <h2 id="about-who" className="summary-panel-section-heading">Who I Am</h2>
               <p className="about-bio-text">
-                Electrical Engineering student at the University of Waterloo with a focus on
-                embedded systems and hardware design. I like building things at the intersection
-                of software and hardware — from circuit boards to full-stack tools.
+                Hi, I&apos;m Jaran, an Electrical Engineering Student at the University of Waterloo,
+                currently exploring fields like embedded systems and hardware design. I like building
+                things that require me to use software + hardware skills!
               </p>
             </section>
 
@@ -44,7 +44,7 @@ export default function AboutPage() {
             <section className="summary-panel-section" aria-labelledby="about-interests">
               <h2 id="about-interests" className="summary-panel-section-heading">Interests</h2>
               <ul className="about-bullet-list">
-                <li>Video games — RPGs especially: Elden Ring, Dark Souls 3, Bloodborne, Path of Exile 2</li>
+                <li>Video games, specifically RPGs: Elden Ring, Dark Souls 3, Bloodborne, Path of Exile 2</li>
                 <li>Building and flipping PC components, keeping up with the PC hardware world</li>
                 <li>3D printing on a Bambu Lab A1 Mini, eyeing an upgrade to the A1, and getting better with Autodesk Fusion</li>
               </ul>
