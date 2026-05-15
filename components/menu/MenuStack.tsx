@@ -15,10 +15,10 @@ interface MenuStackProps {
 export function MenuStack({ selectedIdx, setSelectedIdx }: MenuStackProps) {
   const router = useRouter()
   const lastKeyAt = useRef(0)
-  // Tracks the keyboard cursor independently of mouse-hover visual state.
-  // Initialized once from selectedIdx (which is already restored from sessionStorage
-  // before MenuStack first mounts, so useRef captures the correct starting position).
   const kbIdx = useRef(selectedIdx)
+  // Last-input-wins: arrow keys disable hover, any mouse movement re-enables it.
+  // Starts in 'keyboard' so cursor drift on navigation return doesn't hijack selection.
+  const inputMode = useRef<'mouse' | 'keyboard'>('keyboard')
 
   const select = useCallback(
     (idx: number) => {
@@ -26,6 +26,13 @@ export function MenuStack({ selectedIdx, setSelectedIdx }: MenuStackProps) {
     },
     [setSelectedIdx],
   )
+
+  // Any mouse movement re-enables mouse mode
+  useEffect(() => {
+    const onMove = () => { inputMode.current = 'mouse' }
+    window.addEventListener('mousemove', onMove, { passive: true })
+    return () => window.removeEventListener('mousemove', onMove)
+  }, [])
 
   useEffect(() => {
     for (const item of MENU_ITEMS) router.prefetch(item.href)
@@ -41,6 +48,7 @@ export function MenuStack({ selectedIdx, setSelectedIdx }: MenuStackProps) {
           e.preventDefault()
           if (now - lastKeyAt.current < KEY_THROTTLE_MS) return
           lastKeyAt.current = now
+          inputMode.current = 'keyboard'
           kbIdx.current = (kbIdx.current + 1 + MENU_ITEMS.length) % MENU_ITEMS.length
           select(kbIdx.current)
           break
@@ -49,6 +57,7 @@ export function MenuStack({ selectedIdx, setSelectedIdx }: MenuStackProps) {
           e.preventDefault()
           if (now - lastKeyAt.current < KEY_THROTTLE_MS) return
           lastKeyAt.current = now
+          inputMode.current = 'keyboard'
           kbIdx.current = (kbIdx.current - 1 + MENU_ITEMS.length) % MENU_ITEMS.length
           select(kbIdx.current)
           break
@@ -66,9 +75,17 @@ export function MenuStack({ selectedIdx, setSelectedIdx }: MenuStackProps) {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [select, router])
 
+  // Hover only works in mouse mode; also syncs kbIdx so subsequent arrow keys
+  // continue naturally from wherever the mouse last landed.
+  const handleHover = useCallback((i: number) => {
+    if (inputMode.current === 'keyboard') return
+    kbIdx.current = i
+    select(i)
+  }, [select])
+
   return (
     <nav className="menu" aria-label="main menu">
-      <ul role="listbox" onMouseLeave={() => select(kbIdx.current)}>
+      <ul role="listbox">
         {MENU_ITEMS.map((item, i) => (
           <BrushItem
             key={item.section}
@@ -79,8 +96,8 @@ export function MenuStack({ selectedIdx, setSelectedIdx }: MenuStackProps) {
             outline={item.outline}
             panel={item.panel}
             selected={selectedIdx === i}
-            onSelect={() => select(i)}
-            onActivate={() => { kbIdx.current = i; select(i) }}
+            onSelect={() => handleHover(i)}
+            onActivate={() => { inputMode.current = 'mouse'; kbIdx.current = i; select(i) }}
             onNavigate={() => sessionStorage.setItem('home-selected-idx', String(i))}
           />
         ))}
