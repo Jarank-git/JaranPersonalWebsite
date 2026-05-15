@@ -15,6 +15,10 @@ interface MenuStackProps {
 export function MenuStack({ selectedIdx, setSelectedIdx }: MenuStackProps) {
   const router = useRouter()
   const lastKeyAt = useRef(0)
+  // Tracks the keyboard cursor independently of mouse-hover visual state.
+  // Initialized once from selectedIdx (which is already restored from sessionStorage
+  // before MenuStack first mounts, so useRef captures the correct starting position).
+  const kbIdx = useRef(selectedIdx)
 
   const select = useCallback(
     (idx: number) => {
@@ -37,27 +41,30 @@ export function MenuStack({ selectedIdx, setSelectedIdx }: MenuStackProps) {
           e.preventDefault()
           if (now - lastKeyAt.current < KEY_THROTTLE_MS) return
           lastKeyAt.current = now
-          select(selectedIdx + 1)
+          kbIdx.current = (kbIdx.current + 1 + MENU_ITEMS.length) % MENU_ITEMS.length
+          select(kbIdx.current)
           break
         case 'ArrowUp':
         case 'k':
           e.preventDefault()
           if (now - lastKeyAt.current < KEY_THROTTLE_MS) return
           lastKeyAt.current = now
-          select(selectedIdx - 1)
+          kbIdx.current = (kbIdx.current - 1 + MENU_ITEMS.length) % MENU_ITEMS.length
+          select(kbIdx.current)
           break
         case 'Enter':
           e.preventDefault()
-          if (!MENU_ITEMS[selectedIdx].panel) {
-            sessionStorage.setItem('home-selected-idx', String(selectedIdx))
-            router.push(MENU_ITEMS[selectedIdx].href)
+          if (!MENU_ITEMS[kbIdx.current].panel) {
+            sessionStorage.setItem('home-selected-idx', String(kbIdx.current))
+            router.push(MENU_ITEMS[kbIdx.current].href)
           }
           break
       }
     }
     window.addEventListener('keydown', onKey)
     return () => window.removeEventListener('keydown', onKey)
-  }, [selectedIdx, select, router])
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [select, router])
 
   return (
     <nav className="menu" aria-label="main menu">
@@ -73,6 +80,7 @@ export function MenuStack({ selectedIdx, setSelectedIdx }: MenuStackProps) {
             panel={item.panel}
             selected={selectedIdx === i}
             onSelect={() => select(i)}
+            onActivate={() => { kbIdx.current = i; select(i) }}
             onNavigate={() => sessionStorage.setItem('home-selected-idx', String(i))}
           />
         ))}

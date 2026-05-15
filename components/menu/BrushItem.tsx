@@ -13,6 +13,7 @@ interface BrushItemProps {
   panel?: boolean
   selected: boolean
   onSelect: () => void
+  onActivate?: () => void
   onNavigate?: () => void
 }
 
@@ -26,6 +27,7 @@ export function BrushItem({
   panel = false,
   selected,
   onSelect,
+  onActivate,
   onNavigate,
 }: BrushItemProps) {
   const sparklesRef = useRef<HTMLSpanElement>(null)
@@ -63,7 +65,7 @@ export function BrushItem({
       </span>
       <span className="sparkles" ref={sparklesRef} aria-hidden="true" />
       {panel ? (
-        <button className="menu-word-btn" onClick={onSelect} type="button">
+        <button className="menu-word-btn" onClick={onActivate ?? onSelect} type="button">
           <span className="menu-word">{label}</span>
         </button>
       ) : (
