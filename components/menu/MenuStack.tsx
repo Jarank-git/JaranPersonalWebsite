@@ -68,7 +68,7 @@ export function MenuStack({ selectedIdx, setSelectedIdx }: MenuStackProps) {
 
   return (
     <nav className="menu" aria-label="main menu">
-      <ul role="listbox">
+      <ul role="listbox" onMouseLeave={() => select(kbIdx.current)}>
         {MENU_ITEMS.map((item, i) => (
           <BrushItem
             key={item.section}
