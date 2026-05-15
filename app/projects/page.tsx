@@ -112,7 +112,7 @@ const PROJECTS: ProjectEntry[] = [
     num: '04',
     title: 'Arctic Analytics: IoT Line-Follow Robot',
     sub: 'Arduino Uno R4 WiFi · React · Python · MongoDB',
-    year: 'Oct–Nov 2025',
+    year: 'Jan–Feb 2026',
     category: 'Embedded · Full-Stack · Hackathon',
     tagline:
       'Top-5 finish at UTRAHacks out of 300+ — autonomous robot streams live telemetry to a React dashboard over WiFi.',

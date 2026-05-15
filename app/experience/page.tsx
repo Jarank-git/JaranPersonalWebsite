@@ -13,7 +13,7 @@ const EXPERIENCES = [
     companyLogo: '/assets/Renellence%20Logo.png',
     location: 'North York, Ontario',
     start: 'Jan 2026',
-    end: 'Present',
+    end: 'Apr 2026',
     stack: ['n8n', 'Next.js', 'Shopify API', 'Supabase'],
     bullets: [
       'Developed end-to-end B2B automation workflows using n8n to streamline purchase order processing for sales reps, reducing ordering latency and processing $200,000 in gross revenue.',
