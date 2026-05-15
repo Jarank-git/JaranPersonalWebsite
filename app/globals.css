@@ -1518,11 +1518,63 @@ body {
   margin-bottom: 48px;
 }
 
-.about-layout {
+.about-unified-panel {
+  position: relative;
   display: flex;
-  align-items: flex-start;
-  gap: 32px;
+  align-items: stretch;
   width: 100%;
+}
+
+/* Panel surface + side hairlines (same pattern as summary-panel) */
+.about-unified-panel::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: var(--color-panel-surface);
+  box-shadow:
+    inset  1px 0 0 0 var(--color-panel-hairline),
+    inset -1px 0 0 0 var(--color-panel-hairline);
+  backdrop-filter: blur(5px) saturate(0.95);
+  -webkit-backdrop-filter: blur(5px) saturate(0.95);
+  mask-image: linear-gradient(to right,
+    transparent 0%, rgba(0,0,0,0.20) 2%, rgba(0,0,0,0.55) 5%,
+    rgba(0,0,0,0.85) 9%, #000 13%, #000 87%,
+    rgba(0,0,0,0.85) 91%, rgba(0,0,0,0.55) 95%,
+    rgba(0,0,0,0.20) 98%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to right,
+    transparent 0%, rgba(0,0,0,0.20) 2%, rgba(0,0,0,0.55) 5%,
+    rgba(0,0,0,0.85) 9%, #000 13%, #000 87%,
+    rgba(0,0,0,0.85) 91%, rgba(0,0,0,0.55) 95%,
+    rgba(0,0,0,0.20) 98%, transparent 100%);
+}
+
+/* Top + bottom hairlines */
+.about-unified-panel::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  box-shadow:
+    inset 0  1px 0 0 var(--color-panel-border-bright),
+    inset 0 -1px 0 0 var(--color-panel-border-bright);
+  mask-image: linear-gradient(to right,
+    transparent 0%, rgba(0,0,0,0.30) 1%, rgba(0,0,0,0.70) 3%,
+    rgba(0,0,0,0.92) 5%, #000 7%, #000 93%,
+    rgba(0,0,0,0.92) 95%, rgba(0,0,0,0.70) 97%,
+    rgba(0,0,0,0.30) 99%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to right,
+    transparent 0%, rgba(0,0,0,0.30) 1%, rgba(0,0,0,0.70) 3%,
+    rgba(0,0,0,0.92) 5%, #000 7%, #000 93%,
+    rgba(0,0,0,0.92) 95%, rgba(0,0,0,0.70) 97%,
+    rgba(0,0,0,0.30) 99%, transparent 100%);
+}
+
+.about-unified-panel > * {
+  position: relative;
+  z-index: 1;
 }
 
 .about-photo-col {
@@ -1530,6 +1582,8 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
+  padding: 36px 28px 36px 36px;
 }
 
 .about-photo-frame {
@@ -1537,6 +1591,7 @@ body {
   width: 240px;
   height: 305px;
   overflow: hidden;
+  border-radius: 10px;
   box-shadow:
     0 0 28px rgba(138, 106, 30, 0.45),
     0 8px 40px rgba(0, 0, 0, 0.65);
@@ -1547,6 +1602,7 @@ body {
   content: "";
   position: absolute;
   inset: 0;
+  border-radius: 10px;
   background:
     radial-gradient(ellipse at center, transparent 40%, rgba(14, 13, 9, 0.72) 100%);
   z-index: 1;
@@ -1580,6 +1636,10 @@ body {
 .about-panel-col {
   flex: 1;
   min-width: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 0 44px 28px;
+  color: var(--color-parchment);
 }
 
 .about-panel-col .summary-panel-body {
@@ -1630,10 +1690,18 @@ body {
     padding: 32px 20px 60px;
   }
 
-  .about-layout {
+  .about-unified-panel {
     flex-direction: column;
     align-items: center;
-    gap: 20px;
+  }
+
+  .about-photo-col {
+    padding: 28px 28px 16px;
+  }
+
+  .about-panel-col {
+    padding: 0 24px 24px;
+    width: 100%;
   }
 
   .about-photo-frame {
