@@ -44,9 +44,11 @@ export default function AboutPage() {
 
               <section className="summary-panel-section" aria-labelledby="about-interests">
                 <h2 id="about-interests" className="summary-panel-section-heading">Interests</h2>
-                <p className="about-bio-text">
-                  [Placeholder — add interests, hobbies, what you&apos;re into outside of work.]
-                </p>
+                <ul className="about-bullet-list">
+                  <li>Video games — RPGs especially: Elden Ring, Dark Souls 3, Bloodborne, Path of Exile 2</li>
+                  <li>Building and flipping PC components, keeping up with the PC hardware world</li>
+                  <li>3D printing on a Bambu Lab A1 Mini, eyeing an upgrade to the A1, and getting better with Autodesk Fusion</li>
+                </ul>
               </section>
             </div>
 
