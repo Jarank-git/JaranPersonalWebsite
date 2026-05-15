@@ -16,6 +16,7 @@ export interface ProjectEntry {
   links: { label: string; href: string }[]
   images: { src: string; alt: string }[]
   videos?: { label: string; youtubeId: string }[]
+  cardVideoId?: string
   icon: string | null
 }
 

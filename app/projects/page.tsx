@@ -93,14 +93,13 @@ const PROJECTS: ProjectEntry[] = [
     stack: ['React 19', 'TypeScript', 'Vite', 'Google Gemini 2.0', 'Cloudinary', 'Vercel', 'JSZip'],
     links: [
       { label: 'GitHub', href: 'https://github.com/Jarank-git/HackCanada2026' },
-      { label: 'Demo', href: 'https://www.youtube.com/watch?v=D3_WjKy2eTc' },
     ],
     images: [
       { src: '/images/projects/pawprint/pet-profile.png', alt: 'Pet profile page for Buddy the Shiba Inu' },
-      { src: '/images/projects/pawprint/upload-wizard.png', alt: '3-step upload wizard — pet details' },
       { src: '/images/projects/pawprint/platform-captions.png', alt: 'AI-generated platform captions' },
       { src: '/images/projects/pawprint/platform-packs.png', alt: 'Platform-optimized download packs' },
     ],
+    cardVideoId: 'D3_WjKy2eTc',
     videos: [
       { label: 'Demo — HackCanada 2026', youtubeId: 'D3_WjKy2eTc' },
     ],
@@ -192,11 +191,29 @@ export default function ProjectsPage() {
             {/* Preview images */}
             {p.images.length > 0 && (
               <div className="proj-entry-gallery">
-                {p.images.slice(0, 2).map((img) => (
-                  <div key={img.src} className="proj-entry-gallery-img">
-                    <img src={img.src} alt={img.alt} />
+                <div className="proj-entry-gallery-img">
+                  <img src={p.images[0].src} alt={p.images[0].alt} />
+                </div>
+                {p.cardVideoId ? (
+                  <a
+                    href={`https://www.youtube.com/watch?v=${p.cardVideoId}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="proj-entry-gallery-img proj-entry-gallery-video"
+                    onClick={(e) => e.stopPropagation()}
+                    aria-label="Watch demo video on YouTube"
+                  >
+                    <img
+                      src={`https://img.youtube.com/vi/${p.cardVideoId}/hqdefault.jpg`}
+                      alt="Demo video thumbnail"
+                    />
+                    <span className="proj-entry-gallery-play" aria-hidden="true">▶</span>
+                  </a>
+                ) : p.images[1] ? (
+                  <div className="proj-entry-gallery-img">
+                    <img src={p.images[1].src} alt={p.images[1].alt} />
                   </div>
-                ))}
+                ) : null}
               </div>
             )}
 

@@ -13,10 +13,6 @@ export default function AboutPage() {
         <div className="about-photo-col">
           <div className="about-photo-frame">
             <img src="/assets/Picture.jpg" alt="Jaran Khalid" />
-            <span className="about-corner about-corner--tl" aria-hidden="true" />
-            <span className="about-corner about-corner--tr" aria-hidden="true" />
-            <span className="about-corner about-corner--bl" aria-hidden="true" />
-            <span className="about-corner about-corner--br" aria-hidden="true" />
           </div>
         </div>
 
@@ -34,17 +30,13 @@ export default function AboutPage() {
                   embedded systems and hardware design. I like building things at the intersection
                   of software and hardware — from circuit boards to full-stack tools.
                 </p>
-                <p className="about-bio-text">
-                  [Placeholder — rewrite this with your own words.]
-                </p>
               </section>
 
               <section className="summary-panel-section" aria-labelledby="about-currently">
                 <h2 id="about-currently" className="summary-panel-section-heading">Currently Working On</h2>
                 <ul className="about-bullet-list">
-                  <li>Placeholder project one</li>
-                  <li>Placeholder thing two</li>
-                  <li>Placeholder three</li>
+                  <li>Writing a technical blog documenting my learning journey through PCB design</li>
+                  <li>Exploring FPGA development with Quartus Prime and Verilog</li>
                 </ul>
               </section>
 
