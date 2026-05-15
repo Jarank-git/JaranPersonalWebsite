@@ -35,8 +35,10 @@ export default function AboutPage() {
               <section className="summary-panel-section" aria-labelledby="about-currently">
                 <h2 id="about-currently" className="summary-panel-section-heading">Currently Working On</h2>
                 <ul className="about-bullet-list">
+                  <li>Adding a blog section to this website</li>
                   <li>Writing a technical blog documenting my learning journey through PCB design</li>
                   <li>Exploring FPGA development with Quartus Prime and Verilog</li>
+                  <li>Designing an STM32 microcontroller board PCB from scratch</li>
                 </ul>
               </section>
 
