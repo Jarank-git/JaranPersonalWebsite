@@ -69,6 +69,7 @@ const PROJECTS: ProjectEntry[] = [
     images: [
       { src: '/images/projects/ldo/schematic-2.png', alt: 'LDO schematic' },
       { src: '/images/projects/ldo/pcb-layout.png', alt: 'PCB layout in Altium Designer' },
+      { src: '/assets/3D_LDO.png', alt: '3D render of the LDO PCB' },
     ],
     icon: null,
   },
