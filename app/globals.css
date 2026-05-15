@@ -1508,7 +1508,7 @@ body {
 .about-page {
   position: relative;
   min-height: 100vh;
-  max-width: 1100px;
+  max-width: 1400px;
   margin: 0 auto;
   padding: 60px 60px 80px;
   color: var(--color-parchment);
@@ -1653,7 +1653,7 @@ body {
 
 .about-bio-text {
   font-family: var(--font-body);
-  font-size: clamp(14px, 1.2vw, 17px);
+  font-size: clamp(16px, 1.5vw, 20px);
   color: var(--color-parchment-dim);
   line-height: 1.75;
   margin: 0 0 6px;
@@ -1668,7 +1668,7 @@ body {
 
 .about-bullet-list li {
   font-family: var(--font-body);
-  font-size: clamp(14px, 1.2vw, 17px);
+  font-size: clamp(16px, 1.5vw, 20px);
   color: var(--color-parchment-dim);
   line-height: 1.75;
   padding-left: 18px;
