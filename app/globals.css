@@ -1554,18 +1554,13 @@ body {
   pointer-events: none;
 }
 
-/* edge vignette */
+/* all-sides vignette — blends white photo bg into the dark frame */
 .about-photo-frame::after {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    to bottom,
-    rgba(0, 0, 0, 0.12) 0%,
-    transparent 28%,
-    transparent 68%,
-    rgba(0, 0, 0, 0.28) 100%
-  );
+  background:
+    radial-gradient(ellipse at center, transparent 40%, rgba(14, 13, 9, 0.72) 100%);
   z-index: 1;
   pointer-events: none;
 }
@@ -1576,6 +1571,7 @@ body {
   object-fit: cover;
   object-position: center top;
   display: block;
+  filter: brightness(0.82) contrast(1.05) saturate(0.75) sepia(0.12);
 }
 
 /* 4 gold L-bracket corners — positioned inside frame so overflow:hidden doesn't clip */
@@ -1600,11 +1596,11 @@ body {
 
 .about-panel-col .summary-panel-body {
   display: block;
-  padding: 0;
+  padding: 14px 0 0;
 }
 
 .about-panel-col .summary-panel-section + .summary-panel-section {
-  margin-top: 0;
+  margin-top: 20px;
 }
 
 .about-bio-text {

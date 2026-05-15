@@ -39,8 +39,6 @@ export default function AboutPage() {
                 </p>
               </section>
 
-              <hr className="summary-panel-rule" aria-hidden="true" />
-
               <section className="summary-panel-section" aria-labelledby="about-currently">
                 <h2 id="about-currently" className="summary-panel-section-heading">Currently Working On</h2>
                 <ul className="about-bullet-list">
@@ -49,8 +47,6 @@ export default function AboutPage() {
                   <li>Placeholder three</li>
                 </ul>
               </section>
-
-              <hr className="summary-panel-rule" aria-hidden="true" />
 
               <section className="summary-panel-section" aria-labelledby="about-interests">
                 <h2 id="about-interests" className="summary-panel-section-heading">Interests</h2>
