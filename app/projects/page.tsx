@@ -95,6 +95,7 @@ const PROJECTS: ProjectEntry[] = [
       { label: 'GitHub', href: 'https://github.com/Jarank-git/HackCanada2026' },
     ],
     images: [
+      { src: '/images/projects/pawprint/homepage.png', alt: 'PawPrint homepage — Every shelter pet deserves a great first impression' },
       { src: '/images/projects/pawprint/pet-profile.png', alt: 'Pet profile page for Buddy the Shiba Inu' },
       { src: '/images/projects/pawprint/platform-captions.png', alt: 'AI-generated platform captions' },
       { src: '/images/projects/pawprint/platform-packs.png', alt: 'Platform-optimized download packs' },
