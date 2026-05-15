@@ -94,8 +94,15 @@ const PROJECTS: ProjectEntry[] = [
     links: [
       { label: 'GitHub', href: 'https://github.com/Jarank-git/HackCanada2026' },
     ],
-    images: [],
-    videos: [],
+    images: [
+      { src: '/images/projects/pawprint/pet-profile.png', alt: 'Pet profile page for Buddy the Shiba Inu' },
+      { src: '/images/projects/pawprint/platform-packs.png', alt: 'Platform-optimized download packs' },
+      { src: '/images/projects/pawprint/upload-wizard.png', alt: '3-step upload wizard — pet details' },
+      { src: '/images/projects/pawprint/platform-captions.png', alt: 'AI-generated platform captions' },
+    ],
+    videos: [
+      { label: 'Demo — HackCanada 2026', youtubeId: 'D3_WjKy2eTc' },
+    ],
     icon: null,
   },
   {
