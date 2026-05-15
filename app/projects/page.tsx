@@ -93,12 +93,13 @@ const PROJECTS: ProjectEntry[] = [
     stack: ['React 19', 'TypeScript', 'Vite', 'Google Gemini 2.0', 'Cloudinary', 'Vercel', 'JSZip'],
     links: [
       { label: 'GitHub', href: 'https://github.com/Jarank-git/HackCanada2026' },
+      { label: 'Demo', href: 'https://www.youtube.com/watch?v=D3_WjKy2eTc' },
     ],
     images: [
       { src: '/images/projects/pawprint/pet-profile.png', alt: 'Pet profile page for Buddy the Shiba Inu' },
-      { src: '/images/projects/pawprint/platform-packs.png', alt: 'Platform-optimized download packs' },
       { src: '/images/projects/pawprint/upload-wizard.png', alt: '3-step upload wizard — pet details' },
       { src: '/images/projects/pawprint/platform-captions.png', alt: 'AI-generated platform captions' },
+      { src: '/images/projects/pawprint/platform-packs.png', alt: 'Platform-optimized download packs' },
     ],
     videos: [
       { label: 'Demo — HackCanada 2026', youtubeId: 'D3_WjKy2eTc' },
@@ -211,8 +212,14 @@ export default function ProjectsPage() {
                     className="proj-entry-link"
                     onClick={(e) => e.stopPropagation()}
                   >
-                    <img src="/assets/Github%20Logo.png" alt="" aria-hidden="true" className="proj-entry-link-logo" />
-                    {p.title}
+                    {l.label === 'GitHub' ? (
+                      <>
+                        <img src="/assets/Github%20Logo.png" alt="" aria-hidden="true" className="proj-entry-link-logo" />
+                        {p.title}
+                      </>
+                    ) : (
+                      <>▶ {l.label}</>
+                    )}
                   </a>
                 ))}
               </div>
