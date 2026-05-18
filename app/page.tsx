@@ -292,13 +292,11 @@ function MobileSummaryCard({
 function MobileMenuState({
   onBack,
   dataExiting,
-  initialIdx = 1,
 }: {
   onBack: () => void
   dataExiting: boolean
-  initialIdx?: number
 }) {
-  const [selectedIdx, setSelectedIdx] = useState(initialIdx)
+  const [selectedIdx, setSelectedIdx] = useState(1)
 
   useEffect(() => {
     if (selectedIdx === 0) onBack()
@@ -327,8 +325,8 @@ function MobileMenuState({
   )
 }
 
-function MobileHome({ startOnMenu = false, initialIdx = 1 }: { startOnMenu?: boolean; initialIdx?: number }) {
-  const [cardVisible, setCardVisible] = useState(!startOnMenu)
+function MobileHome() {
+  const [cardVisible, setCardVisible] = useState(true)
   const [cardExiting, setCardExiting] = useState(false)
   const [menuExiting, setMenuExiting] = useState(false)
 
@@ -379,7 +377,6 @@ function MobileHome({ startOnMenu = false, initialIdx = 1 }: { startOnMenu?: boo
           key="menu"
           onBack={showCard}
           dataExiting={menuExiting}
-          initialIdx={initialIdx}
         />
       )}
     </div>
@@ -394,16 +391,12 @@ export default function HomePage() {
   const mode = useLayoutMode()
   const [mounted, setMounted] = useState(false)
   const [selectedIdx, setSelectedIdx] = useState(0)
-  const [returnedFromPage, setReturnedFromPage] = useState(false)
   useEffect(() => {
     const saved = sessionStorage.getItem('home-selected-idx')
     if (saved !== null) {
       sessionStorage.removeItem('home-selected-idx')
       const idx = parseInt(saved, 10)
-      if (!isNaN(idx) && idx >= 0 && idx < MENU_ITEMS.length) {
-        setSelectedIdx(idx)
-        setReturnedFromPage(true)
-      }
+      if (!isNaN(idx) && idx >= 0 && idx < MENU_ITEMS.length) setSelectedIdx(idx)
     }
     setMounted(true)
   }, [])
@@ -418,5 +411,5 @@ export default function HomePage() {
 
   if (mode === 'cinematic') return <CinematicHome selectedIdx={selectedIdx} setSelectedIdx={setSelectedIdx} />
   if (mode === 'fluid') return <FluidHome selectedIdx={selectedIdx} setSelectedIdx={setSelectedIdx} />
-  return <MobileHome startOnMenu={returnedFromPage} initialIdx={selectedIdx} />
+  return <MobileHome />
 }
