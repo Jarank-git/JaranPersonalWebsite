@@ -1396,6 +1396,18 @@ body {
   letter-spacing: 0.01em;
 }
 
+.summary-panel-entry-project-link {
+  text-decoration: none;
+  border-bottom: 1px solid oklch(0.55 0.04 70 / 0.35);
+  padding-bottom: 1px;
+}
+
+.summary-panel-entry-project-link::after {
+  content: " ›";
+  color: var(--color-parchment-dim);
+  font-weight: 400;
+}
+
 .summary-panel-entry-sub {
   display: block;
   margin-top: 3px;
