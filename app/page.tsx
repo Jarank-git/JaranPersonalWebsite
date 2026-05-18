@@ -291,6 +291,10 @@ function MobileMenuState({
 }) {
   const [selectedIdx, setSelectedIdx] = useState(1)
 
+  useEffect(() => {
+    if (selectedIdx === 0) onBack()
+  }, [selectedIdx, onBack])
+
   return (
     <div className="mobile-menu-state home-mobile" data-exiting={dataExiting || undefined}>
       <button
