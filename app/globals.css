@@ -1979,31 +1979,32 @@ body {
 
 .mobile-back-name {
   font-family: var(--font-display);
-  font-size: 9px;
-  color: var(--color-parchment-dim);
+  font-size: 11px;
+  color: var(--color-parchment);
   letter-spacing: 0.28em;
   text-transform: uppercase;
+  opacity: 0.75;
 }
 
 .mobile-back-chevron {
   width: 0;
   height: 0;
-  border-left: 4px solid transparent;
-  border-right: 4px solid transparent;
-  border-bottom: 4px solid var(--color-parchment-dim);
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-bottom: 5px solid var(--color-parchment);
+  opacity: 0.6;
 }
 
 .mobile-menu-hud {
   flex-shrink: 0;
-  padding: 8px 16px 12px;
-  border-top: 1px solid oklch(0.22 0.03 260 / 0.25);
+  padding: 10px 16px max(14px, env(safe-area-inset-bottom));
+  border-top: 1px solid oklch(0.55 0.04 70 / 0.3);
   background: oklch(0.08 0.015 265 / 0.7);
   font-family: var(--font-display);
-  font-size: 7px;
-  color: var(--color-ink-dim);
-  letter-spacing: 0.14em;
+  font-size: 9px;
+  color: var(--color-parchment-dim);
+  letter-spacing: 0.18em;
   text-align: center;
-  opacity: 0.6;
 }
 
 /* ------------------------------------------------------------------ */
