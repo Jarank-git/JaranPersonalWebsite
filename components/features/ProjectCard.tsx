@@ -1,6 +1,5 @@
 import Image from 'next/image'
 import type { Project, ProjectLink } from '@/types/content'
-import { Ornament } from '@/components/layout/Ornament'
 
 export interface ProjectCardProps {
   project: Project
@@ -17,56 +16,49 @@ export function ProjectCard({ project }: ProjectCardProps) {
   const { title, tagline, year, stack, images, summary, bullets, links } = project
 
   return (
-    <article className="relative mx-auto w-full max-w-3xl px-6 py-12">
-      <header className="mb-8">
-        <h1 className="menu-label gold-text text-4xl md:text-5xl leading-tight">{title}</h1>
-        <p className="mt-3 text-lg italic text-[var(--color-cream-dim)]">{tagline}</p>
-        <Ornament variant="divider" className="mt-5" />
-        <div className="mt-5 flex flex-wrap items-center gap-x-6 gap-y-2 text-xs text-[var(--color-cream-faint)]">
-          <div className="flex items-center gap-2">
-            <span className="menu-label tracking-widest text-[var(--color-gold)]/60">Year</span>
-            <span className="text-[var(--color-gold-bright)]">{year}</span>
-          </div>
+    <article className="project-card">
+      <header className="project-card-header">
+        <h1 className="project-card-title">{title}</h1>
+        <p className="project-card-tagline">{tagline}</p>
+        <hr className="project-card-rule" aria-hidden="true" />
+        <div className="project-card-meta">
+          <span className="project-card-meta-label">Year</span>
+          <span className="project-card-meta-value">{year}</span>
           {stack.length > 0 && (
-            <div className="flex items-center gap-2">
-              <span className="menu-label tracking-widest text-[var(--color-gold)]/60">Stack</span>
-              <ul className="flex flex-wrap gap-2">
-                {stack.map((s) => (
-                  <li key={s} className="menu-label border border-[var(--color-gold)]/30 bg-[var(--color-obsidian-2)]/60 px-3 py-1 text-[10px] text-[var(--color-cream)]">
-                    {s}
-                  </li>
-                ))}
-              </ul>
-            </div>
+            <>
+              <span className="project-card-meta-label">Stack</span>
+              <span className="project-card-meta-value">{stack.join(' · ')}</span>
+            </>
           )}
         </div>
       </header>
 
       {images.length > 0 && (
-        <section aria-label="Gallery" className="mb-10 space-y-6">
+        <section aria-label="Gallery" className="project-card-gallery">
           {images.map((img) => (
-            <figure key={img.src} className="relative aspect-[4/3] w-full overflow-hidden art-nouveau-border bg-[var(--color-obsidian-2)]">
-              <Image src={img.src} alt={img.alt} fill sizes="(max-width: 768px) 100vw, 768px" className="object-cover" />
+            <figure key={img.src} className="project-card-figure">
+              <Image
+                src={img.src}
+                alt={img.alt}
+                fill
+                sizes="(max-width: 768px) 100vw, 800px"
+                className="project-card-img"
+              />
               {img.caption && (
-                <figcaption className="absolute bottom-0 left-0 right-0 bg-[var(--color-obsidian)]/90 px-5 py-3 text-xs text-[var(--color-cream-dim)]">
-                  {img.caption}
-                </figcaption>
+                <figcaption className="project-card-caption">{img.caption}</figcaption>
               )}
             </figure>
           ))}
         </section>
       )}
 
-      <div className="relative art-nouveau-border p-6">
-        <div className="space-y-4 text-[var(--color-cream-dim)] leading-relaxed">
-          <p>{summary}</p>
-        </div>
-
+      <div className="project-card-body">
+        <p className="project-card-summary">{summary}</p>
         {bullets.length > 0 && (
-          <ul className="mt-6 space-y-3 pl-4 text-[var(--color-cream-dim)]">
+          <ul className="project-card-bullets">
             {bullets.map((b, i) => (
-              <li key={i} className="flex gap-3">
-                <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rotate-45 bg-[var(--color-gold)]/60" />
+              <li key={i} className="project-card-bullet">
+                <span className="project-card-bullet-mark" aria-hidden="true" />
                 <span>{b}</span>
               </li>
             ))}
@@ -75,13 +67,17 @@ export function ProjectCard({ project }: ProjectCardProps) {
       </div>
 
       {links.length > 0 && (
-        <footer className="mt-8">
-          <p className="menu-label mb-3 text-[10px] tracking-[0.3em] text-[var(--color-gold)]/50">Links</p>
-          <ul className="flex flex-wrap gap-x-6 gap-y-3">
+        <footer className="project-card-footer">
+          <span className="project-card-links-label">Links</span>
+          <ul className="project-card-links">
             {links.map((l) => (
               <li key={l.href}>
-                <a href={l.href} target="_blank" rel="noreferrer noopener"
-                  className="menu-label border-b border-b-[var(--color-gold)]/30 pb-1 text-sm text-[var(--color-gold-bright)] transition-colors hover:border-b-[var(--color-gold-bright)] hover:text-[var(--color-cream)] focus-visible:outline-none focus-visible:text-[var(--color-cream)]">
+                <a
+                  href={l.href}
+                  target="_blank"
+                  rel="noreferrer noopener"
+                  className="project-card-link"
+                >
                   {KIND_LABEL[l.kind]} · {l.label}
                 </a>
               </li>
