@@ -132,8 +132,6 @@ function FluidHome({ selectedIdx, setSelectedIdx }: HomeProps) {
 //  Mobile two-state home                                              //
 // ------------------------------------------------------------------ //
 
-const SCROLL_STEP = 160
-
 function MobileSummaryCard({
   onNavigate,
   dataExiting,
@@ -142,8 +140,24 @@ function MobileSummaryCard({
   dataExiting: boolean
 }) {
   const bodyRef = useRef<HTMLDivElement>(null)
-  const scrollUp = () => bodyRef.current?.scrollBy({ top: -SCROLL_STEP, behavior: 'smooth' })
-  const scrollDown = () => bodyRef.current?.scrollBy({ top: SCROLL_STEP, behavior: 'smooth' })
+  const [atBottom, setAtBottom] = useState(false)
+
+  useEffect(() => {
+    const el = bodyRef.current
+    if (!el) return
+    const check = () => setAtBottom(el.scrollTop + el.clientHeight >= el.scrollHeight - 8)
+    check()
+    el.addEventListener('scroll', check, { passive: true })
+    return () => el.removeEventListener('scroll', check)
+  }, [])
+
+  const handleBottomBtn = useCallback(() => {
+    if (atBottom) {
+      onNavigate()
+    } else {
+      bodyRef.current?.scrollBy({ top: 220, behavior: 'smooth' })
+    }
+  }, [atBottom, onNavigate])
 
   return (
     <div className="mobile-summary-card" data-exiting={dataExiting || undefined}>
@@ -236,15 +250,6 @@ function MobileSummaryCard({
 
       </div>
 
-      <div className="mobile-scroll-nav">
-        <button className="mobile-scroll-nav-btn" onPointerDown={scrollUp} aria-label="Scroll up" type="button">
-          <span className="mobile-scroll-nav-chevron mobile-scroll-nav-chevron--up" />
-        </button>
-        <button className="mobile-scroll-nav-btn" onPointerDown={scrollDown} aria-label="Scroll down" type="button">
-          <span className="mobile-scroll-nav-chevron mobile-scroll-nav-chevron--down" />
-        </button>
-      </div>
-
       <hr className="mobile-summary-rule" aria-hidden="true" />
       <div className="mobile-summary-footer">
         <a
@@ -271,11 +276,13 @@ function MobileSummaryCard({
 
       <button
         className="mobile-summary-swipe-btn"
-        onClick={onNavigate}
-        aria-label="Open navigation menu"
+        onPointerDown={handleBottomBtn}
+        aria-label={atBottom ? "Open navigation menu" : "Scroll down"}
         type="button"
       >
-        <span className="mobile-summary-swipe-hint">Swipe to navigate</span>
+        <span className="mobile-summary-swipe-hint">
+          {atBottom ? "Tap to navigate" : "Scroll down"}
+        </span>
         <span className="mobile-summary-swipe-chevron" aria-hidden="true" />
       </button>
     </div>
