@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useRef, useCallback, useState } from 'react'
+import Link from 'next/link'
 import { MenuStack } from '@/components/menu/MenuStack'
 import { SummaryPanel } from '@/components/menu/SummaryPanel'
 import { ContactPanel } from '@/components/menu/ContactPanel'
@@ -211,13 +212,13 @@ function MobileSummaryCard({
           <h3 id="msp-projects" className="mobile-summary-section-heading">Projects</h3>
 
           <div className="mobile-summary-entry">
-            <a href="/projects/robotic-arm" className="mobile-summary-entry-title mobile-summary-entry-project-link">Robotic Arm</a>
+            <Link href="/projects/robotic-arm" className="mobile-summary-entry-title mobile-summary-entry-project-link">Robotic Arm</Link>
           </div>
           <div className="mobile-summary-entry">
-            <a href="/projects/arctic" className="mobile-summary-entry-title mobile-summary-entry-project-link">Arctic Analytics</a>
+            <Link href="/projects/arctic" className="mobile-summary-entry-title mobile-summary-entry-project-link">Arctic Analytics</Link>
           </div>
           <div className="mobile-summary-entry">
-            <a href="/projects/ldo" className="mobile-summary-entry-title mobile-summary-entry-project-link">LDO Voltage Regulator</a>
+            <Link href="/projects/ldo" className="mobile-summary-entry-title mobile-summary-entry-project-link">LDO Voltage Regulator</Link>
           </div>
         </section>
 

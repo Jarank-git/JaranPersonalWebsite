@@ -1,5 +1,7 @@
 'use client'
 
+import Link from 'next/link'
+
 export function SummaryPanel() {
   return (
     <div className="summary-panel">
@@ -57,13 +59,13 @@ export function SummaryPanel() {
             <h3 id="sp-projects" className="summary-panel-section-heading">Projects</h3>
 
             <div className="summary-panel-entry">
-              <a href="/projects/robotic-arm" className="summary-panel-entry-title summary-panel-entry-project-link">Robotic Arm</a>
+              <Link href="/projects/robotic-arm" className="summary-panel-entry-title summary-panel-entry-project-link">Robotic Arm</Link>
             </div>
             <div className="summary-panel-entry">
-              <a href="/projects/arctic" className="summary-panel-entry-title summary-panel-entry-project-link">Arctic Analytics</a>
+              <Link href="/projects/arctic" className="summary-panel-entry-title summary-panel-entry-project-link">Arctic Analytics</Link>
             </div>
             <div className="summary-panel-entry">
-              <a href="/projects/ldo" className="summary-panel-entry-title summary-panel-entry-project-link">LDO Voltage Regulator</a>
+              <Link href="/projects/ldo" className="summary-panel-entry-title summary-panel-entry-project-link">LDO Voltage Regulator</Link>
             </div>
           </section>
 
