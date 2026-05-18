@@ -2554,29 +2554,32 @@ body {
   gap: 7px;
   font-family: var(--font-body);
   font-size: 17px;
-  color: var(--color-gold);
+  color: var(--color-panel-hairline);
   text-decoration: none;
-  border-bottom: 1px solid transparent;
-  padding-bottom: 2px;
-  transition: border-color 160ms ease, color 160ms ease;
+  transition: color 160ms ease, transform 120ms ease;
   pointer-events: auto;
+  transform-origin: left center;
 }
 
 .proj-entry-link-logo {
   width: 16px;
   height: 16px;
   flex-shrink: 0;
-  filter: brightness(0) invert(1) opacity(0.75);
+  filter: brightness(0) invert(1) opacity(0.45);
   transition: opacity 160ms ease;
 }
 
-.proj-entry-link:hover .proj-entry-link-logo {
-  filter: brightness(0) invert(1) opacity(1);
+.proj-entry-link:hover {
+  color: var(--color-parchment-dim);
 }
 
-.proj-entry-link:hover {
+.proj-entry-link:hover .proj-entry-link-logo {
+  filter: brightness(0) invert(1) opacity(0.65);
+}
+
+.proj-entry-link:active {
+  transform: scale(1.07);
   color: var(--color-parchment);
-  border-bottom-color: var(--color-gold);
 }
 
 /* Overlay backdrop — transparent so video background shows at edges */
