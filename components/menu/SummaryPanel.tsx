@@ -61,8 +61,8 @@ export function SummaryPanel() {
               <span className="summary-panel-entry-sub">Arduino Nano · OpenCV · Altium</span>
             </div>
             <div className="summary-panel-entry">
-              <span className="summary-panel-entry-title">LDO Voltage Regulator</span>
-              <span className="summary-panel-entry-sub">Altium Designer · WARG</span>
+              <span className="summary-panel-entry-title">STM32F4 + IMU Dev Board</span>
+              <span className="summary-panel-entry-sub">Altium Designer · STM32F411 · MPU-6050</span>
             </div>
             <div className="summary-panel-entry">
               <span className="summary-panel-entry-title">Arctic Analytics</span>

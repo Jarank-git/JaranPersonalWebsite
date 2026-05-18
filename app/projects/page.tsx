@@ -7,8 +7,40 @@ import type { ProjectEntry } from '@/components/projects/ProjectOverlay'
 
 const PROJECTS: ProjectEntry[] = [
   {
-    id: 'robotic-arm',
+    id: 'stm32-imu',
     num: '01',
+    title: 'STM32F4 + IMU Development Board',
+    sub: 'Altium Designer · STM32F411 · MPU-6050',
+    year: 'May 2026',
+    category: 'Hardware · PCB Design · Embedded',
+    tagline:
+      '4-layer STM32F411 dev board with MPU-6050 IMU, controlled-impedance USB differential pair, and full SWD debug header — designed toward a custom flight controller.',
+    overview:
+      'Board power is provided by a Micro USB port that gives 5V power supply to the pi filter and AMS1117-3.3 LDO voltage regulator to provide stable 3.3V rails to the MCU and peripherals. The STM32F411CEU6 microcontroller gets data from the MPU-6050 using the I2C interface. The IMU sensor has a data ready signal for the MCU indicating availability of new data samples without using polling. The USB full speed data lines are laid out as differential 90Ω lines. The debug interface (SWD) is made available via a 2×5 pin header. An external 24 MHz crystal oscillator provides the high speed clock source.',
+    bullets: [
+      'Crystal oscillator: 24 MHz HSE chosen within the STM32F411 4–26 MHz range; load caps derived from the crystal datasheet (CL = 10 pF, minus stray, times two); 0Ω series resistor on the oscillator output for drive level adjustment',
+      'IMU interface: MPU-6050 at I2C address 0x68 (AD0 grounded); 2.2 kΩ pull-ups on SDA and SCL at host side; bypass caps on VDD, VLOGIC, REGOUT, and CPOUT pins per datasheet operating circuit',
+      'Power supply: AMS1117-3.3 LDO with pi filter on VBUS; 100 nF per MCU VDD pin plus 2.2 µF bulk decoupling; VCAP1 tied to a dedicated 2.2 µF low-ESR cap as required by the STM32 datasheet; 22 µF on both LDO rails',
+      '4-layer stack-up (Signal / GND / GND / Signal) with JLCPCB-matched controlled impedance; USB diff pair routed at 90 Ω (0.26 mm trace, 0.2 mm gap) calculated from JLCPCB stack-up parameters (εr = 4.6, core = 1.065 mm, prepreg = 0.2 mm)',
+      'Boot0 pulled low via 10 kΩ resistor to disable the on-chip bootloader at startup; nRESET debounced with 100 nF and a 10 kΩ pull-up to prevent false resets; full SWD (SWDIO, SWCLK, SWO, nRESET) broken out to a 2×5 pin header',
+    ],
+    stack: ['Altium Designer', 'STM32F411CEU6', 'MPU-6050', 'PCB Layout', 'Signal Integrity', 'Controlled Impedance'],
+    links: [
+      { label: 'GitHub', href: 'https://github.com/Jarank-git/STM32F4-MPU-6050-Schematic-and-PCB' },
+    ],
+    images: [
+      { src: 'https://raw.githubusercontent.com/Jarank-git/STM32F4-MPU-6050-Schematic-and-PCB/main/Footprint%20+%203D%20Model%20+%20Schematic%20Pictures/3D_View.png', alt: '3D view of the STM32F4 + IMU board' },
+      { src: 'https://raw.githubusercontent.com/Jarank-git/STM32F4-MPU-6050-Schematic-and-PCB/main/Footprint%20+%203D%20Model%20+%20Schematic%20Pictures/Top_Layer.png', alt: 'PCB top layer' },
+      { src: 'https://raw.githubusercontent.com/Jarank-git/STM32F4-MPU-6050-Schematic-and-PCB/main/Footprint%20+%203D%20Model%20+%20Schematic%20Pictures/Bottom_Layer.png', alt: 'PCB bottom layer' },
+      { src: 'https://raw.githubusercontent.com/Jarank-git/STM32F4-MPU-6050-Schematic-and-PCB/main/Footprint%20+%203D%20Model%20+%20Schematic%20Pictures/STM32F4.png', alt: 'STM32F4 microcontroller schematic' },
+      { src: 'https://raw.githubusercontent.com/Jarank-git/STM32F4-MPU-6050-Schematic-and-PCB/main/Footprint%20+%203D%20Model%20+%20Schematic%20Pictures/IMU.png', alt: 'MPU-6050 IMU schematic' },
+      { src: 'https://raw.githubusercontent.com/Jarank-git/STM32F4-MPU-6050-Schematic-and-PCB/main/Footprint%20+%203D%20Model%20+%20Schematic%20Pictures/USB%20Connector%20+%20LDO.png', alt: 'USB connector and LDO regulator schematic' },
+    ],
+    icon: null,
+  },
+  {
+    id: 'robotic-arm',
+    num: '02',
     title: 'Robotic Arm: Record/Playback & Hand Control',
     sub: 'Arduino Nano · OpenCV · Altium Designer',
     year: 'Mar–Apr 2026',
@@ -46,7 +78,7 @@ const PROJECTS: ProjectEntry[] = [
   },
   {
     id: 'ldo',
-    num: '02',
+    num: '03',
     title: '5–3.3V LDO Voltage Regulator',
     sub: 'Altium Designer · WARG',
     year: 'Sep–Oct 2025',
@@ -75,7 +107,7 @@ const PROJECTS: ProjectEntry[] = [
   },
   {
     id: 'pawprint',
-    num: '03',
+    num: '04',
     title: 'PawPrint: AI-Powered Adoption Campaigns',
     sub: 'React 19 · Google Gemini 2.0 · Cloudinary',
     year: 'Mar 2026',
@@ -109,7 +141,7 @@ const PROJECTS: ProjectEntry[] = [
   },
   {
     id: 'arctic',
-    num: '04',
+    num: '05',
     title: 'Arctic Analytics: IoT Line-Follow Robot',
     sub: 'Arduino Uno R4 WiFi · React · Python · MongoDB',
     year: 'Jan–Feb 2026',
