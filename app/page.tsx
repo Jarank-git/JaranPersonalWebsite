@@ -132,6 +132,8 @@ function FluidHome({ selectedIdx, setSelectedIdx }: HomeProps) {
 //  Mobile two-state home                                              //
 // ------------------------------------------------------------------ //
 
+const SCROLL_STEP = 160
+
 function MobileSummaryCard({
   onNavigate,
   dataExiting,
@@ -139,13 +141,17 @@ function MobileSummaryCard({
   onNavigate: () => void
   dataExiting: boolean
 }) {
+  const bodyRef = useRef<HTMLDivElement>(null)
+  const scrollUp = () => bodyRef.current?.scrollBy({ top: -SCROLL_STEP, behavior: 'smooth' })
+  const scrollDown = () => bodyRef.current?.scrollBy({ top: SCROLL_STEP, behavior: 'smooth' })
+
   return (
     <div className="mobile-summary-card" data-exiting={dataExiting || undefined}>
       <hr className="mobile-summary-rule" aria-hidden="true" />
       <h2 className="mobile-summary-title">Jaran Khalid</h2>
       <hr className="mobile-summary-rule" aria-hidden="true" />
 
-      <div className="mobile-summary-card-body">
+      <div className="mobile-summary-card-body" ref={bodyRef}>
         <section className="mobile-summary-section" aria-labelledby="msp-experience">
           <h3 id="msp-experience" className="mobile-summary-section-heading">Experience</h3>
 
@@ -228,10 +234,15 @@ function MobileSummaryCard({
           </div>
         </section>
 
-        <div className="mobile-scroll-cue" aria-hidden="true">
-          <span className="mobile-scroll-cue-text">Scroll</span>
-          <span className="mobile-scroll-cue-chevron" />
-        </div>
+      </div>
+
+      <div className="mobile-scroll-nav" aria-hidden="true">
+        <button className="mobile-scroll-nav-btn" onClick={scrollUp} aria-label="Scroll up" type="button">
+          <span className="mobile-scroll-nav-chevron mobile-scroll-nav-chevron--up" />
+        </button>
+        <button className="mobile-scroll-nav-btn" onClick={scrollDown} aria-label="Scroll down" type="button">
+          <span className="mobile-scroll-nav-chevron mobile-scroll-nav-chevron--down" />
+        </button>
       </div>
 
       <hr className="mobile-summary-rule" aria-hidden="true" />
