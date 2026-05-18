@@ -214,10 +214,10 @@ function MobileSummaryCard({
             <a href="/projects/robotic-arm" className="mobile-summary-entry-title mobile-summary-entry-project-link">Robotic Arm</a>
           </div>
           <div className="mobile-summary-entry">
-            <a href="/projects/stm32-imu-dev-board" className="mobile-summary-entry-title mobile-summary-entry-project-link">STM32F4 + IMU Dev Board</a>
+            <a href="/projects/arctic" className="mobile-summary-entry-title mobile-summary-entry-project-link">Arctic Analytics</a>
           </div>
           <div className="mobile-summary-entry">
-            <a href="/projects/arctic-analytics" className="mobile-summary-entry-title mobile-summary-entry-project-link">Arctic Analytics</a>
+            <a href="/projects/ldo" className="mobile-summary-entry-title mobile-summary-entry-project-link">LDO Voltage Regulator</a>
           </div>
         </section>
 

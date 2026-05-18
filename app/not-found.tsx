@@ -2,25 +2,38 @@ import Link from 'next/link'
 
 export default function NotFound() {
   return (
-    <main className="chronicle" style={{ justifyContent: 'center', alignItems: 'center', textAlign: 'center' }}>
-      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 20 }}>
-        <div className="chronicle-eyebrow">Untranslated Fragment</div>
-        <h1
-          className="chronicle-title"
-          style={{ fontFamily: 'var(--font-script)', fontSize: 'clamp(72px, 10vw, 140px)' }}
-        >
-          Quest Not Found
-        </h1>
-        <p className="chronicle-lead" style={{ maxWidth: '42em' }}>
-          This page has drifted out of the expedition. No record of it remains.
-        </p>
-        <Link href="/" className="chronicle-back" style={{ marginTop: 20 }}>
-          <span className="chronicle-back-glyph" aria-hidden>
-            {'\u2190'}
-          </span>
-          <span className="chronicle-back-text">Return to Main</span>
-        </Link>
-      </div>
+    <main style={{
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      justifyContent: 'center',
+      minHeight: '100dvh',
+      gap: 24,
+      textAlign: 'center',
+      padding: '0 24px',
+    }}>
+      <h1 style={{
+        fontFamily: 'var(--font-display)',
+        fontWeight: 400,
+        fontSize: 'clamp(28px, 6vw, 56px)',
+        letterSpacing: '0.08em',
+        color: 'var(--color-parchment)',
+        margin: 0,
+      }}>
+        Page Not Found
+      </h1>
+      <Link href="/" style={{
+        fontFamily: 'var(--font-display)',
+        fontSize: '11px',
+        letterSpacing: '0.26em',
+        textTransform: 'uppercase',
+        color: 'var(--color-parchment-dim)',
+        textDecoration: 'none',
+        borderBottom: '1px solid oklch(0.55 0.04 70 / 0.4)',
+        paddingBottom: '2px',
+      }}>
+        ← Return
+      </Link>
     </main>
   )
 }
