@@ -1867,9 +1867,20 @@ body {
   display: inline-flex;
   align-items: baseline;
   gap: 5px;
-  color: inherit;
+  color: var(--color-parchment-dim);
   text-decoration: none;
   border-bottom: 1px solid oklch(0.55 0.04 70 / 0.4);
+}
+
+.mobile-summary-entry-project-link {
+  color: var(--color-parchment);
+  text-decoration: none;
+  border-bottom: 1px solid oklch(0.55 0.04 70 / 0.35);
+}
+
+.mobile-summary-entry-project-link::after {
+  content: " ›";
+  color: var(--color-parchment-dim);
 }
 
 .mobile-summary-entry-link::after {

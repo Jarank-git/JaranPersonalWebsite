@@ -211,16 +211,13 @@ function MobileSummaryCard({
           <h3 id="msp-projects" className="mobile-summary-section-heading">Projects</h3>
 
           <div className="mobile-summary-entry">
-            <span className="mobile-summary-entry-title">Robotic Arm</span>
-            <span className="mobile-summary-entry-sub">Arduino Nano · OpenCV · Altium</span>
+            <a href="/projects/robotic-arm" className="mobile-summary-entry-title mobile-summary-entry-project-link">Robotic Arm</a>
           </div>
           <div className="mobile-summary-entry">
-            <span className="mobile-summary-entry-title">STM32F4 + IMU Dev Board</span>
-            <span className="mobile-summary-entry-sub">Altium Designer · STM32F411 · MPU-6050</span>
+            <a href="/projects/stm32-imu-dev-board" className="mobile-summary-entry-title mobile-summary-entry-project-link">STM32F4 + IMU Dev Board</a>
           </div>
           <div className="mobile-summary-entry">
-            <span className="mobile-summary-entry-title">Arctic Analytics</span>
-            <span className="mobile-summary-entry-sub">Arduino · React · Python</span>
+            <a href="/projects/arctic-analytics" className="mobile-summary-entry-title mobile-summary-entry-project-link">Arctic Analytics</a>
           </div>
         </section>
 
