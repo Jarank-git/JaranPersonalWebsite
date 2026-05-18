@@ -292,11 +292,13 @@ function MobileSummaryCard({
 function MobileMenuState({
   onBack,
   dataExiting,
+  initialIdx = 1,
 }: {
   onBack: () => void
   dataExiting: boolean
+  initialIdx?: number
 }) {
-  const [selectedIdx, setSelectedIdx] = useState(1)
+  const [selectedIdx, setSelectedIdx] = useState(initialIdx)
 
   useEffect(() => {
     if (selectedIdx === 0) onBack()
@@ -325,8 +327,8 @@ function MobileMenuState({
   )
 }
 
-function MobileHome() {
-  const [cardVisible, setCardVisible] = useState(true)
+function MobileHome({ startOnMenu = false, initialIdx = 1 }: { startOnMenu?: boolean; initialIdx?: number }) {
+  const [cardVisible, setCardVisible] = useState(!startOnMenu)
   const [cardExiting, setCardExiting] = useState(false)
   const [menuExiting, setMenuExiting] = useState(false)
 
@@ -377,6 +379,7 @@ function MobileHome() {
           key="menu"
           onBack={showCard}
           dataExiting={menuExiting}
+          initialIdx={initialIdx}
         />
       )}
     </div>
@@ -391,12 +394,16 @@ export default function HomePage() {
   const mode = useLayoutMode()
   const [mounted, setMounted] = useState(false)
   const [selectedIdx, setSelectedIdx] = useState(0)
+  const [returnedFromPage, setReturnedFromPage] = useState(false)
   useEffect(() => {
     const saved = sessionStorage.getItem('home-selected-idx')
     if (saved !== null) {
       sessionStorage.removeItem('home-selected-idx')
       const idx = parseInt(saved, 10)
-      if (!isNaN(idx) && idx >= 0 && idx < MENU_ITEMS.length) setSelectedIdx(idx)
+      if (!isNaN(idx) && idx >= 0 && idx < MENU_ITEMS.length) {
+        setSelectedIdx(idx)
+        setReturnedFromPage(true)
+      }
     }
     setMounted(true)
   }, [])
@@ -411,5 +418,5 @@ export default function HomePage() {
 
   if (mode === 'cinematic') return <CinematicHome selectedIdx={selectedIdx} setSelectedIdx={setSelectedIdx} />
   if (mode === 'fluid') return <FluidHome selectedIdx={selectedIdx} setSelectedIdx={setSelectedIdx} />
-  return <MobileHome />
+  return <MobileHome startOnMenu={returnedFromPage} initialIdx={selectedIdx} />
 }

@@ -1716,7 +1716,7 @@ body {
 
 .mobile-home-wrap {
   position: relative;
-  height: 100vh;
+  height: 100dvh;
   overflow: hidden;
   touch-action: pan-y;
 }
@@ -1727,11 +1727,11 @@ body {
   inset: 0;
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  height: 100dvh;
   color: var(--color-parchment);
   z-index: 2;
   overflow: hidden;
-  padding: 0 22px 14px;
+  padding: 0 22px 0;
 }
 
 .mobile-summary-card::before {
@@ -1833,6 +1833,15 @@ body {
   color: inherit;
   text-decoration: none;
   font-style: normal;
+  border-bottom: 1px solid oklch(0.55 0.04 70 / 0.4);
+}
+
+.mobile-summary-entry-company::after {
+  content: "›";
+  font-size: 11px;
+  color: var(--color-parchment-deep);
+  margin-left: 1px;
+  flex-shrink: 0;
 }
 
 .mobile-summary-entry-co-mark {
@@ -1853,7 +1862,14 @@ body {
   gap: 5px;
   color: inherit;
   text-decoration: none;
-  border-bottom: 1px solid transparent;
+  border-bottom: 1px solid oklch(0.55 0.04 70 / 0.4);
+}
+
+.mobile-summary-entry-link::after {
+  content: "›";
+  font-size: 11px;
+  color: var(--color-parchment-deep);
+  margin-left: 1px;
 }
 
 .mobile-summary-entry-mark {
@@ -1901,7 +1917,7 @@ body {
   flex-shrink: 0;
   border: none;
   background: none;
-  padding: 12px 0 10px;
+  padding: 10px 0 max(10px, env(safe-area-inset-bottom));
   touch-action: manipulation;
   -webkit-tap-highlight-color: transparent;
   display: flex;
@@ -1909,7 +1925,7 @@ body {
   align-items: center;
   gap: 4px;
   cursor: pointer;
-  margin-top: 4px;
+  margin-top: 2px;
   width: 100%;
   position: relative;
   z-index: 10;
