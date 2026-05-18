@@ -150,20 +150,40 @@ function MobileSummaryCard({
           <h3 id="msp-experience" className="mobile-summary-section-heading">Experience</h3>
 
           <div className="mobile-summary-entry">
-            <span className="mobile-summary-entry-title">Business Automation &amp; Systems Dev · Renellence</span>
-            <span className="mobile-summary-entry-sub">North York · Jan 2026–Present</span>
+            <span className="mobile-summary-entry-title">Business Automation &amp; Systems Developer (Co-op)</span>
+            <span className="mobile-summary-entry-sub">
+              <a href="https://renellence.com/" target="_blank" rel="noopener noreferrer" className="mobile-summary-entry-company">
+                <img src="/assets/Renellence%20Logo.png" alt="" aria-hidden="true" className="mobile-summary-entry-co-mark" />
+                Renellence · Jan–Apr 2026
+              </a>
+            </span>
           </div>
           <div className="mobile-summary-entry">
-            <span className="mobile-summary-entry-title">Systems Eng. Intern · Civilcraft</span>
-            <span className="mobile-summary-entry-sub">Remote · Jun–Aug 2025</span>
+            <span className="mobile-summary-entry-title">Systems Engineering Intern</span>
+            <span className="mobile-summary-entry-sub">
+              <a href="https://civilcraft.com/" target="_blank" rel="noopener noreferrer" className="mobile-summary-entry-company">
+                <img src="/assets/Civilcraft.png" alt="" aria-hidden="true" className="mobile-summary-entry-co-mark" />
+                Civilcraft · Jun–Aug 2025
+              </a>
+            </span>
           </div>
           <div className="mobile-summary-entry">
-            <span className="mobile-summary-entry-title">Electrical Subsystem · WARG</span>
-            <span className="mobile-summary-entry-sub">Waterloo · Sep 2025–Present</span>
+            <span className="mobile-summary-entry-title">Electrical Subsystem Member</span>
+            <span className="mobile-summary-entry-sub">
+              <a href="https://www.uwarg.com/" target="_blank" rel="noopener noreferrer" className="mobile-summary-entry-company">
+                <img src="/assets/WARG.png" alt="" aria-hidden="true" className="mobile-summary-entry-co-mark" />
+                WARG · Sep 2025–Present
+              </a>
+            </span>
           </div>
           <div className="mobile-summary-entry">
-            <span className="mobile-summary-entry-title">Coding Instructor · Code Ninjas</span>
-            <span className="mobile-summary-entry-sub">Milton · Jul–Aug 2025</span>
+            <span className="mobile-summary-entry-title">Coding Instructor</span>
+            <span className="mobile-summary-entry-sub">
+              <a href="https://www.codeninjas.com/milton-on-ca" target="_blank" rel="noopener noreferrer" className="mobile-summary-entry-company">
+                <img src="/assets/Code%20Ninjas%20Logo.png" alt="" aria-hidden="true" className="mobile-summary-entry-co-mark" />
+                Code Ninjas · Jul–Aug 2025
+              </a>
+            </span>
           </div>
         </section>
 
@@ -171,12 +191,16 @@ function MobileSummaryCard({
           <h3 id="msp-projects" className="mobile-summary-section-heading">Projects</h3>
 
           <div className="mobile-summary-entry">
-            <span className="mobile-summary-entry-title">12-24V Buck Boost Converter</span>
-            <span className="mobile-summary-entry-sub">Altium Designer · WARG</span>
+            <span className="mobile-summary-entry-title">Robotic Arm</span>
+            <span className="mobile-summary-entry-sub">Arduino Nano · OpenCV · Altium</span>
           </div>
           <div className="mobile-summary-entry">
-            <span className="mobile-summary-entry-title">Patient Env. Management System</span>
-            <span className="mobile-summary-entry-sub">Python · Flask · Raspberry Pi</span>
+            <span className="mobile-summary-entry-title">STM32F4 + IMU Dev Board</span>
+            <span className="mobile-summary-entry-sub">Altium Designer · STM32F411 · MPU-6050</span>
+          </div>
+          <div className="mobile-summary-entry">
+            <span className="mobile-summary-entry-title">Arctic Analytics</span>
+            <span className="mobile-summary-entry-sub">Arduino · React · Python</span>
           </div>
         </section>
 
@@ -193,7 +217,7 @@ function MobileSummaryCard({
                 className="mobile-summary-entry-link"
               >
                 <img
-                  src="/assets/uwaterloo-crest.png"
+                  src="/assets/Uwaterloo_crest.png"
                   alt=""
                   aria-hidden="true"
                   className="mobile-summary-entry-mark"
@@ -203,6 +227,11 @@ function MobileSummaryCard({
             </span>
           </div>
         </section>
+
+        <div className="mobile-scroll-cue" aria-hidden="true">
+          <span className="mobile-scroll-cue-text">Scroll</span>
+          <span className="mobile-scroll-cue-chevron" />
+        </div>
       </div>
 
       <hr className="mobile-summary-rule" aria-hidden="true" />
@@ -214,7 +243,7 @@ function MobileSummaryCard({
           rel="noopener noreferrer"
           aria-label="GitHub profile"
         >
-          <span className="mobile-summary-hint-glyph" aria-hidden="true" />
+          <img src="/assets/Github%20Logo.png" alt="" aria-hidden="true" className="mobile-summary-hint-logo" />
           <span>:GitHub</span>
         </a>
         <a
@@ -224,7 +253,7 @@ function MobileSummaryCard({
           rel="noopener noreferrer"
           aria-label="LinkedIn profile"
         >
-          <span className="mobile-summary-hint-glyph" aria-hidden="true" />
+          <img src="/assets/Linkedin%20Logo.png" alt="" aria-hidden="true" className="mobile-summary-hint-logo" />
           <span>:LinkedIn</span>
         </a>
       </div>
