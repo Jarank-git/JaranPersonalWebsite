@@ -236,11 +236,11 @@ function MobileSummaryCard({
 
       </div>
 
-      <div className="mobile-scroll-nav" aria-hidden="true">
-        <button className="mobile-scroll-nav-btn" onClick={scrollUp} aria-label="Scroll up" type="button">
+      <div className="mobile-scroll-nav">
+        <button className="mobile-scroll-nav-btn" onPointerDown={scrollUp} aria-label="Scroll up" type="button">
           <span className="mobile-scroll-nav-chevron mobile-scroll-nav-chevron--up" />
         </button>
-        <button className="mobile-scroll-nav-btn" onClick={scrollDown} aria-label="Scroll down" type="button">
+        <button className="mobile-scroll-nav-btn" onPointerDown={scrollDown} aria-label="Scroll down" type="button">
           <span className="mobile-scroll-nav-chevron mobile-scroll-nav-chevron--down" />
         </button>
       </div>
