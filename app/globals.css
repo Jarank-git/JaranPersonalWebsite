@@ -1972,16 +1972,18 @@ body {
 
 .mobile-summary-entry-title {
   font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
   color: var(--color-parchment);
   display: block;
 }
 
 .mobile-summary-entry-sub {
   display: block;
-  margin-top: 1px;
+  margin-top: 2px;
   font-size: 13px;
   font-style: normal;
-  color: var(--color-parchment-deep);
+  color: var(--color-parchment-dim);
 }
 
 .mobile-summary-entry-company {
