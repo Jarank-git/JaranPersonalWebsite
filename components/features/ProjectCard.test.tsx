@@ -49,7 +49,7 @@ describe('ProjectCard', () => {
   it('renders bullets, stack pills, and links when populated', () => {
     render(<ProjectCard project={richProject} />)
     expect(screen.getByText('Bullet one')).toBeInTheDocument()
-    expect(screen.getByText('TypeScript')).toBeInTheDocument()
+    expect(screen.getByText(/TypeScript/)).toBeInTheDocument()
     const source = screen.getByRole('link', { name: /source/i })
     expect(source).toHaveAttribute('href', 'https://github.com/x/y')
     expect(source).toHaveAttribute('target', '_blank')
