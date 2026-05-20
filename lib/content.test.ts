@@ -7,15 +7,15 @@ import {
 } from './content'
 
 describe('content seeds', () => {
-  it('has exactly 2 projects with expected slugs', () => {
-    expect(projects).toHaveLength(2)
-    expect(projects.map((p) => p.slug).sort()).toEqual(['arctic', 'ldo'])
+  it('has exactly 3 projects with expected slugs', () => {
+    expect(projects).toHaveLength(3)
+    expect(projects.map((p) => p.slug).sort()).toEqual(['arctic', 'robotic-arm', 'stm32-imu'])
   })
 
   it('has exactly 4 experience roles in most-recent-first order', () => {
     expect(experience).toHaveLength(4)
     expect(experience.map((r) => r.slug)).toEqual([
-      'warg', 'renellence', 'civilcraft', 'codeninjas',
+      'renellence', 'civilcraft', 'warg', 'codeninjas',
     ])
   })
 

@@ -65,7 +65,7 @@ export function SummaryPanel() {
               <Link href="/projects/arctic" className="summary-panel-entry-title summary-panel-entry-project-link">Arctic Analytics</Link>
             </div>
             <div className="summary-panel-entry">
-              <Link href="/projects/ldo" className="summary-panel-entry-title summary-panel-entry-project-link">LDO Voltage Regulator</Link>
+              <Link href="/projects/stm32-imu" className="summary-panel-entry-title summary-panel-entry-project-link">STM32F4 IMU Board</Link>
             </div>
           </section>
 
