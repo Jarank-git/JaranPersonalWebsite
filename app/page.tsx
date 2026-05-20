@@ -218,7 +218,7 @@ function MobileSummaryCard({
             <Link href="/projects/arctic" className="mobile-summary-entry-title mobile-summary-entry-project-link">Arctic Analytics</Link>
           </div>
           <div className="mobile-summary-entry">
-            <Link href="/projects/ldo" className="mobile-summary-entry-title mobile-summary-entry-project-link">LDO Voltage Regulator</Link>
+            <Link href="/projects/stm32-imu" className="mobile-summary-entry-title mobile-summary-entry-project-link">STM32F4 IMU Board</Link>
           </div>
         </section>
 
