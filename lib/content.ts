@@ -73,7 +73,6 @@ export const projects: Project[] = [
       { src: '/images/projects/stm32-imu/3D_View.png',      alt: '3D render of the PCB' },
       { src: '/images/projects/stm32-imu/Top_Layer.png',    alt: 'PCB top copper layer' },
       { src: '/images/projects/stm32-imu/Bottom_Layer.png', alt: 'PCB bottom copper layer' },
-      { src: '/images/projects/stm32-imu/Footprint.png',    alt: 'Component footprint layout' },
       { src: '/images/projects/stm32-imu/IMU.png',          alt: 'MPU-6050 IMU schematic block' },
       { src: '/images/projects/stm32-imu/STM32F4.png',      alt: 'STM32F4 schematic block' },
     ],
